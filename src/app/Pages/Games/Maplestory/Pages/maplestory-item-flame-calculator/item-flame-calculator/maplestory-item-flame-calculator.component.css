@@ -1,0 +1,415 @@
+.selectSearchWrapper {
+    display: table;
+    width: 200px;
+    box-sizing:border-box;
+    margin: 0px;
+}
+
+.editButton {
+    background-color: var(--game-page-accent-color);
+    border: none;
+    color: #FFFFFF;
+    padding: 5px 8px 5px 8px;
+    text-align: center;
+    font-size: 16px;
+    margin: 8px 8px 0px 0px;
+    outline:none;
+    position: absolute;
+    top: 0;
+    right: 0;
+    cursor: pointer;
+}
+
+.explanation {
+    text-align: center;
+    max-width: 400px;
+    margin: 0 auto;
+    margin-bottom: 20px;
+    padding-top: 8px;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.inputLabelWrapper input {
+    margin-bottom: 3px;
+}
+
+.dropdown-content {
+    position: absolute;
+    background-color: var(--input-box-background-color);
+    width: 198px;
+    z-index: 1;
+    margin: 0px 0px 0px 0px;
+    list-style-type: none;
+    border: 1px solid var(--input-box-border-color);
+    padding: 0px;
+    max-height: 150px;
+    border-top: 0;
+
+    overflow-y: scroll;
+    scrollbar-width: thin; /* Firefox */
+    -ms-overflow-style: 8px;  /* Internet Explorer 10+ */
+}
+
+li {
+    padding-left: 6px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.dropdown-content::-webkit-scrollbar {
+    width: 8px;
+    height: initial;
+}
+  
+.dropdown:hover .dropdown-content {
+    display: block;
+  }
+
+.selectInput {
+    width: 200px;
+    padding: 6px 6px;
+    margin: 0px 0;
+    display: inline-block;
+    border-radius: 4px 4px 0px 0px;
+    border: 1px solid var(--input-box-border-color);
+    box-sizing: border-box;
+    color: var(--font-color);
+    background-color: var(--input-box-background-color);
+}
+
+.selectInput:focus {
+    outline: none;
+}
+
+.bottomBorder {
+    border-radius: 4px;
+}
+
+.classSelector {
+    width: 250px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.classSelector {
+    width: 210px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.classSelector p {
+    margin: 20px 0px 3px 0px;
+}
+
+a {
+    color: #FFFFFF;
+}
+
+.output {
+    margin: 0 auto;
+    width: 90px;
+    border: 2px solid var(--game-page-accent-color);
+    margin-top: 15px;
+    padding: 5px;
+}
+
+.output p {
+    margin: 0;
+    text-align: center;
+}
+
+.score {
+    margin-top: 3px;
+}
+
+.flameInput {
+    width: 200px;
+    margin: 0 auto;
+}
+
+.editedGamePageContent {
+    position: relative;
+    width: 600px;
+    margin: 0 auto;
+    background-color: var(--game-page-background-color);
+    border: 1px solid var(--game-page-border-color);
+    min-height: calc(100vh - 72px);
+    margin-top: 8px;
+    margin-bottom: 8px;
+}
+
+.scoreSaverWrapper {
+    margin: 0 auto;
+    max-width: 400px;
+    margin-bottom: 10px;
+}
+
+.scoreSaverWrapper h3 {
+    margin: 20px 0px 0px 0px;
+    text-align: center;
+}
+
+.scoreSaverWrapper p {
+    margin: 0px;
+    text-align: center;
+}
+
+.scoreSaver {
+    position: relative;
+    margin: 0 auto;
+    width: 232px;
+    height: 337px;
+}
+
+.equipScoreGrid {
+    position: absolute;
+    top: 27px;
+    right: 12px;
+    border-spacing: 3px;
+}
+
+.equipScoreGrid th {
+    width: 38px;
+    height: 38px;
+    padding: 0px;
+    color: #FFFFFF;
+    font-size: 15px;
+    cursor: pointer; 
+}
+
+.extraSlotSpacer{
+    width: 100%;
+    height: 7px;
+}
+
+.hiddenOption {
+    visibility: hidden;
+}
+
+.characterNavigationBar {
+    width: 100%;
+    margin-top: 8px;
+    margin-bottom: 10px;
+    text-align: center;
+    overflow-wrap: break-word;
+}
+
+.characterNavigationBar a {
+    padding: 2px 4px 2px 4px;
+    margin: 4px 4px 0px 4px;
+    font-size: 18px;
+    display: inline-block;
+    color: var(--font-color);
+}
+
+.characterNavigationBar a:hover {
+    cursor: pointer;
+}
+
+.notSelected {
+    border: 2px solid var(--game-page-border-color);
+}
+
+.selected {
+    border: 2px solid var(--game-page-accent-color);
+}
+
+.settingsWrapper {
+    text-align: center;
+    margin: 0 auto;
+    margin-bottom: 8px;
+    margin-top: 8px;
+    max-width: 350px;
+}
+
+.settingsWrapper h3 {
+    margin: 0px 0px 2px 0px;
+}
+
+.characterNameInput {
+    display: inline-block;
+    margin-top: 3px;
+}
+
+.characterNameInput label {
+    display:block;
+    text-align: center;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.characterNameInput input{
+    display:block;
+    margin-top: 3px;
+    text-align: center;
+    width: 180px;
+}
+
+.buttonStyle {
+    background-color: var(--game-page-accent-color);
+    border: none;
+    color: #FFFFFF;
+    padding: 5px 8px 5px 8px;
+    text-align: center;
+    font-size: 16px;
+    margin: 0 auto;
+    margin-bottom: 5px;
+    width: 170px;
+    outline: none;
+}
+
+.presetWrapper {
+    max-width: 250px;
+    margin: 0 auto;
+    margin-bottom: 8px;
+}
+
+.presetWrapper p{
+    margin: 0px 0px 3px 0px;
+}
+
+.separator {
+    max-width: 230px;
+    margin: 0 auto;
+    margin-bottom: 8px;
+    border-bottom: 1px solid gray;
+}
+
+.confirmationBoxWrapper {
+    position: absolute;
+    background-color: rgba(200, 200, 200, 0.2);
+    width: 100%;
+    height: 100%;
+    z-index: 50;
+    border-radius: 10px;
+}
+
+.confirmationBox {
+    width: 182px;
+    height: 80px;
+    background-color: rgba(88, 88, 88, 0.85);
+    border-radius: 4px;
+    margin: auto;
+    position: absolute;
+    top: 0; left: 0; bottom: 0; right: 0;
+}
+
+.confirmationBox p {
+    margin: 4px 4px 4px 4px;
+}
+
+.confirmationBox .buttonStyle {
+    width: 60px;
+}
+
+.buttonWrapper {
+    width: 135px;
+    margin: 0 auto;
+}
+
+.buttonWrapper .left {
+    float: left;
+}
+
+.buttonWrapper .right {
+    float: right;
+}
+
+.daNotice {
+    width: 350px;
+    margin: 0 auto;
+    margin-top: 8px;
+    text-align: center;
+}
+
+.info {
+    width: 600px;
+    margin: 0 auto;
+    background-color: var(--game-page-background-color);
+    border: 1px solid var(--game-page-border-color);
+    margin-top: 8px;
+    margin-bottom: 8px;
+    text-align: center;
+}
+
+.info p {
+    max-width: 400px;
+    text-align: justify;
+    margin: 0 auto;
+    padding-top: 4px;
+    padding-bottom: 8px;
+}
+
+.info h2 {
+    padding-top: 8px;
+    margin: 0px;
+}
+
+.addCharacterButton {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.multiCharInfo {
+    margin-top: 3px;
+    margin-bottom: 7px;
+}
+
+@media only screen and (max-width: 1104px) {
+    .editedGamePageContent {
+        float: left;
+        margin: unset;
+        margin-top: 8px;
+        margin-left: 9px;
+    }
+
+    .info {
+        float: left;
+        margin: unset;
+        margin-top: 8px;
+        margin-left: 9px;
+    }
+}
+
+@media only screen and (max-width: 862px) {
+    .editedGamePageContent {
+        width: calc(100% - 262px);
+    }
+
+    .explanation {
+        max-width: 360px;
+    }
+
+    .info {
+        width: calc(100% - 262px);
+    }
+
+    .info p {
+        max-width: 360px;
+    }
+}
+
+@media only screen and (max-width: 813px) {
+    .editedGamePageContent {
+        margin-left: 8px;
+        margin-right: 8px;
+        min-height: calc(100vh - 100px);
+        width: calc(100% - 18px);
+    }
+
+    .info {
+        margin-left: 8px;
+        margin-right: 8px;
+        width: calc(100% - 18px);
+    }
+}
+
+@media only screen and (max-width: 575px) {
+    .explanation {
+        padding-top: 38px;
+    }
+}

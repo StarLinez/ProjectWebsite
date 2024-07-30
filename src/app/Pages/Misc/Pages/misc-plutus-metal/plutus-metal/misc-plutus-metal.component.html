@@ -1,0 +1,147 @@
+<div class="contentPageOverride">
+    <button class="currencyButton" (click)="changeCurrency()">Switch £/€</button>
+    <p class="title">Plutus Metal</p>
+    <p class="infoTextTop">
+        This is a community-created calculator based on information released by Plutus
+        regarding their upcoming Metal Cards. Please note that the values provided below are in PLU
+        Rewards, which are an in-game token within the Plutus platform. The value of each of these
+        native tokens is determined by Plutus customers outside of the platform.
+        <br>
+        <a class="fullTerms" href="https://medium.com/plutus/plutus-metal-supercharged-rewards-e7fdbebd2ffa" target="_blank">Full article</a>
+    </p>
+
+    <div class="inputWrapper">
+        <div class="inputLabelWrapper">
+            <label for="subscriptionTier">Subscription Plan</label>
+            <ng-select name="subscriptionTier" [searchable]="false" [clearable]="false" [(ngModel)]="selectedSubscriptionTier" (change)="subscriptionTierChange($event)">
+                <ng-container *ngFor="let r of subscriptionTiers">
+                    <ng-option *ngIf="r.cost == 0" [value]="r">&nbsp;{{ r.name.padEnd(14, '&nbsp;') }}</ng-option>
+                    <ng-option *ngIf="r.cost != 0" [value]="r">&nbsp;{{ r.name.padEnd(14, '&nbsp;') }} <span class="optionSmallText">{{ currencySymbol }}{{ r.cost | number : '1.2-2'}}/m</span></ng-option>
+                </ng-container>
+             </ng-select>
+        </div>
+        <div class="inputLabelWrapper">
+            <label for="stackingTier">Reward Levels</label>
+            <ng-select name="stackingTier" [searchable]="false" [clearable]="false" [(ngModel)]="selectedStackingTier" (change)="stackingTierChange($event)">
+                <ng-option *ngFor="let r of stackingTiers" [value]="r">&nbsp;{{ r.name.padEnd(14, '&nbsp;') }} <span class="optionSmallText">{{ r.pluRequired }} PLU</span></ng-option>
+             </ng-select>
+        </div>
+        <div class="inputLabelWrapper">
+            <label for="metalTier">Metal Tiers</label>
+            <ng-select name="metalTier" [searchable]="false" [clearable]="false" [(ngModel)]="selectedMetalTier" (change)="metalTierChange($event)">
+                <ng-option *ngFor="let r of metalTiers" [value]="r">&nbsp;{{ r.name.padEnd(14, '&nbsp;') }} <span class="optionSmallText">{{ currencySymbol }}{{ r.cost | number : '1.2-2'}}</span></ng-option>
+             </ng-select>
+        </div>
+    </div>
+
+    <!-- shows info text if users has a stack or redeem without having a sub -->
+    <p *ngIf="selectedSubscriptionTier == subscriptionTiers[0] && (selectedStackingTier != stackingTiers[0])" class="requiredSubInfo">
+        With the standard account, you will not earn any rewards.
+        <br>
+        Please select one of the three subscriptions to get rewards on your spending.
+    </p>
+
+    <div class="overview">
+        <div class="overviewItem">
+            <h1>{{ currencySymbol }}{{ selectedMetalTier.perkValue }}</h1>
+            <h5>PER PERK</h5>
+        </div>
+        <div class="overviewItem">
+            <h1>$50</h1>
+            <h5>PER REFERRAL</h5>
+        </div>
+        <div class="overviewItem">
+            <h1>{{ selectedMetalTier.duration }}</h1>
+            <h5>x2 REWARDS VOUCHERS</h5>
+        </div>
+    </div>
+</div>
+<div class="contentPageOverride contentpageSecondaryColor">
+    <div class="outputWrapper">
+        <div class="headerBackDrop">
+            <div class="header">
+                <p>Super Charged Perks ({{ perkCount }})</p>
+                <p>Golden Ticket Referral ({{ selectedMetalTier.duration }})</p>
+                <p>x2 Rewards Voucher ({{ selectedMetalTier.duration }})</p>
+                <p>Combined Value</p>
+                <p>Gained Value <span>(Minus Base Perk/Referral Value)</span></p>
+                <p>Total Value <span>(Gained Minus Card Cost)</span></p>
+            </div>
+        </div>
+        <div class="values">
+            <p>{{ currencySymbol }}{{ superChargedPerksValue | number : '1.2-2'}}</p>
+            <p>{{ currencySymbol }}{{ goldenTicketReferralsValue | number : '1.2-2' }}</p>
+            <p>{{ currencySymbol }}{{ doubleRewardsVoucherValue | number : '1.2-2' }}</p>
+            <p>{{ currencySymbol }}{{ combinedValue | number : '1.2-2' }}</p>
+            <p>{{ currencySymbol }}{{ gainedValue | number : '1.2-2' }}</p>
+            <p>{{ currencySymbol }}{{ totalValue | number : '1.2-2' }}</p>
+        </div>
+    </div>
+
+    <div class="contentPageOverride">
+        <div class="explainer">
+            <div class="explainerTitle">Supercharged Perks</div>
+            <div class="explainerText">Earn up to £/€50 in PLU Rewards per perk for up to 12 months.</div>
+            <div class="explainerTitle">Double Reward Vouchers</div>
+            <div class="explainerText">Choose transactions once per month to earn double rewards on, with a potential value of up to £/€100.</div>
+            <div class="explainerTitle">Golden Tickets</div>
+            <div class="explainerText">Invite friends and family via a Golden Ticket, and both of you will enjoy a $50 referral bonus.</div>
+        </div>
+    </div>
+    <div class="contentPageOverride contentpageTertiaryColor">
+        <div class="importantNotes">
+            <p class="notesTitle">Important Notes</p>
+            <div class="noteItem">
+                <div class="noteCheckmarkWrapper">
+                    <span class="noteCheckMark">&#10003;</span>
+                </div>
+                <div class="noteText">
+                    There are two versions of the metal cards, Plutus Metal & GOAT Metal. The latter only being awarded to those on the GOAT or Honey Badger reward level.
+                </div>
+            </div>
+            <div class="noteItem">
+                <div class="noteCheckmarkWrapper">
+                    <span class="noteCheckMark">&#10003;</span>
+                </div>
+                <div class="noteText">
+                    The PLU needed for Reward Levels is not considered a cost, as customers keep both their stack and rewards in personal wallets, available for swapping at any time.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- <table>
+        <tr>
+            <td>Total Value</td>
+            <td class="tdSmaller" *ngFor="let r of totalValue; let i = index">{{ currencySymbol }}{{ r }}</td>
+        </tr>
+        <tr>
+            <td>Total Value Minus Card Cost</td>
+            <td class="tdSmaller" *ngFor="let r of totalValueMinusCost; let i = index">{{ currencySymbol }}{{ r }}</td>
+        </tr>
+    </table>
+    <p class="infoTextMiddle">
+        The metal card bundles replace some of the existing benefits, providing you with
+        supercharged rewards. Therefore, the value received for the basic subscription/RL cost is not
+        accounted for, much like how 325 PLU for unlocking Hero is not accounted for, replacing 3%
+        worth just £4.99 with 4%. However, for illustration purposes, here is what the value earned
+        would look like if you remove the original benefits
+    </p>
+    <table>
+        <tr>
+            <td>Total</td>
+            <td class="tdSmaller" *ngFor="let r of totalValue; let i = index">{{ currencySymbol }}{{ r }}</td>
+
+        </tr>
+        <tr>
+            <td>Original Benefits</td>
+            <td class="tdSmaller" *ngFor="let r of totalOriginalBenefits; let i = index">{{ currencySymbol }}{{ r }}</td>
+
+        </tr>
+        <tr>
+            <td>Total Minus Original Benefits</td>
+            <td class="tdSmaller" *ngFor="let r of totalActualValue; let i = index">{{ currencySymbol }}{{ r }}</td>
+
+        </tr>
+    </table> -->
+</div>

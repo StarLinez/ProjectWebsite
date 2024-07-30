@@ -1,0 +1,15 @@
+<div class="symbolInput">
+    <div class="checkboxWrapper">
+        <input name="dailyQuest" id="dailyQuest" type="checkbox" (change)="valueChanged()" [(ngModel)]="dailyQuest" [ngModelOptions]="{standalone: true}"/>
+        <label for="dailyQuest">Daily Quest (20)</label>
+    </div>
+</div>
+
+<p class="symbolDailyTitle">Weekly Symbols</p>
+
+<div class="symbolInput">
+    <div class="checkboxWrapper">
+        <input name="ranheimDefense" id="ranheimDefense" type="checkbox" (change)="valueChanged()" [(ngModel)]="ranheimDefense" [ngModelOptions]="{standalone: true}" />
+        <label for="ranheimDefense">Ranheim Defense (45)</label>
+    </div>
+</div>

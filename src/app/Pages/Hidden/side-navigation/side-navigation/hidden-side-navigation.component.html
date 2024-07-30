@@ -1,0 +1,14 @@
+<div class="sidenavbar">
+  <div class="sidenavbartitle">Hidden</div>
+  <p>General</p>
+  <a [routerLink]="'/hidden'"><span [class.sidenavbaractivelink]="router.isActive('/hidden', true)">Home</span></a>
+  <div class="horizontalSeparator"></div>
+  <p>Time Stuff</p>
+  <a [routerLink]="'/hidden/timer'"><span [class.sidenavbaractivelink]="router.isActive('/hidden/timer', false)">Timer</span></a>
+  <a [routerLink]="'/hidden/stopwatch'"><span [class.sidenavbaractivelink]="router.isActive('/hidden/stopwatch', false)">Stopwatch</span></a>
+  <div class="horizontalSeparator"></div>
+  <p>Misc</p>
+  <a [routerLink]="'/hidden/binary-translator'"><span [class.sidenavbaractivelink]="router.isActive('/hidden/binary-translator', false)">Binary Translator</span></a>
+  <a [routerLink]="'/hidden/hexrgb-converter'"><span [class.sidenavbaractivelink]="router.isActive('/hidden/hexrgb-converter', false)">Hex & RGB Converter</span></a>
+  <a [routerLink]="'/hidden/palette-generator'"><span [class.sidenavbaractivelink]="router.isActive('/hidden/palette-generator', false)">Palette Generator</span></a>
+</div>
