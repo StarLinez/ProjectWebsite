@@ -126,7 +126,7 @@ export class MaplestoryTrackerComponent implements OnInit, OnDestroy {
     var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
     var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-    this.timerString = "Daily reset in " + hours + " hours " + minutes + " minutes " + ("00" + seconds).slice(-2) + " sseconds";
+    this.timerString = "Daily reset in " + hours + " hours " + minutes + " minutes " + ("00" + seconds).slice(-2) + " seconds";
   }
 
   liveReset() {
