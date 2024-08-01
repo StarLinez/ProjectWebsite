@@ -36,11 +36,15 @@ export class GeneralDataService {
         return newGeneralData
     }
 
-    addCharacter(data: GeneralData) {
+    addCharacter(data: GeneralData, characterName?: string) {
         var newCharacterInfo: CharacterInfo = {
             characterName: "Character " + (data.characters.length + 1),
             characterStorageReference: "character" + data.nextCharacterIndex
         };
+
+        if (characterName) {
+            newCharacterInfo.characterName = characterName;
+        }
 
         // stringify and parse to ensure the data is passed by value not by reference
         // without this all newly added characters would be a reference of eachother

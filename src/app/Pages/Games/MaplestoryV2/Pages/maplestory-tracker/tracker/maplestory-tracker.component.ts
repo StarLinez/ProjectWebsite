@@ -16,6 +16,9 @@ import { TaskService } from '../../../Services/task.service';
 export class MaplestoryTrackerComponent implements OnInit, OnDestroy {
   generalData: GeneralData;
   selectedCharacter: CharacterData;
+ 
+  timer: any;
+  timerString: string;
 
   editMode: boolean = true;
 
@@ -52,6 +55,8 @@ export class MaplestoryTrackerComponent implements OnInit, OnDestroy {
       
       this.fetchSelectedUserData();
     }
+
+    this.startTimer();
   }
 
   fetchSelectedUserData(){
@@ -77,6 +82,26 @@ export class MaplestoryTrackerComponent implements OnInit, OnDestroy {
     this.generalDataChangeHandler();
   }
 
+
+
+  startTimer() {
+    clearInterval(this.timer);
+
+    var endTime = this.calculateResetTime();
+
+    this.calculateAndOutPutTime(endTime - new Date().getTime());
+
+    this.timer = setInterval(() => {
+      var distance = endTime - new Date().getTime();
+      this.calculateAndOutPutTime(distance);
+
+      if (distance < 0) {
+        clearInterval(this.timer);
+        this.liveReset();
+      }
+    }, 1000);
+  }
+
   calculateResetTime(): number {
     var date = new Date();
     var endTime = Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate() + 1, 0, 0, 0, 0);
@@ -91,13 +116,40 @@ export class MaplestoryTrackerComponent implements OnInit, OnDestroy {
     return endTime;
   }
 
+  calculateAndOutPutTime(distance: number) {
+    if (distance < 0) {
+      this.timerString = "RESET!";
+      return;
+    }
+
+    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    this.timerString = "Daily reset in " + hours + " hours " + minutes + " minutes " + ("00" + seconds).slice(-2) + " sseconds";
+  }
+
+  liveReset() {
+    this.taskService.resetDailyCompletion(this.generalData);
+    this.startTimer();
+    this.generalData.trackerInfo.lastDailyTrackerVisit = (parseInt(Date.now().toString()) + 5000).toString();
+    this.generalDataChangeHandler();
+  }
 
 
+  addCharacter($event: string) {
+    this.generalDataService.addCharacter(this.generalData, $event);
+  }
 
+  switchCharacter($event: number) {
+    this.generalData.selectedCharacterIndex = $event;
+    this.generalDataChangeHandler();
+    this.fetchSelectedUserData();
+  }
 
 
   changeHandler() {
-    //TODO: save character data to localstorage
+    localStorage.setItem(this.generalData.characters[this.generalData.selectedCharacterIndex].characterStorageReference, JSON.stringify(this.selectedCharacter));
   }
 
 

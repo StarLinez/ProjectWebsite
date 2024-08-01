@@ -1,5 +1,5 @@
-<div class="task" [ngClass]="{'tChecked': false}">
-    <div *ngIf="true" class="checkbox" [ngClass]="(false)?'cbChecked':'cbUnchecked'"><span *ngIf="false" class="fa fa-check"></span></div>
+<div class="task" [ngClass]="{'tChecked': task.done}" (click)="toggleTask()">
+    <div *ngIf="true" class="checkbox" [ngClass]="(task.done)?'cbChecked':'cbUnchecked'"><span *ngIf="task.done" class="fa fa-check"></span></div>
     <div *ngIf="editMode" class="updown">
         <span class="fa fa-caret-up"></span>
         <span class="fa fa-caret-down"></span>

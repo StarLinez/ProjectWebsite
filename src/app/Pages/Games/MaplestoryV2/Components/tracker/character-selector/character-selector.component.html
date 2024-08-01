@@ -1,0 +1,42 @@
+<div class="characterSelector">
+    <button class="characterSelectorButton" (click)="toggleMenu()"> 
+        {{ generalData.characters[this.generalData.selectedCharacterIndex].characterName }} 
+        <span *ngIf="!showMenu" class="fa fa-caret-down"></span>
+        <span *ngIf="showMenu" class="fa fa-caret-up"></span>
+    </button>
+    <div class="characterSelectorMenu" *ngIf="showMenu">
+        <ng-container *ngFor="let character of generalData.characters; let i = index">
+            <ng-container *ngIf="!editMode[i] && !deleteMode[i]">
+                <div class="characterItem character" (click)="switchCharacter(i)">
+                    <span class="name">{{ character.characterName }}</span>
+                    <span class="fa fa-edit" (click)="editCharacter(i)"></span>
+                    <span class="fa fa-trash" (click)="deleteCharacter(i)"></span>
+                </div>
+            </ng-container>
+            <ng-container *ngIf="editMode[i]">
+                <div class="characterItem editCharacter">
+                    <input name="editChar" id="{{ 'editChar' + i }}" type="text" maxlength="12" [(ngModel)]="changedName" placeholder="{{ character.characterName }}" (keyup.enter)="confirmEdit(i)">
+                    <span class="fa fa-check" (click)="confirmEdit(i)"></span>
+                    <span class="fa fa-close" (click)="initiateVariables()"></span>
+                </div>
+            </ng-container>
+            <ng-container *ngIf="deleteMode[i]">
+                <div class="characterItem deleteCharacter">
+                    <span class="name">Delete "{{ character.characterName }}"?</span>
+                    <span class="fa fa-check" (click)="confirmDelete(i)"></span>
+                    <span class="fa fa-close" (click)="initiateVariables()"></span>
+                </div>
+            </ng-container>
+        </ng-container>
+
+        <div class="separator"></div>
+        <div *ngIf="!addMode" class="characterItem" (click)="addCharacter()">
+            <span class="plusIcon">+</span><span class="name">new character</span>
+        </div>
+        <div *ngIf="addMode" class="characterItem addCharacter">
+            <input name="addChar" id="addChar" type="text" maxlength="12" [(ngModel)]="newName" placeholder="enter name" (keyup.enter)="confirmAdd()">
+            <span class="fa fa-check" (click)="confirmAdd()"></span>
+            <span class="fa fa-close" (click)="initiateVariables()"></span>
+        </div>
+    </div>
+</div>

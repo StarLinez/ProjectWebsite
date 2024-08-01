@@ -28,6 +28,11 @@ export class TaskComponent {
     this.moveEvent.emit({ index: this.index, direction: direction });
   }
 
+  toggleTask() {
+    this.task.done = !this.task.done;
+    this.changeHandler();
+  }
+
   changeHandler() {
     this.changeEvent.emit();
   }

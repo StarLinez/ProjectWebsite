@@ -6,6 +6,6 @@ import { SharedModule } from "../../../Shared/shared.module";
 @NgModule({
     imports: [CommonModule, SharedModule],
     declarations: [MaplestoryNavigationComponent],
-    exports: [MaplestoryNavigationComponent, SharedModule]
+    exports: [SharedModule, MaplestoryNavigationComponent]
 })
 export class MaplestorySharedModule { }

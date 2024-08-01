@@ -9,10 +9,12 @@ import { CommonModule } from "@angular/common";
 import { SharedModule } from "../../../Shared/shared.module";
 import { TaskComponent } from "./Components/tracker/task/task.component";
 import { TaskGroupComponent } from "./Components/tracker/task-group/task-group.component";
+import { TaskTitlebarComponent } from "./Components/tracker/task-titlebar/task-titlebar.component";
+import { CharacterSelectorComponent } from "./Components/tracker/character-selector/character-selector.component";
 
 @NgModule({
     imports: [CommonModule, SharedModule],
-    declarations: [TaskComponent, TaskGroupComponent],
-    exports: [TaskComponent, TaskGroupComponent]
+    declarations: [TaskComponent, TaskGroupComponent, TaskTitlebarComponent, CharacterSelectorComponent],
+    exports: [TaskComponent, TaskGroupComponent, TaskTitlebarComponent, CharacterSelectorComponent]
 })
 export class MaplestoryTrackerSharedModule { }

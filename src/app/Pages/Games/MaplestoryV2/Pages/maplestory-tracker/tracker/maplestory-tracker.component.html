@@ -1,6 +1,7 @@
 <app-maplestory-navigation></app-maplestory-navigation>
 <div class="background"></div>
-<div class="titlebar">
+<app-task-titlebar [generalData]="generalData" (addCharacterEvent)="addCharacter($event)" (switchCharacterEvent)="switchCharacter($event)"></app-task-titlebar>
+<!-- <div class="titlebar">
     <div class="title">Trackers</div>
     <div class="buttons">
         <div class="characterSelector">
@@ -39,18 +40,18 @@
         </div>
         <button class="settings"><span class="fa fa-cog fa-lg"></span></button>
     </div>
-</div>
+</div> -->
 <div class="trackerSwitcher">
     <button class="dailyTracker">Daily Tracker</button>
     <button class="weeklyTracker">Weekly Tracker</button>
 </div>
 <div class="timerWrapper">
-    <div class="timer"><span>Daily reset in 3 hours, 32 minutes and 52 seconds</span></div>
+    <div class="timer"><span>{{ timerString }}</span></div>
 </div>
 
 <div class="taskWrapper">
     <ng-container *ngFor="let item of selectedCharacter.dailyTaskGroups; let i = index">
-        <app-task-group class="test" [taskGroup]="item" (changeEvent)="changeHandler()"></app-task-group>
+        <app-task-group [taskGroup]="item" (changeEvent)="changeHandler()"></app-task-group>
     </ng-container>
 
     <!-- <div class="taskGroup">
