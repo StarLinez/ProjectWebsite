@@ -110,6 +110,10 @@ const routes: Routes = [
         path: 'plutusnew', 
         redirectTo: 'plutus-calculator'
     },
+    {
+        path: 'plutus-calculator-wp', 
+        redirectTo: 'plutus-calculator'
+    },
 
 
 
@@ -118,11 +122,11 @@ const routes: Routes = [
         loadChildren: () => import('./Pages/Misc/Pages/misc-plutus-metal/misc-plutus-metal.module').then(m => m.MiscPlutusMetalModule)
     },
     {
-        path        : 'plutus-calculator',
+        path        : 'plutus-calculator-old',
         loadChildren: () => import('./Pages/Misc/Pages/misc-plutus-calculator/misc-plutus-calculator.module').then(m => m.MiscPlutusCalculatorModule)
     },
     {
-        path        : 'plutus-calculator-wp',
+        path        : 'plutus-calculator',
         loadChildren: () => import('./Pages/Misc/Pages/misc-plutus-new/misc-plutus-new.module').then(m => m.MiscPlutusNewModule)
     },
     {

@@ -50,6 +50,10 @@
     color: rgb(132, 141, 156);
 }
 
+.infoTextTop span{
+    font-weight: bold;
+}
+
 .inputWrapper {
     width: 762px;
     margin: 0 auto;
