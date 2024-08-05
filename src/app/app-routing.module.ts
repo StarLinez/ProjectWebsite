@@ -130,6 +130,10 @@ const routes: Routes = [
         loadChildren: () => import('./Pages/Misc/Pages/misc-plutus-new/misc-plutus-new.module').then(m => m.MiscPlutusNewModule)
     },
     {
+        path        : 'plutus-placeholder',
+        loadChildren: () => import('./Pages/Misc/Pages/misc-plutus-crycomparison/misc-plutus-crycomparison.module').then(m => m.MiscPlutusCryComparisonModule)
+    },
+    {
         path        : '**',
         redirectTo  : '404',
         pathMatch   : 'full'
