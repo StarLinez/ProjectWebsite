@@ -388,14 +388,21 @@ export class MiscPlutusNewComponent implements OnInit, OnDestroy {
     // to prevent it from calculating NaN check if heldPluCount is not null
     var intermediateMonthlyValue = this.monthlyCashbackValue + this.monthlyPerkValue + this.doubleRewardsVoucherValue + this.goldenTicketReferralsValue;
     var cryRate = 0;
+    var pluPrice = 0;
     if (this.cashbackRate == 3) {
       cryRate = this.selectedStackingTier.cryRate / 100;
     } else {
       cryRate = this.cashbackRate / 100;
     }
 
+    if (this.currencySymbol === "€") {
+      pluPrice = this.pluPrice.eur;
+    } else {
+      pluPrice = this.pluPrice.gbp;
+    }
+
     if(this.heldPluCount != null) {
-      this.monthlyCryValue = ((this.heldPluCount / 12) + intermediateMonthlyValue) * cryRate * 2;
+      this.monthlyCryValue = ((this.heldPluCount * pluPrice / 12) + intermediateMonthlyValue) * cryRate * 2;
     } else {
       this.monthlyCryValue = intermediateMonthlyValue * cryRate * 2;
     }

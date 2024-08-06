@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import PlutusJson from '../../../../../../assets/Misc/PlutusTiers.json';
 import PlutusWpJson from '../../../../../../assets/Misc/PlutusTiersWP.json';
 import { Meta, Title } from '@angular/platform-browser';
-import { PlutusStackingTierNew, EligibleSpendTier, Coin, Pluton, Promos, Tether, Fiat } from '../../../Models/PlutusTiers';
+import { PlutusStackingTierNew, EligibleSpendTier, Coin, Pluton, Promos, Tether, Fiat, PlutusStackingTier } from '../../../Models/PlutusTiers';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
@@ -25,29 +25,41 @@ export class MiscPlutusCryComparisonComponent implements OnInit, OnDestroy {
     gbp: 0.776655
   };
 
-  stackingTiers: PlutusStackingTierNew[] = PlutusWpJson.stackingTiers;
-  eligibleSpendTiers: EligibleSpendTier[] = PlutusJson.eligibleSpendTiers;
-  eligibleSpendTiersDefault: EligibleSpendTier[] = JSON.parse(JSON.stringify(PlutusJson.eligibleSpendTiers)); // for resetting promo changes
+  stackingTiersNew: PlutusStackingTierNew[] = PlutusWpJson.stackingTiers;
+  stackingTiersOld: PlutusStackingTier[] = PlutusJson.stackingTiers;
 
-  selectedStackingTier = this.stackingTiers[0];
-  selectedEligibleSpendTier = this.eligibleSpendTiers[0];
-  selectedStackingTierIndex = 0;
+  selectedStackingTierNew = this.stackingTiersNew[0];
+  selectedStackingTierOld = this.stackingTiersOld[0];
+  selectedStackingTierIndexNew = 0;
+  selectedStackingTierIndexOld = 0;
 
   heldPluCount: number;
   currencySymbol: string = "€";
-  showPromotions: boolean = false;
 
-  cashbackRate: number = 0;
-  perkCount: number = 0;
-  eligibleSpend: number = 0;
+  cashbackRateNew: number = 0;
+  cashbackRateOld: number = 0;
+  perkCountNew: number = 0;
+  perkCountOld: number = 0;
+  cryRateNew: number = 0;
+  cryRateOld: number = 0;
+  eligibleSpendNew: number = 0;
+  eligibleSpendOld: number = 0;
 
-  monthlyCashbackValue: number = 0;
-  monthlyPerkValue: number = 0;
-  monthlyCryValue: number = 0;
-  totalMonthlyValue: number = 0;
+  monthlyCashbackValueNew: number = 0;
+  monthlyCashbackValueOld: number = 0;
+  monthlyPerkValueNew: number = 0;
+  monthlyPerkValueOld: number = 0;
+  monthlyCryValueNew: number = 0;
+  monthlyCryValueOld: number = 0;
+  monthlyCryValueYear2: number = 0;
+
+  totalMonthlyValueNew: number = 0;
+  totalMonthlyValueOld: number = 0;
   
-  totalYearlyValue: number = 0;
-  actualTotalYearlyValue: number = 0;
+  year1TotalValueNew: number = 0;
+  year1TotalValueOld: number = 0;
+  year2TotalValueNew: number = 0;
+  year2TotalValueOld: number = 0;
 
   totalValue: number[] = [0, 0, 0];
   totalActualValue: number[] = [0, 0, 0];
@@ -133,102 +145,164 @@ export class MiscPlutusCryComparisonComponent implements OnInit, OnDestroy {
   }
 
   calculate() {
-    this.calculateTier();
-    this.calculateCashbackRate();
-    this.calculatePerkCount();
-    this.calculateEligibleSpend();
+    this.calculateTierNew();
+    this.calculateTierOld();
+
+    this.calculateCashbackRates();
+    this.calculatePerkCounts();
+    this.calculateCryRate();
+    this.calculateEligibleSpends();
 
     this.calculateMonthlyCashback(); //TODO funky noob stuffs
     this.calculateMonthlyPerkValue();
     this.calculateMonthlyCryValue();
 
     this.calculateTotalMonthlyValue();
-    this.calculateTotalYearlyValue();
-
-    this.calculateActualTotalYearlyValue();
+    this.calculateYear1TotalValue();
+    this.calculateMonthlyCryValueYear2();
+    this.calculateYear2TotalValue();
   }
 
-  calculateTier() {
+  calculateTierNew() {
     if (this.heldPluCount == null) {
-      this.selectedStackingTier = this.stackingTiers[0];
+      this.selectedStackingTierNew = this.stackingTiersNew[0];
+      this.selectedStackingTierIndexNew = 0;
     } else if (this.heldPluCount >= 50000) {
-      this.selectedStackingTier = this.stackingTiers[this.stackingTiers.length - 1];
-      this.selectedStackingTierIndex = this.stackingTiers.length - 1;
+      this.selectedStackingTierNew = this.stackingTiersNew[this.stackingTiersNew.length - 1];
+      this.selectedStackingTierIndexNew = this.stackingTiersNew.length - 1;
     } else {
-        for (let i = 0; i < this.stackingTiers.length; i++) {
-          if (this.stackingTiers[i].pluRequired > this.heldPluCount) {
-            this.selectedStackingTier = this.stackingTiers[i - 1];
-            this.selectedStackingTierIndex = i - 1;
+        for (let i = 0; i < this.stackingTiersNew.length; i++) {
+          if (this.stackingTiersNew[i].pluRequired > this.heldPluCount) {
+            this.selectedStackingTierNew = this.stackingTiersNew[i - 1];
+            this.selectedStackingTierIndexNew = i - 1;
             break;
           }
         }
     }
   }
 
-  calculateCashbackRate() {
-    if (this.selectedStackingTier.name !== "None") {
-      if (this.selectedStackingTier.cashbackPercentage === this.stackingTiers[this.stackingTiers.length - 1].cashbackPercentage || this.stackingTiers[this.selectedStackingTierIndex + 1].cashbackPercentage < 4) {
-        this.cashbackRate = this.selectedStackingTier.cashbackPercentage;
+  calculateTierOld() {
+    if (this.heldPluCount == null) {
+      this.selectedStackingTierOld = this.stackingTiersOld[0];
+      this.selectedStackingTierIndexOld = 0;
+    } else if (this.heldPluCount >= 3000) {
+      this.selectedStackingTierOld = this.stackingTiersOld[this.stackingTiersOld.length - 1];
+      this.selectedStackingTierIndexOld = this.stackingTiersOld.length - 1;
+    } else {
+        for (let i = 0; i < this.stackingTiersOld.length; i++) {
+          if (this.stackingTiersOld[i].pluRequired > this.heldPluCount) {
+            this.selectedStackingTierOld = this.stackingTiersOld[i - 1];
+            this.selectedStackingTierIndexOld = i - 1;
+            break;
+          }
+        }
+    }
+  }
+
+  calculateCashbackRates() {
+    this.cashbackRateOld = this.selectedStackingTierOld.cashbackPercentage;
+
+    if (this.selectedStackingTierNew.name !== "None") {
+      if (this.selectedStackingTierNew.cashbackPercentage === this.stackingTiersNew[this.stackingTiersNew.length - 1].cashbackPercentage || this.stackingTiersNew[this.selectedStackingTierIndexNew + 1].cashbackPercentage < 4) {
+        this.cashbackRateNew = this.selectedStackingTierNew.cashbackPercentage;
       } else {
-        var pluToNextTier = this.stackingTiers[this.selectedStackingTierIndex + 1].pluRequired - this.stackingTiers[this.selectedStackingTierIndex].pluRequired;
-        var extraPlu = this.heldPluCount - this.selectedStackingTier.pluRequired;
+        var pluToNextTier = this.stackingTiersNew[this.selectedStackingTierIndexNew + 1].pluRequired - this.stackingTiersNew[this.selectedStackingTierIndexNew].pluRequired;
+        var extraPlu = this.heldPluCount - this.selectedStackingTierNew.pluRequired;
         var incrementalPercentage = Math.floor(extraPlu / pluToNextTier * 10) / 10
-        this.cashbackRate = this.selectedStackingTier.cashbackPercentage + incrementalPercentage;
+        this.cashbackRateNew = this.selectedStackingTierNew.cashbackPercentage + incrementalPercentage;
       }
       return;
     }
 
     
-    this.cashbackRate = this.selectedStackingTier.cashbackPercentage;
+    this.cashbackRateNew = this.selectedStackingTierNew.cashbackPercentage;
   }
 
-  calculatePerkCount() {
-    this.perkCount = this.selectedStackingTier.perkCount;  
+  calculatePerkCounts() {
+    this.perkCountNew = this.selectedStackingTierNew.perkCount;  
+    this.perkCountOld = this.selectedStackingTierOld.perkCount;
   }
 
-  calculateEligibleSpend() {
-    if (this.heldPluCount === null || isNaN(this.heldPluCount)) {
-      this.eligibleSpend = 0;
+  calculateCryRate() {
+    var cryRate = 0;
+    if (this.cashbackRateNew == 3) {
+      cryRate = this.selectedStackingTierNew.cryRate;
     } else {
-      this.eligibleSpend = this.heldPluCount;
+      cryRate = this.cashbackRateNew;
     }
+    
+    this.cryRateNew = cryRate;
+    this.cryRateOld = 0;
+  }
+
+  calculateEligibleSpends() {
+    if (this.heldPluCount === null || isNaN(this.heldPluCount)) {
+      this.eligibleSpendNew = 0;
+    } else {
+      this.eligibleSpendNew = this.heldPluCount;
+    }
+    this.eligibleSpendOld = 0;
   }
 
   calculateMonthlyCashback() {
-    this.monthlyCashbackValue = this.eligibleSpend * (this.cashbackRate / 100);
+    this.monthlyCashbackValueNew = this.eligibleSpendNew * (this.cashbackRateNew / 100);
+    this.monthlyCashbackValueOld = this.eligibleSpendOld * (this.cashbackRateOld / 100);
   }
 
   calculateMonthlyPerkValue() {
-    this.monthlyPerkValue = this.perkCount * 10;
+    this.monthlyPerkValueNew = this.perkCountNew * 10;
+    this.monthlyPerkValueOld = this.perkCountOld * 10;
   }
 
   calculateMonthlyCryValue() {
-    // to prevent it from calculating NaN check if heldPluCount is not null
-    var intermediateMonthlyValue = this.monthlyCashbackValue + this.monthlyPerkValue;
-    var cryRate = 0;
-    if (this.cashbackRate == 3) {
-      cryRate = this.selectedStackingTier.cryRate / 100;
+    var intermediateMonthlyValue = this.monthlyCashbackValueNew + this.monthlyPerkValueNew;
+    var pluPrice = 0;
+    if (this.currencySymbol === "€") {
+      pluPrice = this.pluPrice.eur;
     } else {
-      cryRate = this.cashbackRate / 100;
+      pluPrice = this.pluPrice.gbp;
     }
 
+    // to prevent it from calculating NaN check if heldPluCount is not null
     if(this.heldPluCount != null) {
-      this.monthlyCryValue = ((this.heldPluCount / 12) + intermediateMonthlyValue) * cryRate * 2;
+      this.monthlyCryValueNew = ((this.heldPluCount * pluPrice / 12) + intermediateMonthlyValue) * (this.cryRateNew / 100) * 2;
     } else {
-      this.monthlyCryValue = intermediateMonthlyValue * cryRate * 2;
+      this.monthlyCryValueNew = intermediateMonthlyValue * (this.cryRateNew / 100) * 2;
     }
    }
   
   calculateTotalMonthlyValue() {
-    this.totalMonthlyValue = this.monthlyCashbackValue + this.monthlyPerkValue + this.monthlyCryValue;
+    this.totalMonthlyValueNew = this.monthlyCashbackValueNew + this.monthlyPerkValueNew + this.monthlyCryValueNew;
+    this.totalMonthlyValueOld = this.monthlyCashbackValueOld + this.monthlyPerkValueOld + this.monthlyCryValueOld;
   }
 
-  calculateTotalYearlyValue() {
-    this.totalYearlyValue = (this.totalMonthlyValue * 12);
+  calculateYear1TotalValue() {
+    this.year1TotalValueNew = (this.totalMonthlyValueNew * 12);
+    this.year1TotalValueOld = (this.totalMonthlyValueOld * 12)
   }
 
-  calculateActualTotalYearlyValue() {
-    this.actualTotalYearlyValue = this.totalYearlyValue;
+  calculateMonthlyCryValueYear2 () {
+    var intermediateMonthlyValue = this.monthlyCashbackValueNew + this.monthlyPerkValueNew;
+    var pluPrice = 0;
+    if (this.currencySymbol === "€") {
+      pluPrice = this.pluPrice.eur;
+    } else {
+      pluPrice = this.pluPrice.gbp;
+    }
+
+    var heldPluAfter1Year = 0;
+    // to prevent a divide by zero
+    if(this.year1TotalValueNew != 0) {
+      heldPluAfter1Year = (this.year1TotalValueNew / pluPrice) + this.heldPluCount;
+    }
+
+    this.monthlyCryValueYear2 = ((heldPluAfter1Year * pluPrice / 12) + intermediateMonthlyValue) * (this.cryRateNew / 100) * 3;
+  }
+
+  calculateYear2TotalValue() {
+    this.year2TotalValueNew = this.year1TotalValueNew + ((this.monthlyCryValueYear2 + this.monthlyPerkValueNew + this.monthlyCashbackValueNew) * 12);
+
+    this.year2TotalValueOld = (this.totalMonthlyValueOld * 24);
   }
 
   changeCurrency() {
