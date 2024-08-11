@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import PlutusJson from '../../../../../../assets/Misc/PlutusTiers.json';
 import PlutusWpJson from '../../../../../../assets/Misc/PlutusTiersWP.json';
 import { Meta, Title } from '@angular/platform-browser';
-import { PlutusStackingTierNew, EligibleSpendTier, Coin, Pluton, Promos, Tether, Fiat, PlutusStackingTier } from '../../../Models/PlutusTiers';
+import { PlutusStackingTierNew, Coin, Pluton, Tether, Fiat, PlutusStackingTier } from '../../../Models/PlutusTiers';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
@@ -88,8 +88,8 @@ export class MiscPlutusCryComparisonComponent implements OnInit, OnDestroy {
     }
 
     // warning this fetch is not waited on, so if used for calculations, run the calculation again in this function.
-    //this.fetchTetherPrice();
-    //this.fetchPluPrice();
+    this.fetchTetherPrice();
+    this.fetchPluPrice();
 
     this.calculate();
   }
@@ -119,10 +119,6 @@ export class MiscPlutusCryComparisonComponent implements OnInit, OnDestroy {
       // add the values into the pluPrice object
       this.pluPrice = plutonData.pluton;
     });
-  }
-
-  getPrices(): Observable<Pluton> {
-    return this.http.get<Pluton>(this.url);
   }
 
   stackingTierChange(event: any) {
@@ -263,7 +259,6 @@ export class MiscPlutusCryComparisonComponent implements OnInit, OnDestroy {
     return eligibleSpend * (cashbackRate / 100);
   }
 
-  // TODO: don't use this instead take the first item from the eventual array that will be made for year 1-5
   calculateMonthlyCryValue() {
     var intermediateMonthlyValue = this.monthlyCashbackValueNew + this.monthlyPerkValueNew;
     var pluPrice = 0;
@@ -291,7 +286,7 @@ export class MiscPlutusCryComparisonComponent implements OnInit, OnDestroy {
 
   calculateYear1TotalValue() {
     this.year1TotalValueNew = (this.totalMonthlyValueNew * 12);
-    this.year1TotalValueOld = (this.totalMonthlyValueOld * 12)
+    this.year1TotalValueOld = (this.totalMonthlyValueOld * 12);
   }
 
   calculateRewardsOver5YearsWithCry() {
