@@ -54,6 +54,7 @@
     width: 254px;
     margin: 0 auto;
     margin-top: 70px;
+    margin-bottom: 40px;
     height: 80px;
 }
 
@@ -252,10 +253,10 @@ input[type=number] {
     clear: both;
     display: flex;
     align-items: center;
-    width: 511px;
+    width: 750px;
     padding-left: 12px;
     padding-right: 12px;
-    height: 210px;
+    height: 194px;
     margin: 0 auto;
     justify-content: space-around;
     text-align: center;
@@ -272,8 +273,12 @@ input[type=number] {
 .overviewItem {
     background-color: #001271;
     border-radius: 20px;
-    width: 236px;
-    height: 190px;
+    width: 173px;
+    height: 180px;
+}
+
+.overview2 .overviewItem {
+    width: 135px;
 }
 
 .overviewItem h2 {
@@ -299,12 +304,104 @@ input[type=number] {
 .overviewItem h4 {
     margin: 0;
     margin-top: 18px;
+    margin-bottom: 5px;
+    height: 36px;
     font-weight: bold;
 }
 
 .optionSmallText {
     font-size: 14px;
     color: #848D9C;
+}
+
+.newOutputWrapper {
+    clear: both;
+    display: flex;
+    align-items: center;
+    width: 1250px;
+    height: 320px;
+    margin: 0 auto;
+    margin-top: 50px;
+    padding-bottom: 50px;
+    justify-content: space-around;
+    text-align: center;
+}
+
+.newOutput {
+    position:relative;
+    background-color: #2649ea;
+    border-radius: 20px;
+    width: 600px;
+    height: 300px;
+}
+
+.newOutputTitle {
+    margin: 10px 0px 0px 20px;
+    text-align: left;
+}
+
+.monthlyValues {
+    width: 250px;
+    height: 100px;
+    text-align: left;
+    margin: 20px 0px 0px 20px;
+    float: left;
+}
+
+.monthlyValues span {
+    display: inline-block;
+    width: 145px;
+}
+
+.yearlyValue {
+    width: 150px;
+    height: 100px;
+    float: right;
+    margin: 0px 20px 0px 0px;
+    border-radius: 6px;
+    background-color: #0923B5;
+}
+
+.yearlyValue p {
+    width: 100%;
+}
+
+.yearlyAmount {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.cryTitle {
+    position: absolute; 
+    bottom: 0;
+    left: 50%;
+    bottom: 62px;
+    transform: translateX(-50%);
+}
+
+.yearlyCry {
+    width: 550px;
+    position: absolute; 
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+    align-items: center;
+    bottom: 0;
+    left: 50%;
+    bottom: 20px;
+    transform: translateX(-50%);
+    margin: 0 auto;
+}
+
+.yearlyCry h4 {
+    margin: 0;
+    padding: 16px 12px 7px 12px;
+    display: inline-block; 
+    background-color: #0923B5;
+    border-radius: 6px;
+    font-weight: lighter;
+    min-width: 83px;
+    height: 24px;
 }
 
 .outputTitle {
@@ -489,7 +586,7 @@ hr {
         margin-top: 30px;
         width: 254px;
         text-align: center;
-        height: 120px;
+        height: 90px;
     }
 
     .inputLabelWrapper {
@@ -526,26 +623,25 @@ hr {
     }
 
     .overview {
-        display: inline-block;
-        width: 100%;
+        width: 350px;
         height: auto;
         transform: none;
         padding: 0px;
-        padding-bottom: 10px;
+        padding-bottom: 5px;
+        flex-wrap: wrap;
     }
 
     .overviewItem {
-        margin: 0 auto;
-        margin-top: 20px;
-        padding-top: 3px;
+        margin-top: 10px;
+        width: 165px;
+    }
+    
+    .overview2 .overviewItem {
+        width: 165px;
     }
 
-    .overviewItem:first-child {
-        margin-top: 10px;
-    }
-
-    .overviewItem h5 {
-        margin-top: 10px;
+    .overviewItem:nth-child(-n+2) {
+        margin-top: 5px;
     }
 
     .stackingTitle {

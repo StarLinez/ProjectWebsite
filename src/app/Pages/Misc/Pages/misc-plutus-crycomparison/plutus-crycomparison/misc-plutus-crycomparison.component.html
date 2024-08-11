@@ -11,87 +11,130 @@
         </div>
     </div>
 
-    <p [ngClass]="(heldPluCount != 0 && heldPluCount != null) ? 'visible' : 'hidden'" class="stackingTitle">New Reward Level: {{ selectedStackingTierNew.name }}</p>
+    <!-- <p [ngClass]="(heldPluCount != 0 && heldPluCount != null) ? 'visible' : 'hidden'" class="stackingTitle">New Reward Level: {{ selectedStackingTierNew.name }}</p> -->
 
     <div class="overview">
         <div class="overviewItem">
-            <h5>new</h5>
+            <h4>Reward Rate</h4>
             <h2>{{ cashbackRateNew }}%</h2>
             <br>
-            <h5>old</h5>
+            <br>
             <h2>{{ cashbackRateOld }}%</h2>
-            <h4>Cashback Rate</h4>
         </div>
-        
         <div class="overviewItem">
-            <h5>new</h5>
+            <h4>CRY %</h4>
+            <h2>{{ cryRateNew }}%</h2>
+            <br>
+            <br>
+            <h2>{{ cryRateOld }}%</h2>
+        </div>
+        <div class="overviewItem">
+            <h4>Perks</h4>
             <h2>{{ perkCountNew }}</h2>
             <br>
-            <h5>old</h5>
+            <br>
             <h2>{{ perkCountOld }}</h2>
-            <h4>Perks</h4>
+        </div>
+        <div class="overviewItem">
+            <h4>Rewards Cap</h4>
+            <h2>{{ currencySymbol }}{{ eligibleSpendNew | number : '1.0-0' }}/m</h2>
+            <br>
+            <br>
+            <h2>{{ currencySymbol }}{{ eligibleSpendOld | number : '1.0-0' }}/m</h2>
         </div>
     </div>
 </div>
 <div class="contentPageOverride contentpageSecondaryColor">
-    <div class="overview">
+    <div class="overview overview2">
         <div class="overviewItem">
-            <h5>new</h5>
-            <h2>{{ cryRateNew }}%</h2>
+            <h4>Double Rewards<br>Vouchers</h4>
+            <h2>{{ selectedStackingTierNew.doubleRewards }}</h2>
             <br>
-            <h5>old</h5>
-            <h2>{{ cryRateOld }}%</h2>
-            <h4>CRY %</h4>
+            <br>
+            <h2>0</h2>
         </div>
         <div class="overviewItem">
-            <h5>new</h5>
-            <h2>{{ currencySymbol }}{{ eligibleSpendNew | number : '1.0-0' }}/m</h2>
+            <h4>Stackable Perks</h4>
+            <h2>{{ selectedStackingTierNew.stackablePerkCount }}</h2>
             <br>
-            <h5>old</h5>
-            <h2>{{ currencySymbol }}{{ eligibleSpendOld | number : '1.0-0' }}/m</h2>
-            <h4>Rewards Cap</h4>
+            <br>
+            <h2>0</h2>
+        </div>
+        <div class="overviewItem">
+            <h4>Free Payouts</h4>
+            <h2>{{ selectedStackingTierNew.freePayouts }}</h2>
+            <br>
+            <br>
+            <h2>0</h2>
+        </div>
+        <div class="overviewItem">
+            <h4>Direct Debit<br>Rewards</h4>
+            <h2>{{ selectedStackingTierNew.directDebitRewards }}</h2>
+            <br>
+            <br>
+            <h2>0</h2>
+        </div>
+        <div class="overviewItem">
+            <h4>Golden Tickets</h4>
+            <h2>{{ selectedStackingTierNew.goldenTickets }}</h2>
+            <br>
+            <br>
+            <h2>0</h2>
         </div>
     </div>
-    <p class="outputTitle">New Rewards</p>
-    <div class="outputWrapper">
-        <div class="headerBackDrop">
-            <div class="header">
-                <p>Cashback Rewards</p>
-                <p>Perk Rewards</p>
-                <p>Monthly CRY</p>
-                <p>Value Earned<span>(Monthly)</span></p>
-                <p>Value Earned<span>(after 1 Year)</span></p>
-                <p>Value Earned<span>(after 2 Years)</span></p>
+
+    <div class="newOutputWrapper">
+        <div class="newOutput">
+            <h2 class="newOutputTitle">New</h2>
+            <div class="monthlyValues">
+                <span>Rewards: </span>{{ currencySymbol }}{{ monthlyCashbackValueNew | number : '1.2-2'}}/m
+                <br>
+                <span>CRY: </span>{{ currencySymbol }}{{ monthlyCryValueNew | number : '1.2-2' }}/m
+                <br>
+                <span>Perks: </span>{{ currencySymbol }}{{ monthlyPerkValueNew | number : '1.2-2' }}/m
+                <br>
+                <span>Additional Benefits: </span>{{ currencySymbol }}{{ additionalBenefitsNew | number : '1.2-2' }}/m   <input type="checkbox" id="additionalBenefits" name="additionalBenefits" (change)="calculate()" [(ngModel)]="countAdditionalBenefits" />
+            </div>
+            <div class="yearlyValue">
+                <p class="yearlyHeader">Yearly</p>
+                <p class="yearlyAmount">{{ currencySymbol }}{{ year1TotalValueNew | number : '1.2-2' }}</p>
+            </div>
+            <p class="cryTitle">Stack evolution from 1 year to 5 years.</p>
+            <div class="yearlyCry">
+                <h4>{{ yearlyStackValuesNew[0] | number : '1.0-0' }} PLU</h4>
+                
+                <h4>{{ yearlyStackValuesNew[1] | number : '1.0-0' }} PLU</h4>
+
+                <h4>{{ yearlyStackValuesNew[2] | number : '1.0-0' }} PLU</h4>
+
+                <h4>{{ yearlyStackValuesNew[3] | number : '1.0-0' }} PLU</h4>
+
+                <h4>{{ yearlyStackValuesNew[4] | number : '1.0-0' }} PLU</h4>
             </div>
         </div>
-        <div class="values">
-            <p>{{ currencySymbol }}{{ monthlyCashbackValueNew | number : '1.2-2'}}</p>
-            <p>{{ currencySymbol }}{{ monthlyPerkValueNew | number : '1.2-2' }}</p>
-            <p>{{ currencySymbol }}{{ monthlyCryValueNew | number : '1.2-2' }}</p>
-            <p>{{ currencySymbol }}{{ totalMonthlyValueNew | number : '1.2-2' }}</p>
-            <p>{{ currencySymbol }}{{ year1TotalValueNew | number : '1.2-2' }}</p>
-            <p>{{ currencySymbol }}{{ year2TotalValueNew | number : '1.2-2' }}</p>
-        </div>
-    </div>
-    <p class="outputTitle">Old Rewards</p>
-    <div class="outputWrapper secondOutput">
-        <div class="headerBackDrop">
-            <div class="header">
-                <p>Cashback Rewards</p>
-                <p>Perk Rewards</p>
-                <p>Monthly CRY</p>
-                <p>Value Earned<span>(Monthly)</span></p>
-                <p>Value Earned<span>(after 1 Year)</span></p>
-                <p>Value Earned<span>(after 2 Years)</span></p>
+        <div class="newOutput">
+            <h2 class="newOutputTitle">Old</h2>
+            <div class="monthlyValues">
+                <span>Rewards: </span>{{ currencySymbol }}{{ monthlyCashbackValueOld | number : '1.2-2'}}/m
+                <br>
+                <span>CRY: </span>{{ currencySymbol }}{{ monthlyCryValueOld | number : '1.2-2' }}/m
+                <br>
+                <span>Perks: </span>{{ currencySymbol }}{{ monthlyPerkValueOld | number : '1.2-2' }}/m
+                <br>
+                <span>Additional Benefits: </span>{{ currencySymbol }}{{ additionalBenefitsOld | number : '1.2-2' }}/m   <input type="checkbox" id="additionalBenefits" name="additionalBenefits" [checked]="countAdditionalBenefits" />
             </div>
-        </div>
-        <div class="values">
-            <p>{{ currencySymbol }}{{ monthlyCashbackValueOld | number : '1.2-2'}}</p>
-            <p>{{ currencySymbol }}{{ monthlyPerkValueOld | number : '1.2-2' }}</p>
-            <p>{{ currencySymbol }}{{ monthlyCryValueOld | number : '1.2-2' }}</p>
-            <p>{{ currencySymbol }}{{ totalMonthlyValueOld | number : '1.2-2' }}</p>
-            <p>{{ currencySymbol }}{{ year1TotalValueOld | number : '1.2-2' }}</p>
-            <p>{{ currencySymbol }}{{ year2TotalValueOld | number : '1.2-2' }}</p>
+            <div class="yearlyValue">
+                <p class="yearlyHeader">Yearly</p>
+                <p class="yearlyAmount">{{ currencySymbol }}{{ year1TotalValueOld | number : '1.2-2' }}</p>
+            </div>
+            <p class="cryTitle">Stack evolution from 1 year to 5 years.</p>
+            <div class="yearlyCry">
+                <h4>{{ yearlyStackValuesOld[0] | number : '1.0-0' }} PLU</h4>
+                <h4>{{ yearlyStackValuesOld[1] | number : '1.0-0' }} PLU</h4>
+                <h4>{{ yearlyStackValuesOld[2] | number : '1.0-0' }} PLU</h4>
+                <h4>{{ yearlyStackValuesOld[3] | number : '1.0-0' }} PLU</h4>
+                <h4>{{ yearlyStackValuesOld[4] | number : '1.0-0' }} PLU</h4>
+            </div>
         </div>
     </div>
 </div>
