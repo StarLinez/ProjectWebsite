@@ -118,7 +118,7 @@
                 <br>
                 <span>Perks: </span>{{ currencySymbol }}{{ monthlyPerkValueOld | number : '1.2-2' }}/m
                 <br>
-                <span>Additional Benefits: </span>{{ currencySymbol }}{{ additionalBenefitsOld | number : '1.2-2' }}/m   <input type="checkbox" id="additionalBenefits" name="additionalBenefits" [checked]="countAdditionalBenefits" />
+                <span>Additional Benefits: </span>{{ currencySymbol }}{{ additionalBenefitsOld | number : '1.2-2' }}/m   <input type="checkbox" id="additionalBenefits" name="additionalBenefits"  (change)="calculate()" [(ngModel)]="countAdditionalBenefits" />
             </div>
             <div class="yearlyValue">
                 <p class="yearlyHeader">Yearly</p>
