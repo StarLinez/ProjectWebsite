@@ -240,6 +240,11 @@ export class MiscPlutusCryComparisonComponent implements OnInit, OnDestroy {
   calculateAdditionalBenefits(monthlyCashbackValue: number, stackingTier: PlutusStackingTierNew) {
     var totalAdditionalBenefits = 0;
 
+    if (!this.countAdditionalBenefits) {
+      // return 0 and exit out of the function.
+      return 0; 
+    }
+
     if(monthlyCashbackValue > (stackingTier.doubleRewards * 20)) {
       totalAdditionalBenefits += stackingTier.doubleRewards * 20;
     } else {
@@ -247,9 +252,9 @@ export class MiscPlutusCryComparisonComponent implements OnInit, OnDestroy {
     }
   
     if (this.currencySymbol === "€") {
-      totalAdditionalBenefits = stackingTier.goldenTickets * 20 * this.tetherPrice.eur;
+      totalAdditionalBenefits += stackingTier.goldenTickets * 20 * this.tetherPrice.eur;
     } else {
-      totalAdditionalBenefits = stackingTier.goldenTickets * 20 * this.tetherPrice.gbp;
+      totalAdditionalBenefits += stackingTier.goldenTickets * 20 * this.tetherPrice.gbp;
     }
 
     return totalAdditionalBenefits;
@@ -277,10 +282,8 @@ export class MiscPlutusCryComparisonComponent implements OnInit, OnDestroy {
    }
   
   calculateTotalMonthlyValue(monthlyCashbackValue, monthlyPerkValue, monthlyCryValue, additionalBenefits) {
-    var total = monthlyCashbackValue + monthlyPerkValue + monthlyCryValue;
-    if (this.countAdditionalBenefits){
-      total += additionalBenefits;
-    }
+    var total = monthlyCashbackValue + monthlyPerkValue + monthlyCryValue + additionalBenefits;
+
     return total;
   }
 
@@ -316,9 +319,10 @@ export class MiscPlutusCryComparisonComponent implements OnInit, OnDestroy {
 
         var monthlyCashback = this.calculateMonthlyCashback(eligibleSpend, cashbackRate);
         var monthlyPerkValue = perkCount * 10;
+        var additionalBenefits = this.calculateAdditionalBenefits(monthlyCashback, stackingTier);
 
         // add the PLU count for the rewards value
-        totalStack += (monthlyCashback + monthlyPerkValue) / pluPrice;
+        totalStack += (monthlyCashback + monthlyPerkValue + additionalBenefits) / pluPrice;
 
         // calculating cryvalue on 1/12 of the starting stack of the year so that the multiplier adjusts on a monthly basis based on the increasing PLU held (from rewards being earned)
         // taking the cryrate + (the cryrate * years) to add on the bonus of holding for multiple years without resetting it
