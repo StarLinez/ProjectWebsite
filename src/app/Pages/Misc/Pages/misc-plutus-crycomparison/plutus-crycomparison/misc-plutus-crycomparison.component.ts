@@ -245,8 +245,8 @@ export class MiscPlutusCryComparisonComponent implements OnInit, OnDestroy {
       return 0; 
     }
 
-    if(monthlyCashbackValue > (stackingTier.doubleRewards * 20)) {
-      totalAdditionalBenefits += stackingTier.doubleRewards * 20;
+    if(monthlyCashbackValue > (stackingTier.doubleRewards * 10)) {
+      totalAdditionalBenefits += stackingTier.doubleRewards * 10;
     } else {
       totalAdditionalBenefits += monthlyCashbackValue;
     }

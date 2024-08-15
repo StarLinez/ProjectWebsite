@@ -361,8 +361,8 @@ export class MiscPlutusNewComponent implements OnInit, OnDestroy {
       return; 
     }
 
-    if(this.monthlyCashbackValue > (this.selectedStackingTier.doubleRewards * 20)) {
-      this.doubleRewardsVoucherValue = this.selectedStackingTier.doubleRewards * 20;
+    if(this.monthlyCashbackValue > (this.selectedStackingTier.doubleRewards * 10)) {
+      this.doubleRewardsVoucherValue = this.selectedStackingTier.doubleRewards * 10;
     } else {
       this.doubleRewardsVoucherValue = this.monthlyCashbackValue;
     }
@@ -409,7 +409,7 @@ export class MiscPlutusNewComponent implements OnInit, OnDestroy {
    }
   
   calculateTotalMonthlyValue() {
-    this.totalMonthlyValue = this.monthlyCashbackValue + this.monthlyPerkValue + this.doubleRewardsVoucherValue + this.goldenTicketReferralsValue + this.freePayoutValue + this.monthlyCryValue;
+    this.totalMonthlyValue = this.monthlyCashbackValue + this.monthlyPerkValue + this.doubleRewardsVoucherValue + this.goldenTicketReferralsValue + this.monthlyCryValue;
   }
 
   calculateTotalYearlyValue() {
