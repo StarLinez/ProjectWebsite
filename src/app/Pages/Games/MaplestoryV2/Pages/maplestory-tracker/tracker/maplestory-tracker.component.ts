@@ -20,7 +20,7 @@ export class MaplestoryTrackerComponent implements OnInit, OnDestroy {
   timer: any;
   timerString: string;
 
-  editMode: boolean = true;
+  editMode: boolean = false;
 
   
 
@@ -152,6 +152,9 @@ export class MaplestoryTrackerComponent implements OnInit, OnDestroy {
     localStorage.setItem(this.generalData.characters[this.generalData.selectedCharacterIndex].characterStorageReference, JSON.stringify(this.selectedCharacter));
   }
 
+  editModeChange($event: boolean){
+    this.editMode = $event;
+  }
 
   generalDataChangeHandler() {
     localStorage.setItem("generalData", JSON.stringify(this.generalData));

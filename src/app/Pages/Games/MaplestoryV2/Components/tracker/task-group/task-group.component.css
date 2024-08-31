@@ -9,6 +9,7 @@
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
     border: white 1px solid;
+    padding-bottom: 9px;
 }
 
 .taskGroupHeader {
@@ -71,6 +72,19 @@
     border-radius: 3px;
 }
 
+.allDisabledMessage {
+    width: 385px;
+    height: 70px;
+    background-color: #EBEBEB;
+    margin: 0 auto 10px auto;
+    font-size: 15px;
+    font-family: "Lemon Milk", sans-serif;
+    color: #393939;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .addTask {
     width: 385px;
     height: 70px;
@@ -87,8 +101,6 @@
     color: #393939;
 }
 
-
-
 .addTask span {
     margin: 0 10px 0 10px;
 }
@@ -99,4 +111,97 @@
 
 .addTask span:nth-child(2) {
     line-height: 10px;
+}
+
+.addTaskMenu {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: "Lemon Milk", sans-serif;
+    color: #393939;
+    width: 548px;
+    height: 370px;
+    border-radius: 6px;;
+    background-color: white;
+    z-index: 110;
+}
+
+.addTaskTitle {
+    width: 100%;
+    text-align: center;
+    font-family: "Lemon Milk", sans-serif;
+    color: #393939;
+    font-size: 20px;
+    margin-bottom: 30px;
+}
+
+.addTaskInputWrapper {
+    width: 388px;
+    margin: 0 auto;
+}
+
+.addTaskMenu label {
+    display: block;
+    text-align: center;
+    margin-bottom: 5px;
+}
+
+.addTaskMenu span {
+    color: #B45757;
+}
+
+.addTaskMenu input {
+    width: 388px;
+    height: 51px;
+    border-radius: 6px;
+    padding: 8px;
+    box-sizing: border-box;
+    background-color: #EBEBEB;
+    border: none;
+    text-align: center;
+    font-size: 14px;
+    font-family: "Lemon Milk", sans-serif;
+    color: #393939;
+    margin-bottom: 25px;
+}
+
+.addTaskMenu input:focus {
+    outline: none;
+}
+
+.buttons {
+    display: flex; /* Enables flexbox layout */
+    justify-content: space-between; /* Distributes space between items */
+    width: 260px;
+    margin: 0 auto;
+}
+
+.buttons button {
+    height: 50px;
+    border-radius: 100px;
+    border: none;
+    font-weight: 500;
+    font-size: 20px;
+    padding: 0px 25px 0px 25px;
+    color: white;
+    font-family: "Lemon Milk", sans-serif;
+}
+
+.buttons .cancel {
+    background-color: #B45757;
+}
+
+.buttons .save {
+    background-color: #6FC25B;
+}
+
+.addTaskOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 100;
 }

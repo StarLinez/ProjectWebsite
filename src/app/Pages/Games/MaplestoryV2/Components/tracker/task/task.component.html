@@ -1,14 +1,15 @@
-<div class="task" [ngClass]="{'tChecked': task.done}" (click)="toggleTask()">
-    <div *ngIf="true" class="checkbox" [ngClass]="(task.done)?'cbChecked':'cbUnchecked'"><span *ngIf="task.done" class="fa fa-check"></span></div>
+<div class="task" [ngClass]="{'tChecked': task.done && !editMode}" (click)="toggleTask()">
+    <div *ngIf="!task.enabled && editMode" class="disabledOverlay"></div>
+    <div *ngIf="!editMode" class="checkbox" [ngClass]="(task.done)?'cbChecked':'cbUnchecked'"><span *ngIf="task.done" class="fa fa-check"></span></div>
     <div *ngIf="editMode" class="updown">
         <span class="fa fa-caret-up"></span>
         <span class="fa fa-caret-down"></span>
     </div>
     <div class="taskName">{{ task.name }}</div>
     <img [src]="task.type != 'custom' ? 'assets/Games/MaplestoryV2/Daily/' + task.image : task.image" onerror="this.onerror=null; this.src='assets/TrackerImages/error.png'" alt="{{task.name}}">
-    <div *ngIf="editMode" class="toggle" [ngClass]="(false)?'emEnabled':'emDisabled'">
-        <span *ngIf="false" class="fa fa-plus"></span>
-        <span *ngIf="false" class="fa fa-minus"></span>
-        <span *ngIf="true" class="fa fa-trash"></span>
+    <div *ngIf="editMode" class="toggle" [ngClass]="(!task.enabled)?'emEnabled':'emDisabled'">
+        <span *ngIf="!task.enabled && task.type != 'custom'" class="fa fa-plus"></span>
+        <span *ngIf="task.enabled && task.type != 'custom'" class="fa fa-minus"></span>
+        <span *ngIf="task.type == 'custom'" class="fa fa-trash"></span>
     </div>
 </div>

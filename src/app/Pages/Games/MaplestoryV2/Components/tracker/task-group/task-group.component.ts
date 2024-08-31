@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { TaskGroup } from '../../../Models/trackerData';
+import { TaskGroup, Task } from '../../../Models/trackerData';
 
 
 @Component({
@@ -11,12 +11,13 @@ export class TaskGroupComponent implements OnInit {
   //@Input() taskData: TaskData; // reference is passed along to make editModeActive available without requiring an event emitter if it gets changed
   @Input() taskGroup: TaskGroup;
   @Input() title: string;
-  @Input() timerString: string;
+  @Input() editMode: boolean;
 
   @Output() changeEvent = new EventEmitter<any>();
 
-  allTasksDisabled: boolean = false;
   addingCustomTask: boolean = false;
+  customTaskName: string = "";
+  customTaskImageUrl: string = "";
 
   ngOnInit() {
     this.checkIfGroupIsFullyDisabled();
@@ -45,24 +46,11 @@ export class TaskGroupComponent implements OnInit {
   disableTask(index: any) {
     if (this.taskGroup.tasks[index].type == "custom" || this.taskGroup.tasks[index].image == "Custom.png") {
       this.taskGroup.tasks.splice(index, 1);
-      return;
-    }
-
-    if (this.taskGroup.tasks[index].enabled) {
-      this.taskGroup.tasks[index].enabled = false;
     } else {
-      this.taskGroup.tasks[index].enabled = true;
+      this.taskGroup.tasks[index].enabled = !this.taskGroup.tasks[index].enabled;
     }
 
     this.checkIfGroupIsFullyDisabled();
-  }
-
-  evaluateDisplayCondition(condition: string) {
-    try {
-      return eval(condition);
-    } catch (e) {
-      return true;
-    }
   }
 
   checkIfGroupIsFullyDisabled() {
@@ -78,14 +66,38 @@ export class TaskGroupComponent implements OnInit {
     this.addingCustomTask = true;
   }
 
-  customTaskConfirmAdding(eventData: any) {
-      this.taskGroup.tasks.push(eventData);
+  confirmAddingCustomTask() {
+    if (this.customTaskName != "") {
+      // if the user didn't specify an url set it to the default icon
+      if (this.customTaskImageUrl == "") {
+        this.customTaskImageUrl = "assets/TrackerImages/Custom.png";
+      }
+
+      var newTask: Task = {
+        name: this.customTaskName,
+        image: this.customTaskImageUrl,
+        done: false,
+        enabled: true,
+        type: 'custom',
+        dispCon: "true"
+      }
+
+      this.taskGroup.tasks.push(newTask);
+
       this.addingCustomTask = false;
+      this.customTaskName = "";
+      this.customTaskImageUrl = "";
+    
+      // this also kicks off changehandler
       this.checkIfGroupIsFullyDisabled();
-      this.changeHandler();
+    } else {
+      this.cancelAddingCustomTask();
+    }
   }
 
-  customTaskCancelAdding() {
+  cancelAddingCustomTask() {
+    this.customTaskName = "";
+    this.customTaskImageUrl = "";
     this.addingCustomTask = false;
   }
 

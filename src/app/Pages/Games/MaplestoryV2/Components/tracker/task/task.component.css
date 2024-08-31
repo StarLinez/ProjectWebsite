@@ -12,6 +12,18 @@
     background-color: #A6E197;
 }
 
+.disabledOverlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6); /* Black with 50% opacity */
+    pointer-events: none; /* Allows clicks to pass through the overlay */
+    border-radius: 3px;
+    z-index: 10;
+}
+
 .task .checkbox {
     width: 20px;
     height: 20px;
@@ -97,6 +109,7 @@
     border-bottom-right-radius: 2px;
     display: flex;
     align-items: center;
+    z-index: 20;
 }
 
 .emEnabled {

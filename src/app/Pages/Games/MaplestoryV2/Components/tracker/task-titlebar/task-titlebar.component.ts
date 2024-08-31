@@ -8,9 +8,11 @@ import { GeneralData } from '../../../Models/generalData';
 })
 export class TaskTitlebarComponent {
   @Input() generalData: GeneralData;
+  @Input() editMode: boolean;
 
   @Output() addCharacterEvent = new EventEmitter<any>();
   @Output() switchCharacterEvent = new EventEmitter<any>();
+  @Output() editModeChangeEvent = new EventEmitter<boolean>();
 
   passOnAddEvent($event: string) {
     this.addCharacterEvent.emit($event);
@@ -18,5 +20,9 @@ export class TaskTitlebarComponent {
 
   passOnSwitchCharacterEvent($event: number) {
     this.switchCharacterEvent.emit($event);
+  }
+
+  changeMode() {
+    this.editModeChangeEvent.emit(!this.editMode);
   }
 }

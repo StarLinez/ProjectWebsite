@@ -1,6 +1,6 @@
 <app-maplestory-navigation></app-maplestory-navigation>
 <div class="background"></div>
-<app-task-titlebar [generalData]="generalData" (addCharacterEvent)="addCharacter($event)" (switchCharacterEvent)="switchCharacter($event)"></app-task-titlebar>
+<app-task-titlebar [generalData]="generalData" [editMode]="editMode" (editModeChangeEvent)="editModeChange($event)" (addCharacterEvent)="addCharacter($event)" (switchCharacterEvent)="switchCharacter($event)"></app-task-titlebar>
 <!-- <div class="titlebar">
     <div class="title">Trackers</div>
     <div class="buttons">
@@ -51,7 +51,7 @@
 
 <div class="taskWrapper">
     <ng-container *ngFor="let item of selectedCharacter.dailyTaskGroups; let i = index">
-        <app-task-group [taskGroup]="item" (changeEvent)="changeHandler()"></app-task-group>
+        <app-task-group [editMode]="editMode" [taskGroup]="item" (changeEvent)="changeHandler()"></app-task-group>
     </ng-container>
 
     <!-- <div class="taskGroup">

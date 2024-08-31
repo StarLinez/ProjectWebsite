@@ -8,35 +8,34 @@ import { Task } from '../../../Models/trackerData';
 })
 export class TaskComponent {
   @Input() task: Task;
-  editMode: boolean = false;
   @Input() title: string;
   @Input() index: number;
   @Input() imagePrefix: string;
+  @Input() editMode: boolean;
 
   @Output() disableEvent = new EventEmitter<any>();
-  @Output() moveEvent = new EventEmitter<any>();
+  //@Output() moveEvent = new EventEmitter<any>();
   @Output() changeEvent = new EventEmitter<any>();
 
-  disableTask() {
-    // don't emit the event if editmode isn't active
-    if (this.editMode) {
+  // moveTask(direction: string) {
+  //   this.moveEvent.emit({ index: this.index, direction: direction });
+  // }
+
+  //enable/disable or complete/uncomplete.
+  toggleTask() {
+    if(!this.editMode) {
+      this.task.done = !this.task.done;
+      this.changeHandler();
+    } else {
       this.disableEvent.emit(this.index);
     }
-  }
-
-  moveTask(direction: string) {
-    this.moveEvent.emit({ index: this.index, direction: direction });
-  }
-
-  toggleTask() {
-    this.task.done = !this.task.done;
-    this.changeHandler();
   }
 
   changeHandler() {
     this.changeEvent.emit();
   }
 
+  //TODO: reimplement this
   evaluateDisplayCondition(condition: string) {
     try {
       return eval(condition);

@@ -9,13 +9,33 @@
     </div>
 
     <ng-container *ngFor="let task of taskGroup.tasks; let i = index">
-        <app-task [task]="task" [index]="i" (disableEvent)="disableTask($event)" (moveEvent)="moveTask($event)" (changeEvent)="changeHandler()"></app-task>
+        <app-task *ngIf="task.enabled || editMode" [task]="task" [index]="i" [editMode]="editMode" (disableEvent)="disableTask($event)" (changeEvent)="changeHandler()"></app-task>
         <!-- <app-ursus-task *ngIf="task.name == 'Ursus'" [task]="task" [editModeActive]="taskData.editModeActive" [title]="title" [index]="i" [imagePrefix]="taskData.imagePrefix" [resetUtcOffset]="taskData.mapleRegion.resetUtcOffset" (disableEvent)="disableTask($event)" (moveEvent)="moveTask($event)" (changeEvent)="changeHandler()"></app-ursus-task> -->
         <!-- <app-yu-garden-task *ngIf="task.name == 'Yu Garden'" [task]="task" [editModeActive]="taskData.editModeActive" [title]="title" [index]="i" [imagePrefix]="taskData.imagePrefix" [resetUtcOffset]="taskData.mapleRegion.resetUtcOffset" (disableEvent)="disableTask($event)" (moveEvent)="moveTask($event)" (changeEvent)="changeHandler()"></app-yu-garden-task> -->
     </ng-container>
 
-    <div class="addTask">
+    <div *ngIf="taskGroup.allDisabled && !editMode" class="allDisabledMessage">
+        All tasks in this group are disabled
+    </div>
+    <div *ngIf="editMode" class="addTask" (click)="customTaskStartAdding()">
         <span class="fa fa-plus"></span>
         <span>Custom tracker</span>
+    </div>
+    <div *ngIf="addingCustomTask" class="addTaskOverlay">
+        <div class="addTaskMenu">
+            <p class="addTaskTitle">Custom Tracker</p>
+            <div class="addTaskInputWrapper">
+                <label for="name">Custom Tracker Name<span>*</span></label>
+                <input type="text" id="name" name="name" [(ngModel)]="customTaskName" placeholder="__________________________________">
+            </div>
+            <div class="addTaskInputWrapper">
+                <label for="link">Custom Tracker Image (Optional)</label>
+                <input type="text" id="link" name="link"  [(ngModel)]="customTaskImageUrl" placeholder="__________________________________">
+            </div>
+            <div class="buttons">
+                <button class="cancel" (click)="cancelAddingCustomTask()">Cancel</button>
+                <button class="save" (click)="confirmAddingCustomTask()">Save</button>
+            </div>
+        </div>
     </div>
 </div>
