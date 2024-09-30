@@ -98,6 +98,8 @@
     right: 0px;
     border-top-right-radius: 3px;
     border-bottom-right-radius: 3px;
+    background-color: #D0D0D0;
+    object-fit: contain;
 }
 
 .task .toggle {
