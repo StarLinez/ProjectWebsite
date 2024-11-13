@@ -295,7 +295,7 @@ export class MaplestorySacredSymbolsComponent implements OnInit {
         break;
       case 4:
         this.sacredSymbolSaveData.arteriaLevel = this.currentLevel;
-        this.sacredSymbolSaveData.arcusExp = this.currentXp;
+        this.sacredSymbolSaveData.arteriaExp = this.currentXp;
         this.sacredSymbolSaveData.arteriaDailyQuest = this.arteriaChild.dailyQuest;
         break;
       case 5:
