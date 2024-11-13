@@ -33,27 +33,27 @@ export class MaplestorySettingsComponent implements OnInit {
 
   exportSettings() {
     if (localStorage.getItem("dailiesDataV3")) {
-      this.settingsData.dailiesDataV3 = JSON.parse(localStorage.getItem("dailiesDataV3"))
+      this.settingsData.dailiesDataV3 = localStorage.getItem("dailiesDataV3")
     }
 
     if (localStorage.getItem("weekliesDataV3")) {
-      this.settingsData.weekliesDataV3 = JSON.parse(localStorage.getItem("weekliesDataV3"))
+      this.settingsData.weekliesDataV3 = localStorage.getItem("weekliesDataV3")
     }
 
     if (localStorage.getItem("arcaneSymbolSaveDataV2")) {
-      this.settingsData.arcaneSymbolSaveDataV2 = JSON.parse(localStorage.getItem("arcaneSymbolSaveDataV2"))
+      this.settingsData.arcaneSymbolSaveDataV2 = localStorage.getItem("arcaneSymbolSaveDataV2")
     }
 
     if (localStorage.getItem("sacredSymbolSaveDataV3")) {
-      this.settingsData.sacredSymbolSaveDataV3 = JSON.parse(localStorage.getItem("sacredSymbolSaveDataV3"))
+      this.settingsData.sacredSymbolSaveDataV3 = localStorage.getItem("sacredSymbolSaveDataV3")
     }
 
     if (localStorage.getItem("flameData")) {
-      this.settingsData.flameData = JSON.parse(localStorage.getItem("flameData"))
+      this.settingsData.flameData = localStorage.getItem("flameData")
     }
 
     if (localStorage.getItem("weaponFlameData")) {
-      this.settingsData.weaponFlameData = JSON.parse(localStorage.getItem("weaponFlameData"))
+      this.settingsData.weaponFlameData = localStorage.getItem("weaponFlameData")
     }
 
     var a = document.createElement('a');
@@ -72,27 +72,27 @@ export class MaplestorySettingsComponent implements OnInit {
       try {
         this.settingsData = JSON.parse(fileReader.result.toString());
         if (this.settingsData.dailiesDataV3) {
-          localStorage.setItem("dailiesDataV3", JSON.stringify(this.settingsData.dailiesDataV3))
+          localStorage.setItem("dailiesDataV3", this.settingsData.dailiesDataV3)
         }
 
         if (this.settingsData.weekliesDataV3) {
-          localStorage.setItem("weekliesDataV3", JSON.stringify(this.settingsData.weekliesDataV3))
+          localStorage.setItem("weekliesDataV3", this.settingsData.weekliesDataV3)
         }
 
         if (this.settingsData.arcaneSymbolSaveDataV2) {
-          localStorage.setItem("arcaneSymbolSaveDataV2", JSON.stringify(this.settingsData.arcaneSymbolSaveDataV2))
+          localStorage.setItem("arcaneSymbolSaveDataV2", this.settingsData.arcaneSymbolSaveDataV2)
         }
 
         if (this.settingsData.sacredSymbolSaveDataV3) {
-          localStorage.setItem("sacredSymbolSaveDataV3", JSON.stringify(this.settingsData.sacredSymbolSaveDataV3))
+          localStorage.setItem("sacredSymbolSaveDataV3", this.settingsData.sacredSymbolSaveDataV3)
         }
 
         if (this.settingsData.flameData) {
-          localStorage.setItem("flameData", JSON.stringify(this.settingsData.flameData))
+          localStorage.setItem("flameData", this.settingsData.flameData)
         }
 
         if (this.settingsData.weaponFlameData) {
-          localStorage.setItem("weaponFlameData", JSON.stringify(this.settingsData.weaponFlameData))
+          localStorage.setItem("weaponFlameData", this.settingsData.weaponFlameData)
         }
 
         alert("The settings have been successfully imported.");
