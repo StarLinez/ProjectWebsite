@@ -18,9 +18,14 @@ export class TaskGroupComponent implements OnInit {
   addingCustomTask: boolean = false;
   customTaskName: string = "";
   customTaskImageUrl: string = "";
+  eventTasks: Task[];
+
+  totalEnabledTasks: number = 0;
+  totalCompleted: number = 0;
 
   ngOnInit() {
     this.checkIfGroupIsFullyDisabled();
+    this.calculateProgress();
   }
 
   moveTask(event: any) {
@@ -41,6 +46,8 @@ export class TaskGroupComponent implements OnInit {
       this.taskGroup.tasks[event.index + 1] = this.taskGroup.tasks[event.index];
       this.taskGroup.tasks[event.index] = temp;
     }
+
+    this.changeHandler();
   }
 
   disableTask(index: any) {
@@ -51,15 +58,37 @@ export class TaskGroupComponent implements OnInit {
     }
 
     this.checkIfGroupIsFullyDisabled();
+    this.calculateProgress();
   }
 
   checkIfGroupIsFullyDisabled() {
-    if (this.taskGroup.tasks.some(item => item.enabled)) {
-      this.taskGroup.allDisabled = false;
-    } else {
-      this.taskGroup.allDisabled = true;
+    // go over each task and as soon as an enabled one is found return false and exit otherwise keep checking.
+    // set the value to true to then set it to false as soon as an enabled task is found.
+    this.taskGroup.allDisabled = true;
+
+    for (let i = 0; i < this.taskGroup.tasks.length; i++) {
+      if(this.taskGroup.tasks[i].enabled && eval(this.taskGroup.tasks[i].dispCon)) {
+        this.taskGroup.allDisabled = false;
+        break;   
+      }
     }
+
     this.changeHandler();
+  }
+
+  calculateProgress() {
+    // two counters on for the total count of enabled&displayed tasks another for their completion
+    this.totalEnabledTasks = 0;
+    this.totalCompleted = 0;
+    this.taskGroup.tasks.forEach(task => {
+      if(task.enabled && eval(task.dispCon)) {
+        this.totalEnabledTasks += 1;
+
+        if(task.done) {
+          this.totalCompleted += 1;
+        }
+      }
+    });
   }
 
   customTaskStartAdding() {
@@ -90,6 +119,7 @@ export class TaskGroupComponent implements OnInit {
     
       // this also kicks off changehandler
       this.checkIfGroupIsFullyDisabled();
+      this.calculateProgress();
     } else {
       this.cancelAddingCustomTask();
     }
@@ -102,6 +132,11 @@ export class TaskGroupComponent implements OnInit {
   }
 
   changeHandler() {
+    this.changeEvent.emit();
+  }
+
+  toggleHandler() {
+    this.calculateProgress();
     this.changeEvent.emit();
   }
 }

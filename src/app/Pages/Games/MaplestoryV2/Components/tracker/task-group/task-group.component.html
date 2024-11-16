@@ -4,12 +4,12 @@
         <div class="taskGroupTitle">{{ taskGroup.title }}</div>
     </div>
 
-    <div class="progress" data-label="Progress: 15/15">
-        <span class="value" style="width:100%;"></span>
+    <div class="progress" [attr.data-label]="'Progress: ' + totalCompleted + '/' + totalEnabledTasks">
+        <span class="value" [style.width]="totalCompleted/totalEnabledTasks*100 + '%'"></span>
     </div>
 
     <ng-container *ngFor="let task of taskGroup.tasks; let i = index">
-        <app-task *ngIf="task.enabled || editMode" [task]="task" [index]="i" [editMode]="editMode" (disableEvent)="disableTask($event)" (changeEvent)="changeHandler()"></app-task>
+        <app-task *ngIf="task.enabled || editMode" [task]="task" [index]="i" [editMode]="editMode" (disableEvent)="disableTask($event)" (moveEvent)="moveTask($event)" (toggleEvent)="toggleHandler()"></app-task>
         <!-- <app-ursus-task *ngIf="task.name == 'Ursus'" [task]="task" [editModeActive]="taskData.editModeActive" [title]="title" [index]="i" [imagePrefix]="taskData.imagePrefix" [resetUtcOffset]="taskData.mapleRegion.resetUtcOffset" (disableEvent)="disableTask($event)" (moveEvent)="moveTask($event)" (changeEvent)="changeHandler()"></app-ursus-task> -->
         <!-- <app-yu-garden-task *ngIf="task.name == 'Yu Garden'" [task]="task" [editModeActive]="taskData.editModeActive" [title]="title" [index]="i" [imagePrefix]="taskData.imagePrefix" [resetUtcOffset]="taskData.mapleRegion.resetUtcOffset" (disableEvent)="disableTask($event)" (moveEvent)="moveTask($event)" (changeEvent)="changeHandler()"></app-yu-garden-task> -->
     </ng-container>

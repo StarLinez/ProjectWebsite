@@ -51,9 +51,8 @@
 }
 
 .updown {
-    width: 20px;
-    height: 20px;
-    margin: 25px 18px 25px 20px;
+    width: 58px;
+    height: 70px;
     border-radius: 5px;
     color: #393939;
     text-align: center;
@@ -62,18 +61,16 @@
 
 .updown span {
     width: 100%;
-    font-size: 18px;
+    font-size: 35px;
 }
 
-.fa-caret-up {
-    position: absolute;
-    top: -4px;
-    left: 0px;
+.up, .down {
+    width: 100%;
+    height: 35px;
 }
 
-.fa-caret-down {
+.fa-caret-up, .fa-caret-down {
     position: absolute;
-    bottom: -4px;
     left: 0px;
 }
 

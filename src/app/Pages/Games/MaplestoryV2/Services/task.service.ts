@@ -14,7 +14,6 @@ export class TaskService {
     dailyUpdateChecker(generalData: GeneralData) {
         if (DailiesJsonV3.version !== generalData.trackerInfo.dailyVersion) {
             this.updateDailyTaskStructure(generalData);
-            console.log("did updating");
             generalData.trackerInfo.dailyVersion = DailiesJsonV3.version;
             localStorage.setItem("generalData", JSON.stringify(generalData));
         }
@@ -30,7 +29,7 @@ export class TaskService {
             // check if there are more task groups in the new data (aka if a new group is added). As the for loop bases it self on the new taskgroup length it will error out if it does not exist in the old data.
 
             for (let j = 0; j < characterData.dailyTaskGroups.length; j++) {
-                characterData.dailyTaskGroups[j] =  this.updateTaskGroup(characterData.dailyTaskGroups[j], newTaskGroups[j]);
+                characterData.dailyTaskGroups[j] = this.updateTaskGroup(characterData.dailyTaskGroups[j], JSON.parse(JSON.stringify(newTaskGroups[j])));
             }
 
             // save the updated data for this character

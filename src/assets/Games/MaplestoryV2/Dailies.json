@@ -275,6 +275,30 @@
                     "enabled": true,
                     "type": "default",
                     "dispCon": "true"
+                },
+                {
+                    "name": "Limina Event Test I B",
+                    "image": "Limina.png",
+                    "done": false,
+                    "enabled": true,
+                    "type": "event",
+                    "dispCon": "new Date().getTime() > 1730809544000 && new Date().getTime() < 1731673544000"
+                },
+                {
+                    "name": "Limina Event Test A",
+                    "image": "Limina.png",
+                    "done": false,
+                    "enabled": true,
+                    "type": "event",
+                    "dispCon": "new Date().getTime() > 1731241544000 && new Date().getTime() < 1732105544000"
+                },
+                {
+                    "name": "Limina Event Test I A",
+                    "image": "Limina.png",
+                    "done": false,
+                    "enabled": true,
+                    "type": "event",
+                    "dispCon": "new Date().getTime() > 1732105544000 && new Date().getTime() < 1732969544000"
                 }
             ],
             "allDisabled":false

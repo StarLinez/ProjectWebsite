@@ -14,28 +14,27 @@ export class TaskComponent {
   @Input() editMode: boolean;
 
   @Output() disableEvent = new EventEmitter<any>();
-  //@Output() moveEvent = new EventEmitter<any>();
-  @Output() changeEvent = new EventEmitter<any>();
-
-  // moveTask(direction: string) {
-  //   this.moveEvent.emit({ index: this.index, direction: direction });
-  // }
+  @Output() moveEvent = new EventEmitter<any>();
+  @Output() toggleEvent = new EventEmitter<any>();
 
   //enable/disable or complete/uncomplete.
   toggleTask() {
     if(!this.editMode) {
       this.task.done = !this.task.done;
-      this.changeHandler();
+      this.toggleHandler();
     } else {
       this.disableEvent.emit(this.index);
     }
   }
 
-  changeHandler() {
-    this.changeEvent.emit();
+  moveTask(direction: string) {
+    this.moveEvent.emit({ index: this.index, direction: direction });
   }
 
-  //TODO: reimplement this
+  toggleHandler() {
+    this.toggleEvent.emit();
+  }
+
   evaluateDisplayCondition(condition: string) {
     try {
       return eval(condition);

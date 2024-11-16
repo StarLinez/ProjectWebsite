@@ -1,9 +1,13 @@
-<div class="task" [ngClass]="{'tChecked': task.done && !editMode}" (click)="toggleTask()">
+<div class="task" [ngClass]="{'tChecked': task.done && !editMode}" (click)="toggleTask()" *ngIf="evaluateDisplayCondition(task.dispCon)">
     <div *ngIf="!task.enabled && editMode" class="disabledOverlay"></div>
     <div *ngIf="!editMode" class="checkbox" [ngClass]="(task.done)?'cbChecked':'cbUnchecked'"><span *ngIf="task.done" class="fa fa-check"></span></div>
     <div *ngIf="editMode" class="updown">
-        <span class="fa fa-caret-up"></span>
-        <span class="fa fa-caret-down"></span>
+        <div class="up">
+            <span class="fa fa-caret-up" (click)="moveTask('up'); $event.stopPropagation()"></span>
+        </div>
+        <div class="down">
+            <span class="fa fa-caret-down" (click)="moveTask('down'); $event.stopPropagation()"></span>
+        </div>
     </div>
     <div class="taskName">{{ task.name }}</div>
     <img [src]="task.type != 'custom' ? 'assets/Games/MaplestoryV2/Daily/' + task.image : task.image" onerror="this.onerror=null; this.src='assets/TrackerImages/error.png'" alt="{{task.name}}">
