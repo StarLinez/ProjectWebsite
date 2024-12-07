@@ -1,6 +1,6 @@
 <app-maplestory-navigation></app-maplestory-navigation>
 <div class="background"></div>
-<app-task-titlebar [generalData]="generalData" [editMode]="editMode" (editModeChangeEvent)="editModeChange($event)" (addCharacterEvent)="addCharacter($event)" (switchCharacterEvent)="switchCharacter($event)"></app-task-titlebar>
+<app-task-titlebar [generalData]="generalData" [editMode]="editMode" (editModeChangeEvent)="editModeChange($event)" (addCharacterEvent)="addCharacter($event)" (switchCharacterEvent)="switchCharacter($event)" (regionChangeEvent)="regionChangeHandler()"></app-task-titlebar>
 <!-- <div class="titlebar">
     <div class="title">Trackers</div>
     <div class="buttons">

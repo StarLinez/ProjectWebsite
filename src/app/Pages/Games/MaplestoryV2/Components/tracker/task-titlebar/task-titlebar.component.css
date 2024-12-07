@@ -42,3 +42,28 @@
 .settings span {
     transform: translateY(-1px);
 }
+
+.select {
+    width: 100px;
+    height: 50px;
+    border-radius: 100px;
+    padding-left: 15px;
+    border: none;
+    outline: none;
+    color: white;
+    font-family: "Lemon Milk", sans-serif;
+    font-size: 16px;
+    margin-right: 16px;
+
+    appearance: none; /* Remove default arrow */ 
+    -webkit-appearance: none; /* For WebKit browsers */ 
+    -moz-appearance: none;
+    
+    background-color: #9660E8;
+    background-image: url("data:image/svg+xml;utf8,<svg fill='white' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>");    padding-right: 20px;
+    background-repeat: no-repeat;
+    background-position-x: 90%;
+    background-position-y: 12px;
+    
+    transform: translateY(-1.5px);
+}

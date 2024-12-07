@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { GeneralData } from '../../../Models/generalData';
+import { GeneralData, Region } from '../../../Models/generalData';
 
 @Component({
   selector: 'app-task-titlebar',
@@ -13,6 +13,13 @@ export class TaskTitlebarComponent {
   @Output() addCharacterEvent = new EventEmitter<any>();
   @Output() switchCharacterEvent = new EventEmitter<any>();
   @Output() editModeChangeEvent = new EventEmitter<boolean>();
+  @Output() regionChangeEvent = new EventEmitter<any>();
+
+  regions: Array<Region> = [
+    { resetUtcOffset: 0, name: 'GMS' },
+    { resetUtcOffset: 8, name: 'MSEA' },
+    { resetUtcOffset: 9, name: 'KMS' }
+  ];
 
   passOnAddEvent($event: string) {
     this.addCharacterEvent.emit($event);
@@ -24,5 +31,12 @@ export class TaskTitlebarComponent {
 
   changeMode() {
     this.editModeChangeEvent.emit(!this.editMode);
+  }
+
+  regionChange(event: any) {
+    this.generalData.mapleRegion = this.regions[event.target.selectedIndex];
+
+    // trigger a re initialisation to make the timers adjust to the new reset & save generaldata
+    this.regionChangeEvent.emit();
   }
 }

@@ -158,7 +158,13 @@ export class MaplestoryTrackerComponent implements OnInit, OnDestroy {
 
   generalDataChangeHandler() {
     localStorage.setItem("generalData", JSON.stringify(this.generalData));
-    //TODO: review this later on
+    //TODO: review this later on (might not be necessary, forgot why I added this todo lol)
     //this.checkIfAllGroupsAreDisabled();
+  }
+
+  regionChangeHandler() {
+    this.dailyResetChecker();
+    this.startTimer();
+    this.generalDataChangeHandler();
   }
 }
