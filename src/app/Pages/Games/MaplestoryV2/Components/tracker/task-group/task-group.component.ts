@@ -12,6 +12,7 @@ export class TaskGroupComponent implements OnInit {
   @Input() taskGroup: TaskGroup;
   @Input() title: string;
   @Input() editMode: boolean;
+  @Input() resetUtcOffset: boolean;
 
   @Output() changeEvent = new EventEmitter<any>();
 

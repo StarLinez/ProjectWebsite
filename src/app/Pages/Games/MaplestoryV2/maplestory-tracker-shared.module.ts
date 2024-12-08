@@ -11,10 +11,12 @@ import { TaskComponent } from "./Components/tracker/task/task.component";
 import { TaskGroupComponent } from "./Components/tracker/task-group/task-group.component";
 import { TaskTitlebarComponent } from "./Components/tracker/task-titlebar/task-titlebar.component";
 import { CharacterSelectorComponent } from "./Components/tracker/character-selector/character-selector.component";
+import { UrsusTimerComponent } from "./Components/tracker/task/task-timers/ursus-timer/ursus-timer.component";
+import { YuGardenTimerComponent } from "./Components/tracker/task/task-timers/yu-garden-timer/yu-garden-timer.component";
 
 @NgModule({
     imports: [CommonModule, SharedModule],
-    declarations: [TaskComponent, TaskGroupComponent, TaskTitlebarComponent, CharacterSelectorComponent],
-    exports: [TaskComponent, TaskGroupComponent, TaskTitlebarComponent, CharacterSelectorComponent]
+    declarations: [TaskComponent, TaskGroupComponent, TaskTitlebarComponent, CharacterSelectorComponent, UrsusTimerComponent, YuGardenTimerComponent],
+    exports: [TaskComponent, TaskGroupComponent, TaskTitlebarComponent, CharacterSelectorComponent, UrsusTimerComponent, YuGardenTimerComponent]
 })
 export class MaplestoryTrackerSharedModule { }

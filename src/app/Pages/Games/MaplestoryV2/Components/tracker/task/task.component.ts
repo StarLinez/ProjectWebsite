@@ -12,6 +12,7 @@ export class TaskComponent {
   @Input() index: number;
   @Input() imagePrefix: string;
   @Input() editMode: boolean;
+  @Input() resetUtcOffset: boolean;
 
   @Output() disableEvent = new EventEmitter<any>();
   @Output() moveEvent = new EventEmitter<any>();

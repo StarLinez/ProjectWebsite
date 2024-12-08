@@ -1,24 +1,12 @@
-import { Component, EventEmitter, Input, OnInit, OnDestroy, Output } from '@angular/core';
-import { Task } from '../../../../Models/taskModels';
+import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 
 
 @Component({
-  selector: 'app-yu-garden-task',
-  templateUrl: './yu-garden-task.component.html',
-  styleUrls: ['./yu-garden-task.component.css']
+  selector: 'app-yu-garden-timer',
+  templateUrl: './yu-garden-timer.component.html',
+  styleUrls: ['./yu-garden-timer.component.css']
 })
-export class YuGardenTaskComponent implements OnInit, OnDestroy{
-  @Input() task: Task;
-  @Input() editModeActive: boolean;
-  @Input() title: string;
-  @Input() index: number;
-  @Input() resetUtcOffset: number = 0;
-  @Input() imagePrefix: string;
-
-  @Output() disableEvent = new EventEmitter<any>();
-  @Output() moveEvent = new EventEmitter<any>();
-  @Output() changeEvent = new EventEmitter<any>();
-
+export class YuGardenTimerComponent implements OnInit, OnDestroy{
   yuGardenTimer: any;
   yuGardenTimerString: string;
   yuGardenTimerPrefix: string;
@@ -29,29 +17,6 @@ export class YuGardenTaskComponent implements OnInit, OnDestroy{
 
   ngOnDestroy() {
 
-  }
-
-  disableTask() {
-    // don't emit the event if editmode isn't active
-    if (this.editModeActive) {
-      this.disableEvent.emit(this.index);
-    }
-  }
-
-  moveTask(direction: string) {
-    this.moveEvent.emit({ index: this.index, direction: direction });
-  }
-
-  changeHandler() {
-    this.changeEvent.emit();
-  }
-
-  evaluateDisplayCondition(condition: string) {
-    try {
-      return eval(condition);
-    } catch (e) {
-      return true;
-    }
   }
 
   startYuGardenTimer() {
@@ -102,6 +67,6 @@ export class YuGardenTaskComponent implements OnInit, OnDestroy{
     var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
     var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-    this.yuGardenTimerString = hours + "h " + minutes + "m " + ("00" + seconds).slice(-2) + "s ";
+    this.yuGardenTimerString = ("00" + hours).slice(-2) + "h " + ("00" + minutes).slice(-2) + "m " + ("00" + seconds).slice(-2) + "s ";
   }
 }

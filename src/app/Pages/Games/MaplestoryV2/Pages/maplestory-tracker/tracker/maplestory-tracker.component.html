@@ -51,7 +51,7 @@
 
 <div class="taskWrapper">
     <ng-container *ngFor="let item of selectedCharacter.dailyTaskGroups; let i = index">
-        <app-task-group [editMode]="editMode" [taskGroup]="item" (changeEvent)="changeHandler()"></app-task-group>
+        <app-task-group [editMode]="editMode" [taskGroup]="item" [resetUtcOffset]="generalData.mapleRegion.resetUtcOffset" (changeEvent)="changeHandler()"></app-task-group>
     </ng-container>
 
     <!-- <div class="taskGroup">

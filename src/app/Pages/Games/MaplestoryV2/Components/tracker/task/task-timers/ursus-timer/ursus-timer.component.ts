@@ -1,24 +1,12 @@
-import { Component, EventEmitter, Input, OnInit, OnDestroy, Output } from '@angular/core';
-import { Task } from '../../../../Models/taskModels';
+import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 
 
 @Component({
-  selector: 'app-ursus-task',
-  templateUrl: './ursus-task.component.html',
-  styleUrls: ['./ursus-task.component.css']
+  selector: 'app-ursus-timer',
+  templateUrl: './ursus-timer.component.html',
+  styleUrls: ['./ursus-timer.component.css']
 })
-export class UrsusTaskComponent implements OnInit, OnDestroy{
-  @Input() task: Task;
-  @Input() editModeActive: boolean;
-  @Input() title: string;
-  @Input() index: number;
-  @Input() resetUtcOffset: number = 0;
-  @Input() imagePrefix: string;
-
-  @Output() disableEvent = new EventEmitter<any>();
-  @Output() moveEvent = new EventEmitter<any>();
-  @Output() changeEvent = new EventEmitter<any>();
-
+export class UrsusTimerComponent implements OnInit, OnDestroy{
   ursusTimer: any;
   ursusTimerString: string;
   ursusTimerPrefix: string;
@@ -29,29 +17,6 @@ export class UrsusTaskComponent implements OnInit, OnDestroy{
 
   ngOnDestroy() {
 
-  }
-
-  disableTask() {
-    // don't emit the event if editmode isn't active
-    if (this.editModeActive) {
-      this.disableEvent.emit(this.index);
-    }
-  }
-
-  moveTask(direction: string) {
-    this.moveEvent.emit({ index: this.index, direction: direction });
-  }
-
-  changeHandler() {
-    this.changeEvent.emit();
-  }
-
-  evaluateDisplayCondition(condition: string) {
-    try {
-      return eval(condition);
-    } catch (e) {
-      return true;
-    }
   }
 
   startUrsusTimer() {
@@ -93,31 +58,31 @@ export class UrsusTaskComponent implements OnInit, OnDestroy{
 
     if (date.getUTCHours() < slotOneStartTime) {
       // count down to ursus slot 1 start which is the current day at 1am
-      this.ursusTimerPrefix = "Golden Time in ";
+      this.ursusTimerPrefix = "Golden Time Starts in";
       return Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate(), slotOneStartTime, 0, 0, 0);
     }
 
     if (date.getUTCHours() >= slotOneStartTime && date.getUTCHours() < slotOneEndTime) {
       // count down to ursus slot 1 ending
-      this.ursusTimerPrefix = "Golden Time ending in";
+      this.ursusTimerPrefix = "Golden Time Ends in";
       return Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate(), slotOneEndTime, 0, 0, 0);
     }
 
     if (date.getUTCHours() >= slotOneEndTime && date.getUTCHours() < slotTwoStartTime) {
       // count down to ursus slot 2 start
-      this.ursusTimerPrefix = "Golden Time in";
+      this.ursusTimerPrefix = "Golden Time Starts in";
       return Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate(), slotTwoStartTime, 0, 0, 0);
     }
 
     if (date.getUTCHours() >= slotTwoStartTime && date.getUTCHours() < slotTwoEndTime) {
       // count down to ursus slot 2 ending
-      this.ursusTimerPrefix = "Golden Time ending in";
+      this.ursusTimerPrefix = "Golden Time ends in";
       return Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate(), slotTwoEndTime, 0, 0, 0);
     }
 
     if (date.getUTCHours() >= slotTwoEndTime) {
       // count down to ursus slot 1 start which is next utc day at 1am
-      this.ursusTimerPrefix = "Golden Time in ";
+      this.ursusTimerPrefix = "Golden Time Starts in";
       return Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate() + 1, slotOneStartTime, 0, 0, 0);
     }
   }
@@ -127,6 +92,6 @@ export class UrsusTaskComponent implements OnInit, OnDestroy{
     var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
     var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-    this.ursusTimerString = hours + "h " + minutes + "m " + ("00" + seconds).slice(-2) + "s ";
+    this.ursusTimerString = ("00" + hours).slice(-2) + "h " + ("00" + minutes).slice(-2) + "m " + ("00" + seconds).slice(-2) + "s ";
   }
 }

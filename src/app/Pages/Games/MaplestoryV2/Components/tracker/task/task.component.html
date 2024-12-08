@@ -16,4 +16,6 @@
         <span *ngIf="task.enabled && task.type != 'custom'" class="fa fa-minus"></span>
         <span *ngIf="task.type == 'custom'" class="fa fa-trash"></span>
     </div>
+    <app-ursus-timer *ngIf="task.name === 'Ursus' && resetUtcOffset == 0"></app-ursus-timer>
+    <app-yu-garden-timer *ngIf="task.name === 'Yu Garden' && resetUtcOffset == 0"></app-yu-garden-timer>
 </div>

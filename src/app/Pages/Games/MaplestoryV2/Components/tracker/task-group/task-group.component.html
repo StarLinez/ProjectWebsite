@@ -9,9 +9,7 @@
     </div>
 
     <ng-container *ngFor="let task of taskGroup.tasks; let i = index">
-        <app-task *ngIf="task.enabled || editMode" [task]="task" [index]="i" [editMode]="editMode" (disableEvent)="disableTask($event)" (moveEvent)="moveTask($event)" (toggleEvent)="toggleHandler()"></app-task>
-        <!-- <app-ursus-task *ngIf="task.name == 'Ursus'" [task]="task" [editModeActive]="taskData.editModeActive" [title]="title" [index]="i" [imagePrefix]="taskData.imagePrefix" [resetUtcOffset]="taskData.mapleRegion.resetUtcOffset" (disableEvent)="disableTask($event)" (moveEvent)="moveTask($event)" (changeEvent)="changeHandler()"></app-ursus-task> -->
-        <!-- <app-yu-garden-task *ngIf="task.name == 'Yu Garden'" [task]="task" [editModeActive]="taskData.editModeActive" [title]="title" [index]="i" [imagePrefix]="taskData.imagePrefix" [resetUtcOffset]="taskData.mapleRegion.resetUtcOffset" (disableEvent)="disableTask($event)" (moveEvent)="moveTask($event)" (changeEvent)="changeHandler()"></app-yu-garden-task> -->
+        <app-task *ngIf="task.enabled || editMode" [task]="task" [index]="i" [editMode]="editMode"  [resetUtcOffset]="resetUtcOffset" (disableEvent)="disableTask($event)" (moveEvent)="moveTask($event)" (toggleEvent)="toggleHandler()"></app-task>
     </ng-container>
 
     <div *ngIf="taskGroup.allDisabled && !editMode" class="allDisabledMessage">

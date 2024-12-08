@@ -1,5 +1,5 @@
 {
-    "version": "9.6",
+    "version": "9.7",
     "imagePrefix": "MapleDailies/",
     "taskGroups": [
         {
@@ -201,7 +201,7 @@
             "allDisabled":false
         },
         {
-            "title": "Arcane River Dailies",
+            "title": "Arcane & Grandis Dailies",
             "image": "DailySymbols.png",
             "tasks": [
                 {
@@ -277,37 +277,6 @@
                     "dispCon": "true"
                 },
                 {
-                    "name": "Limina Event Test I B",
-                    "image": "Limina.png",
-                    "done": false,
-                    "enabled": true,
-                    "type": "event",
-                    "dispCon": "new Date().getTime() > 1730809544000 && new Date().getTime() < 1731673544000"
-                },
-                {
-                    "name": "Limina Event Test A",
-                    "image": "Limina.png",
-                    "done": false,
-                    "enabled": true,
-                    "type": "event",
-                    "dispCon": "new Date().getTime() > 1731241544000 && new Date().getTime() < 1732105544000"
-                },
-                {
-                    "name": "Limina Event Test I A",
-                    "image": "Limina.png",
-                    "done": false,
-                    "enabled": true,
-                    "type": "event",
-                    "dispCon": "new Date().getTime() > 1732105544000 && new Date().getTime() < 1732969544000"
-                }
-            ],
-            "allDisabled":false
-        },
-        {
-            "title": "Grandis Dailies",
-            "image": "test",
-            "tasks": [
-                {
                     "name": "Cernium",
                     "image": "Cernium.png",
                     "done": false,
@@ -363,6 +332,7 @@
                     "type": "default",
                     "dispCon": "true"
                 }
+                
             ],
             "allDisabled":false
         }
