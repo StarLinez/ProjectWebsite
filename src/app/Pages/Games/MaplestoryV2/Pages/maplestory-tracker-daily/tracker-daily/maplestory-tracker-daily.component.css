@@ -174,7 +174,7 @@
     transform: translateY(-1px);
 }
 
-.trackerSwitcher {
+/* .trackerSwitcher {
     width: 100%;
     height: 80px;
     display: flex;
@@ -200,7 +200,7 @@
 
 .weeklyTracker {
     background-color: #926000;
-}
+} */
 
 .timerWrapper {
     width: 100%;

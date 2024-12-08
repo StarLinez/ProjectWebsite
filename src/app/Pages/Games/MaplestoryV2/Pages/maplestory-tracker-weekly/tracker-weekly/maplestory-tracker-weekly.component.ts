@@ -1,0 +1,206 @@
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import DailiesJsonV3 from '../../../../../../../assets/Games/MaplestoryV2/Dailies.json';
+import { Meta, Title } from '@angular/platform-browser';
+import { GeneralData } from '../../../Models/generalData';
+import { CharacterData } from '../../../Models/characterData';
+import { GeneralDataService } from '../../../Services/generalData.service';
+import { TaskService } from '../../../Services/task.service';
+
+// TODO: look into seeing if its possible to also show the info thing when loading the data fails
+
+@Component({
+  selector: 'app-maplestory-tracker-weekly',
+  templateUrl: './maplestory-tracker-weekly.component.html',
+  styleUrls: ['./maplestory-tracker-weekly.component.css']
+})
+export class MaplestoryTrackerWeeklyComponent implements OnInit, OnDestroy {
+  generalData: GeneralData;
+  selectedCharacter: CharacterData;
+ 
+  timers: any[] = [];
+  timerStrings: string[] = ["", "", ""];
+
+  editMode: boolean = false;
+
+  
+
+  constructor(private titleService: Title, private metaService: Meta, private generalDataService: GeneralDataService, private taskService: TaskService) { }
+
+  ngOnInit() {
+    this.titleService.setTitle("Maplestory Dailies Tracker | Random Stuff");
+    this.metaService.updateTag({ name: "description", content: "A weeklies tracker for Maplestory to keep track of your completed weekly tasks. Keep track of your weeklies across multiple different characters." });
+    if (!this.metaService.getTag("name='robots'")) {
+      this.metaService.addTag({ name: "robots", content: "index, follow" });
+    } else {
+      this.metaService.updateTag({ name: "robots", content: "index, follow" });
+    }
+
+    this.initialise();
+  }
+
+  ngOnDestroy() {
+  }
+
+  initialise() {
+    if (localStorage.getItem("generalData")) {
+      this.generalData = JSON.parse(localStorage.getItem("generalData"));
+      console.log(this.generalData);
+      this.taskService.weeklyUpdateChecker(this.generalData);
+      this.weeklyResetChecker();
+
+      this.fetchSelectedUserData();
+    } else {
+      // generate general data & 4 starting characters (it's saved in the creation step)
+      this.generalData = this.generalDataService.initiateDataSet();
+      
+      this.fetchSelectedUserData();
+    }
+
+    // 0 starts weekly boss timer, 1 starts weekly task timer
+    this.startTimer(0);
+    this.startTimer(1);
+  }
+
+  fetchSelectedUserData(){
+    // fetch the selected user index with an if so errors can be caught, if it doesn't exist create it for that character and maybe show a pop up?
+    if(localStorage.getItem(this.generalData.characters[this.generalData.selectedCharacterIndex].characterStorageReference)) {
+      this.selectedCharacter = JSON.parse(localStorage.getItem(this.generalData.characters[this.generalData.selectedCharacterIndex].characterStorageReference));
+      console.log(this.selectedCharacter);
+      console.log("present");
+    } else {
+      // TODO: potentially add a warning message bottom right pop up to tell users there was something wrong
+      this.selectedCharacter = this.generalDataService.addCharacterWithExistingReference(this.generalData.characters[this.generalData.selectedCharacterIndex].characterStorageReference);
+      console.log(this.selectedCharacter);
+      console.log("missing");
+    }
+  }
+
+  weeklyResetChecker() {
+    var lastThursday = this.calculateResetDayTime(4) - (7 * 24 * 60 * 60 * 1000);
+    var lastMonday = this.calculateResetDayTime(1) - (7 * 24 * 60 * 60 * 1000);
+
+    var lastVisit = parseInt(this.generalData.trackerInfo.lastWeeklyTrackerVisit);
+
+    if (lastVisit < lastThursday) {
+      this.taskService.resetWeeklyCompletionIndex(this.generalData, 0);
+    }
+
+    if (lastVisit < lastMonday) {
+      this.taskService.resetWeeklyCompletionIndex(this.generalData, 1);
+      this.taskService.resetWeeklyCompletionIndex(this.generalData, 2);
+    }
+
+    // set last visit to the current time
+    this.generalData.trackerInfo.lastWeeklyTrackerVisit = Date.now().toString();
+    this.generalDataChangeHandler();
+  }
+
+  startTimer(taskGroupIndex: number) {
+    clearInterval(this.timers[taskGroupIndex]);
+
+    var endTime;
+
+    // if the index is 0 the reset is for weeklybosses on thursday else it is 1 which is the reset for weeklytasks on sunday
+    if (taskGroupIndex == 0) {
+      endTime = this.calculateResetDayTime(4);
+    } else {
+      endTime = this.calculateResetDayTime(1);
+    }
+
+    this.calculateAndOutPutTimes(endTime - new Date().getTime(), taskGroupIndex);
+
+    this.timers[taskGroupIndex] = setInterval(() => {
+      var distance = endTime - new Date().getTime();
+      this.calculateAndOutPutTimes(distance, taskGroupIndex);
+
+      if (distance < 0) {
+        clearInterval(this.timers[taskGroupIndex]);
+        this.liveReset(taskGroupIndex);
+      }
+    }, 1000);
+  }
+
+  calculateResetDayTime(dayOfWeek) {
+    var currentDay = new Date();
+    var resultDate = new Date(Date.UTC(currentDay.getUTCFullYear(), currentDay.getUTCMonth(), currentDay.getUTCDate(), 0, 0, 0, 0));
+
+    resultDate.setTime(resultDate.getTime() + (((7 + dayOfWeek - resultDate.getUTCDay() - 1) % 7 + 1) * 24 * 60 * 60 * 1000));
+
+    // calculate the offset from UTC if the time to countdown is in the past it means that a week needs to be added
+    // WARNING: countdowns to timezones behind utc might not work properly (Have fun future me if this needs to be added :) )
+    var resultDateEpoch = resultDate.valueOf();
+    resultDateEpoch = resultDateEpoch - (this.generalData.mapleRegion.resetUtcOffset * 60 * 60 * 1000)
+
+    if (resultDateEpoch < currentDay.getTime()) {
+      resultDateEpoch += (7 * 24 * 60 * 60 * 1000);
+    }
+
+    return resultDateEpoch;
+  }
+
+  calculateAndOutPutTimes(distance: number, taskGroupIndex: number) {
+    if (distance < 0) {
+      this.timerStrings[taskGroupIndex] = "RESET!";
+      // Also show the reset text in the arcane river weeklies
+      if(taskGroupIndex == 1) {
+        this.timerStrings[2] = "RESET!";
+      }
+      return;
+    }
+
+    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    this.timerStrings[taskGroupIndex] = days + "d " + hours + "h " + minutes + "m " + ("00" + seconds).slice(-2) + "s ";
+    // Duplicate the weekly task timer into the arcane river weeklies
+    if(taskGroupIndex == 1) {
+      this.timerStrings[2] = this.timerStrings[taskGroupIndex];
+    }
+  }
+
+  liveReset(taskGroupIndex: number) {
+    this.taskService.resetWeeklyCompletionIndex(this.generalData, taskGroupIndex);
+    //makes sure that arcane weekly live reset works (as there is no separate time for this)
+    if (taskGroupIndex == 1) {
+      this.taskService.resetWeeklyCompletionIndex(this.generalData, 2);
+    }
+    this.startTimer(taskGroupIndex);
+    this.generalData.trackerInfo.lastWeeklyTrackerVisit = (parseInt(Date.now().toString()) + 5000).toString();
+    this.changeHandler();
+  }
+
+
+  addCharacter($event: string) {
+    this.generalDataService.addCharacter(this.generalData, $event);
+  }
+
+  switchCharacter($event: number) {
+    this.generalData.selectedCharacterIndex = $event;
+    this.generalDataChangeHandler();
+    this.fetchSelectedUserData();
+  }
+
+
+  changeHandler() {
+    localStorage.setItem(this.generalData.characters[this.generalData.selectedCharacterIndex].characterStorageReference, JSON.stringify(this.selectedCharacter));
+  }
+
+  editModeChange($event: boolean){
+    this.editMode = $event;
+  }
+
+  generalDataChangeHandler() {
+    localStorage.setItem("generalData", JSON.stringify(this.generalData));
+    //TODO: review this later on (might not be necessary, forgot why I added this todo lol)
+    //this.checkIfAllGroupsAreDisabled();
+  }
+
+  regionChangeHandler() {
+    this.weeklyResetChecker();
+    this.startTimer(0);
+    this.startTimer(1);
+    this.generalDataChangeHandler();
+  }
+}

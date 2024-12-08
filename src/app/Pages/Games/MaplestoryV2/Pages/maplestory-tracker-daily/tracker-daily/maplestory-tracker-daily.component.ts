@@ -9,11 +9,11 @@ import { TaskService } from '../../../Services/task.service';
 // TODO: look into seeing if its possible to also show the info thing when loading the data fails
 
 @Component({
-  selector: 'app-maplestory-tracker',
-  templateUrl: './maplestory-tracker.component.html',
-  styleUrls: ['./maplestory-tracker.component.css']
+  selector: 'app-maplestory-tracker-daily',
+  templateUrl: './maplestory-tracker-daily.component.html',
+  styleUrls: ['./maplestory-tracker-daily.component.css']
 })
-export class MaplestoryTrackerComponent implements OnInit, OnDestroy {
+export class MaplestoryTrackerDailyComponent implements OnInit, OnDestroy {
   generalData: GeneralData;
   selectedCharacter: CharacterData;
  

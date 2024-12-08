@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { MaplestoryTrackerComponent } from './tracker/maplestory-tracker.component';
+import { MaplestoryTrackerDailyComponent } from './tracker-daily/maplestory-tracker-daily.component';
 
 const routes: Routes = [
-    { path: '', component: MaplestoryTrackerComponent }
+    { path: '', component: MaplestoryTrackerDailyComponent }
 ];
 
 @NgModule({
     imports: [RouterModule.forChild(routes)],
     exports: [RouterModule]
 })
-export class MaplestoryTrackerRoutingModule { }
+export class MaplestoryTrackerDailyRoutingModule { }

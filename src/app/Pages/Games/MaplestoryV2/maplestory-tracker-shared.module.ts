@@ -5,7 +5,6 @@ import { NgModule } from "@angular/core";
 // import { TopbarEditmodeComponent } from "../Components/task-topbar-editmode/task-topbar-editmode.component";
 // import { CharacterNavigationBarComponent } from "../Components/task-character-navigation-bar/task-character-navigation-bar.component";
 import { CommonModule } from "@angular/common";
-// import { YuGardenTaskComponent } from "../Components/task/custom-tasks/yu-garden-task/yu-garden-task.component";
 import { SharedModule } from "../../../Shared/shared.module";
 import { TaskComponent } from "./Components/tracker/task/task.component";
 import { TaskGroupComponent } from "./Components/tracker/task-group/task-group.component";
@@ -13,10 +12,11 @@ import { TaskTitlebarComponent } from "./Components/tracker/task-titlebar/task-t
 import { CharacterSelectorComponent } from "./Components/tracker/character-selector/character-selector.component";
 import { UrsusTimerComponent } from "./Components/tracker/task/task-timers/ursus-timer/ursus-timer.component";
 import { YuGardenTimerComponent } from "./Components/tracker/task/task-timers/yu-garden-timer/yu-garden-timer.component";
+import { TrackerNavigationComponent } from "./Components/navigation/sub-navigation/tracker-nagivation/tracker-navigation.component";
 
 @NgModule({
     imports: [CommonModule, SharedModule],
-    declarations: [TaskComponent, TaskGroupComponent, TaskTitlebarComponent, CharacterSelectorComponent, UrsusTimerComponent, YuGardenTimerComponent],
-    exports: [TaskComponent, TaskGroupComponent, TaskTitlebarComponent, CharacterSelectorComponent, UrsusTimerComponent, YuGardenTimerComponent]
+    declarations: [TaskComponent, TaskGroupComponent, TaskTitlebarComponent, CharacterSelectorComponent, UrsusTimerComponent, YuGardenTimerComponent, TrackerNavigationComponent],
+    exports: [TaskComponent, TaskGroupComponent, TaskTitlebarComponent, CharacterSelectorComponent, UrsusTimerComponent, YuGardenTimerComponent, TrackerNavigationComponent]
 })
 export class MaplestoryTrackerSharedModule { }

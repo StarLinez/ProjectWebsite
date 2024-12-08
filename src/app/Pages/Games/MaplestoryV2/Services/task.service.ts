@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import DailiesJsonV3 from '../../../../../assets/Games/MaplestoryV2/Dailies.json';
-import WeekliesJsonV2 from '../../../../../assets/Games/MaplestoryV2/Weeklies.json';
+import DailiesJson from '../../../../../assets/Games/MaplestoryV2/Dailies.json';
+import WeekliesJson from '../../../../../assets/Games/MaplestoryV2/Weeklies.json';
 import { TaskGroup, Task } from "../Models/trackerData";
 import { GeneralData } from '../Models/generalData';
 import { CharacterData } from '../Models/characterData';
@@ -12,9 +12,17 @@ import { CharacterData } from '../Models/characterData';
 export class TaskService {
 
     dailyUpdateChecker(generalData: GeneralData) {
-        if (DailiesJsonV3.version !== generalData.trackerInfo.dailyVersion) {
+        if (DailiesJson.version !== generalData.trackerInfo.dailyVersion) {
             this.updateDailyTaskStructure(generalData);
-            generalData.trackerInfo.dailyVersion = DailiesJsonV3.version;
+            generalData.trackerInfo.dailyVersion = DailiesJson.version;
+            localStorage.setItem("generalData", JSON.stringify(generalData));
+        }
+    }
+
+    weeklyUpdateChecker(generalData: GeneralData) {
+        if (WeekliesJson.version !== generalData.trackerInfo.weeklyVersion) {
+            this.updateDailyTaskStructure(generalData);
+            generalData.trackerInfo.weeklyVersion = WeekliesJson.version;
             localStorage.setItem("generalData", JSON.stringify(generalData));
         }
     }
@@ -23,7 +31,7 @@ export class TaskService {
         for (let i = 0; i < generalData.characters.length; i++) {
             var characterData: CharacterData = JSON.parse(localStorage.getItem(generalData.characters[i].characterStorageReference));
             // make a copy as this has data being removed from it so it needs refreshing
-            var newTaskGroups: TaskGroup [] = DailiesJsonV3.taskGroups;
+            var newTaskGroups: TaskGroup [] = DailiesJson.taskGroups;
 
             // TODO: in future if a new taskgroup is added make sure this is done
             // check if there are more task groups in the new data (aka if a new group is added). As the for loop bases it self on the new taskgroup length it will error out if it does not exist in the old data.

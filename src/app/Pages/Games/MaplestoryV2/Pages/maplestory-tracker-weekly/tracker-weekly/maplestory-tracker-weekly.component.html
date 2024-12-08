@@ -1,0 +1,18 @@
+<app-maplestory-navigation></app-maplestory-navigation>
+<div class="background"></div>
+<app-task-titlebar [generalData]="generalData" [editMode]="editMode" (editModeChangeEvent)="editModeChange($event)" (addCharacterEvent)="addCharacter($event)" (switchCharacterEvent)="switchCharacter($event)" (regionChangeEvent)="regionChangeHandler()"></app-task-titlebar>
+
+
+<app-tracker-navigation></app-tracker-navigation>
+
+<!-- TODO: maybe change this into it's own component for weekly and for daily? Or leave it here as it's unique per tracker anyway
+ For weeklies it will need to be part of the task wrapper technically -->
+<div class="timerWrapper">
+    <div class="timer"><span>{{ timerStrings[0] }}</span></div>
+</div>
+
+<div class="taskWrapper">
+    <ng-container *ngFor="let item of selectedCharacter.weeklyTaskGroups; let i = index">
+        <app-task-group [editMode]="editMode" [taskGroup]="item" [resetUtcOffset]="generalData.mapleRegion.resetUtcOffset" (changeEvent)="changeHandler()"></app-task-group>
+    </ng-container>
+</div>

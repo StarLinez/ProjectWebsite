@@ -53,9 +53,19 @@ const routes: Routes = [
         loadChildren: () => import('./Pages/Games/Maplestory/Pages/maplestory-weeklies-v3/maplestory-weeklies-v3.module').then(m => m.MaplestoryWeekliesV3Module)
     },
     {
-        path: 'games/maplestory/tracker', 
-        loadChildren: () => import('./Pages/Games/MaplestoryV2/Pages/maplestory-tracker/maplestory-tracker.module').then(m => m.MaplestoryTrackerModule)
+        path: 'games/maplestory/tracker/daily', 
+        loadChildren: () => import('./Pages/Games/MaplestoryV2/Pages/maplestory-tracker-daily/maplestory-tracker-daily.module').then(m => m.MaplestoryTrackerDailyModule)
     },
+    {
+        path: 'games/maplestory/tracker/weekly', 
+        loadChildren: () => import('./Pages/Games/MaplestoryV2/Pages/maplestory-tracker-weekly/maplestory-tracker-weekly.module').then(m => m.MaplestoryTrackerWeeklyModule)
+    },
+
+    {
+        path: 'games/maplestory/tracker', 
+        redirectTo: 'games/maplestory/tracker/daily'
+    },
+
 
 
 
