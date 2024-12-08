@@ -21,7 +21,7 @@ export class TaskService {
 
     weeklyUpdateChecker(generalData: GeneralData) {
         if (WeekliesJson.version !== generalData.trackerInfo.weeklyVersion) {
-            this.updateDailyTaskStructure(generalData);
+            this.updateWeeklyTaskStructure(generalData);
             generalData.trackerInfo.weeklyVersion = WeekliesJson.version;
             localStorage.setItem("generalData", JSON.stringify(generalData));
         }
@@ -38,6 +38,24 @@ export class TaskService {
 
             for (let j = 0; j < characterData.dailyTaskGroups.length; j++) {
                 characterData.dailyTaskGroups[j] = this.updateTaskGroup(characterData.dailyTaskGroups[j], JSON.parse(JSON.stringify(newTaskGroups[j])));
+            }
+
+            // save the updated data for this character
+            localStorage.setItem(generalData.characters[i].characterStorageReference, JSON.stringify(characterData));
+        }
+    }
+
+    updateWeeklyTaskStructure(generalData: GeneralData) {
+        for (let i = 0; i < generalData.characters.length; i++) {
+            var characterData: CharacterData = JSON.parse(localStorage.getItem(generalData.characters[i].characterStorageReference));
+            // make a copy as this has data being removed from it so it needs refreshing
+            var newTaskGroups: TaskGroup [] = WeekliesJson.taskGroups;
+
+            // TODO: in future if a new taskgroup is added make sure this is done
+            // check if there are more task groups in the new data (aka if a new group is added). As the for loop bases it self on the new taskgroup length it will error out if it does not exist in the old data.
+
+            for (let j = 0; j < characterData.weeklyTaskGroups.length; j++) {
+                characterData.weeklyTaskGroups[j] = this.updateTaskGroup(characterData.weeklyTaskGroups[j], JSON.parse(JSON.stringify(newTaskGroups[j])));
             }
 
             // save the updated data for this character
