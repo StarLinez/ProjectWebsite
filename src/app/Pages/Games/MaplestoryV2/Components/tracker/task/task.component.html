@@ -10,7 +10,7 @@
         </div>
     </div>
     <div class="taskName">{{ task.name }}</div>
-    <img [src]="task.type != 'custom' ? 'assets/Games/MaplestoryV2/Daily/' + task.image : task.image" onerror="this.onerror=null; this.src='assets/TrackerImages/error.png'" alt="{{task.name}}">
+    <img [src]="task.type != 'custom' ? 'assets/Games/MaplestoryV2/' + imagePrefix + task.image : task.image" onerror="this.onerror=null; this.src='assets/TrackerImages/error.png'" alt="{{task.name}}">
     <div *ngIf="editMode" class="toggle" [ngClass]="(!task.enabled)?'emEnabled':'emDisabled'">
         <span *ngIf="!task.enabled && task.type != 'custom'" class="fa fa-plus"></span>
         <span *ngIf="task.enabled && task.type != 'custom'" class="fa fa-minus"></span>

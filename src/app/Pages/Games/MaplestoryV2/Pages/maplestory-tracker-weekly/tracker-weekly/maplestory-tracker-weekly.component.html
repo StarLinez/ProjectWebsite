@@ -10,6 +10,6 @@
         <div *ngIf="item.title === 'Weekly Bosses'" class="timer"><span>{{ "Weekly Boss Reset in " + timerStrings[0] }}</span></div>
         <div *ngIf="item.title === 'Weekly Tasks'" class="timer"><span>{{ "Weekly Tasks Reset in " + timerStrings[1] }}</span></div>
         <div *ngIf="item.title === 'Arcane Weeklies'" class="timer"><span>{{ "Weekly Arcane reset in " + timerStrings[2] }}</span></div>
-        <app-task-group [editMode]="editMode" [taskGroup]="item" [resetUtcOffset]="generalData.mapleRegion.resetUtcOffset" (changeEvent)="changeHandler()"></app-task-group>
+        <app-task-group [editMode]="editMode" [taskGroup]="item" [imagePrefix]="generalData.trackerInfo.weeklyImagePrefix" [resetUtcOffset]="generalData.mapleRegion.resetUtcOffset" (changeEvent)="changeHandler()"></app-task-group>
     </div>
 </div>

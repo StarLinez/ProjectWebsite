@@ -1,14 +1,14 @@
 {
-    "version": "9.4",
-    "imagePrefix": "MapleWeeklies/",
+    "version": "9.7",
+    "imagePrefix": "Weekly/",
     "taskGroups": [
         {
             "title": "Weekly Bosses",
-            "image": "test",
+            "image": "WeeklyBosses.png",
             "tasks": [
                 {
                     "name": "Chaos Pink Bean",
-                    "image": "ChaosPinkBean.png",
+                    "image": "CPinkBean.png",
                     "done": false,
                     "enabled": true,
                     "type": "default",
@@ -16,7 +16,7 @@
                 },
                 {
                     "name": "Hard Hilla",
-                    "image": "HardHilla.png",
+                    "image": "HHilla.png",
                     "done": false,
                     "enabled": true,
                     "type": "default",
@@ -32,7 +32,7 @@
                 },
                 {
                     "name": "Chaos Zakum",
-                    "image": "ChaosZakum.png",
+                    "image": "CZakum.png",
                     "done": false,
                     "enabled": true,
                     "type": "default",
@@ -47,8 +47,8 @@
                     "dispCon": "true"
                 },
                 {
-                    "name": "Chaos Crimson Queen",
-                    "image": "ChaosCrimsonQueen.png",
+                    "name": "Chaos Crimson Queen",
+                    "image": "CCrimsonQueen.png",
                     "done": false,
                     "enabled": true,
                     "type": "default",
@@ -56,7 +56,7 @@
                 },
                 {
                     "name": "Chaos Pierre",
-                    "image": "ChaosPierre.png",
+                    "image": "CPierre.png",
                     "done": false,
                     "enabled": true,
                     "type": "default",
@@ -64,7 +64,7 @@
                 },
                 {
                     "name": "Chaos Von Bon",
-                    "image": "ChaosVonBon.png",
+                    "image": "CVonBon.png",
                     "done": false,
                     "enabled": true,
                     "type": "default",
@@ -72,7 +72,7 @@
                 },
                 {
                     "name": "Chaos Vellum",
-                    "image": "ChaosVellum.png",
+                    "image": "CVellum.png",
                     "done": false,
                     "enabled": true,
                     "type": "default",
@@ -88,7 +88,7 @@
                 },
                 {
                     "name": "Hard Magnus",
-                    "image": "HardMagnus.png",
+                    "image": "HMagnus.png",
                     "done": false,
                     "enabled": true,
                     "type": "default",
@@ -96,7 +96,7 @@
                 },
                 {
                     "name": "Chaos Papulatus",
-                    "image": "ChaosPapulatus.png",
+                    "image": "CPapulatus.png",
                     "done": false,
                     "enabled": true,
                     "type": "default",
@@ -187,7 +187,7 @@
         },
         {
             "title": "Weekly Tasks",
-            "image": "test",
+            "image": "WeeklyTasks.png",
             "tasks": [
                 {
                     "name": "Guild Buff",
@@ -258,7 +258,7 @@
         },
         {
             "title": "Arcane Weeklies",
-            "image": "test",
+            "image": "WeeklyArcane.png",
             "tasks": [
                 {
                     "name": "Erda Spectrum",

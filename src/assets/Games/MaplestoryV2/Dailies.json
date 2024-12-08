@@ -1,6 +1,6 @@
 {
-    "version": "9.7",
-    "imagePrefix": "MapleDailies/",
+    "version": "9.6",
+    "imagePrefix": "Daily/",
     "taskGroups": [
         {
             "title": "Daily Bosses",

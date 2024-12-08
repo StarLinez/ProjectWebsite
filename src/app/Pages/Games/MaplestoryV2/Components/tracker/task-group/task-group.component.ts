@@ -13,6 +13,7 @@ export class TaskGroupComponent implements OnInit {
   @Input() title: string;
   @Input() editMode: boolean;
   @Input() resetUtcOffset: boolean;
+  @Input() imagePrefix: string;
 
   @Output() changeEvent = new EventEmitter<any>();
 

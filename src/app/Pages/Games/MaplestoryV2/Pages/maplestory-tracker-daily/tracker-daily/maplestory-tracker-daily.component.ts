@@ -34,7 +34,6 @@ export class MaplestoryTrackerDailyComponent implements OnInit, OnDestroy {
     } else {
       this.metaService.updateTag({ name: "robots", content: "index, follow" });
     }
-
     this.initialise();
   }
 

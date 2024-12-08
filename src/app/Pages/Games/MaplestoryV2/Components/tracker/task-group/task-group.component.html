@@ -1,6 +1,6 @@
 <div class="taskGroup">
     <div class="taskGroupHeader">
-        <img class="taskGroupImage" [src]="'assets/Games/MaplestoryV2/Daily/' + taskGroup.image" onerror="this.onerror=null; this.src='assets/TrackerImages/Custom.png'">
+        <img class="taskGroupImage" [src]="'assets/Games/MaplestoryV2/' + imagePrefix + taskGroup.image" onerror="this.onerror=null; this.src='assets/TrackerImages/Custom.png'">
         <div class="taskGroupTitle">{{ taskGroup.title }}</div>
     </div>
 
@@ -9,7 +9,7 @@
     </div>
 
     <ng-container *ngFor="let task of taskGroup.tasks; let i = index">
-        <app-task *ngIf="task.enabled || editMode" [task]="task" [index]="i" [editMode]="editMode"  [resetUtcOffset]="resetUtcOffset" (disableEvent)="disableTask($event)" (moveEvent)="moveTask($event)" (toggleEvent)="toggleHandler()"></app-task>
+        <app-task *ngIf="task.enabled || editMode" [task]="task" [index]="i" [editMode]="editMode" [imagePrefix]="imagePrefix" [resetUtcOffset]="resetUtcOffset" (disableEvent)="disableTask($event)" (moveEvent)="moveTask($event)" (toggleEvent)="toggleHandler()"></app-task>
     </ng-container>
 
     <div *ngIf="taskGroup.allDisabled && !editMode" class="allDisabledMessage">
