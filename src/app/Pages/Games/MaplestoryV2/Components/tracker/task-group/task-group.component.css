@@ -10,6 +10,7 @@
     -webkit-box-sizing: border-box;
     border: white 1px solid;
     padding-bottom: 9px;
+    margin-bottom: 25px;
 }
 
 .taskGroupHeader {
@@ -42,6 +43,7 @@
     box-sizing: border-box;
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
+    cursor: default;
 }
 
 .progress {

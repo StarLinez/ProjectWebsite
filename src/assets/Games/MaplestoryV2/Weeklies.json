@@ -1,5 +1,5 @@
 {
-    "version": "9.7",
+    "version": "9.8",
     "imagePrefix": "Weekly/",
     "taskGroups": [
         {
@@ -175,6 +175,14 @@
                     "dispCon": "true"
                 },
                 {
+                    "name": "Kalos",
+                    "image": "Kalos.png",
+                    "done": false,
+                    "enabled": true,
+                    "type": "default",
+                    "dispCon": "true"
+                },
+                {
                     "name": "Kaling",
                     "image": "Kaling.png",
                     "done": false,
@@ -207,7 +215,7 @@
                 },
                 {
                     "name": "Dark World Tree",
-                    "image": "Dark World Tree.png",
+                    "image": "DWT.png",
                     "done": false,
                     "enabled": true,
                     "type": "default",
@@ -239,7 +247,7 @@
                 },
                 {
                     "name": "Flag Race",
-                    "image": "FlagRace.png",
+                    "image": "Flag.png",
                     "done": false,
                     "enabled": true,
                     "type": "default",
