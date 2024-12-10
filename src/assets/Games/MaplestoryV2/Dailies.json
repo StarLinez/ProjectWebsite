@@ -1,5 +1,5 @@
 {
-    "version": "9.6",
+    "version": "10.0",
     "imagePrefix": "Daily/",
     "taskGroups": [
         {
@@ -8,7 +8,7 @@
             "tasks": [
                 {
                     "name": "Zakum",
-                    "image": "Zakum.png",
+                    "image": "Zak.png",
                     "done": false,
                     "enabled": true,
                     "type": "default",
@@ -16,7 +16,7 @@
                 },
                 {
                     "name": "Horntail",
-                    "image": "Horntail.png",
+                    "image": "HT.png",
                     "done": false,
                     "enabled": true,
                     "type": "default",
@@ -64,7 +64,7 @@
                 },
                 {
                     "name": "Von Leon",
-                    "image": "VonLeon.png",
+                    "image": "VL.png",
                     "done": false,
                     "enabled": true,
                     "type": "default",
@@ -72,7 +72,7 @@
                 },
                 {
                     "name": "Arkarium",
-                    "image": "Arkarium.png",
+                    "image": "Ark.png",
                     "done": false,
                     "enabled": true,
                     "type": "default",
@@ -88,7 +88,7 @@
                 },
                 {
                     "name": "Pink Bean",
-                    "image": "PinkBean.png",
+                    "image": "PB.png",
                     "done": false,
                     "enabled": true,
                     "type": "default",
@@ -135,7 +135,7 @@
             "tasks": [
                 {
                     "name": "Monster Park Regular",
-                    "image": "MonsterPark.png",
+                    "image": "MP.png",
                     "done": false,
                     "enabled": true,
                     "type": "default",
@@ -192,6 +192,14 @@
                 {
                     "name": "Yu Garden",
                     "image": "YuGarden.png",
+                    "done": false,
+                    "enabled": true,
+                    "type": "default",
+                    "dispCon": "true"
+                },
+                {
+                    "name": "Event",
+                    "image": "Event.png",
                     "done": false,
                     "enabled": true,
                     "type": "default",

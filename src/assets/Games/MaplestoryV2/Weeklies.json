@@ -1,5 +1,5 @@
 {
-    "version": "9.8",
+    "version": "10.1",
     "imagePrefix": "Weekly/",
     "taskGroups": [
         {
@@ -8,7 +8,7 @@
             "tasks": [
                 {
                     "name": "Chaos Pink Bean",
-                    "image": "CPinkBean.png",
+                    "image": "CPB.png",
                     "done": false,
                     "enabled": true,
                     "type": "default",
@@ -32,7 +32,7 @@
                 },
                 {
                     "name": "Chaos Zakum",
-                    "image": "CZakum.png",
+                    "image": "CZak.png",
                     "done": false,
                     "enabled": true,
                     "type": "default",
@@ -96,7 +96,7 @@
                 },
                 {
                     "name": "Chaos Papulatus",
-                    "image": "CPapulatus.png",
+                    "image": "CPap.png",
                     "done": false,
                     "enabled": true,
                     "type": "default",
@@ -194,17 +194,9 @@
             "allDisabled": false
         },
         {
-            "title": "Weekly Tasks",
-            "image": "WeeklyTasks.png",
+            "title": "Monday Reset",
+            "image": "MondayReset.png",
             "tasks": [
-                {
-                    "name": "Guild Buff",
-                    "image": "GuildBuff.png",
-                    "done": false,
-                    "enabled": true,
-                    "type": "default",
-                    "dispCon": "true"
-                },
                 {
                     "name": "Scrapyard",
                     "image": "Scrapyard.png",
@@ -245,29 +237,6 @@
                     "type": "default",
                     "dispCon": "true"
                 },
-                {
-                    "name": "Flag Race",
-                    "image": "Flag.png",
-                    "done": false,
-                    "enabled": true,
-                    "type": "default",
-                    "dispCon": "true"
-                },
-                {
-                    "name": "Sharenian Culvert",
-                    "image": "Culvert.png",
-                    "done": false,
-                    "enabled": true,
-                    "type": "default",
-                    "dispCon": "true"
-                }
-            ],
-            "allDisabled": false
-        },
-        {
-            "title": "Arcane Weeklies",
-            "image": "WeeklyArcane.png",
-            "tasks": [
                 {
                     "name": "Erda Spectrum",
                     "image": "ErdaSpectrum.png",
@@ -311,6 +280,37 @@
                 {
                     "name": "Esfera Guardian",
                     "image": "EsferaGuardian.png",
+                    "done": false,
+                    "enabled": true,
+                    "type": "default",
+                    "dispCon": "true"
+                }
+            ],
+            "allDisabled": false
+        },
+        {
+            "title": "Thursday Reset",
+            "image": "ThursdayReset.png",
+            "tasks": [
+                {
+                    "name": "Guild Buff",
+                    "image": "GBuff.png",
+                    "done": false,
+                    "enabled": true,
+                    "type": "default",
+                    "dispCon": "true"
+                },
+                {
+                    "name": "Sharenian Culvert",
+                    "image": "Culvert.png",
+                    "done": false,
+                    "enabled": true,
+                    "type": "default",
+                    "dispCon": "true"
+                },
+                {
+                    "name": "Flag Race",
+                    "image": "Flag.png",
                     "done": false,
                     "enabled": true,
                     "type": "default",

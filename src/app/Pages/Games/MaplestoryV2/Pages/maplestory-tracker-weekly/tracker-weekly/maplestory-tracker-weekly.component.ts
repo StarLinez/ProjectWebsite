@@ -83,11 +83,11 @@ export class MaplestoryTrackerWeeklyComponent implements OnInit, OnDestroy {
 
     if (lastVisit < lastThursday) {
       this.taskService.resetWeeklyCompletionIndex(this.generalData, 0);
+      this.taskService.resetWeeklyCompletionIndex(this.generalData, 2);
     }
 
     if (lastVisit < lastMonday) {
       this.taskService.resetWeeklyCompletionIndex(this.generalData, 1);
-      this.taskService.resetWeeklyCompletionIndex(this.generalData, 2);
     }
 
     // set last visit to the current time
@@ -100,11 +100,11 @@ export class MaplestoryTrackerWeeklyComponent implements OnInit, OnDestroy {
 
     var endTime;
 
-    // if the index is 0 the reset is for weeklybosses on thursday else it is 1 which is the reset for weeklytasks on sunday
-    if (taskGroupIndex == 0) {
-      endTime = this.calculateResetDayTime(4);
-    } else {
+    // if the index is 1 the reset is for Monday Reset on Sunday (1) else it is 4 which is the reset for weeklytasks on Thursday
+    if (taskGroupIndex == 1) {
       endTime = this.calculateResetDayTime(1);
+    } else {
+      endTime = this.calculateResetDayTime(4);
     }
 
     this.calculateAndOutPutTimes(endTime - new Date().getTime(), taskGroupIndex);
@@ -141,8 +141,8 @@ export class MaplestoryTrackerWeeklyComponent implements OnInit, OnDestroy {
   calculateAndOutPutTimes(distance: number, taskGroupIndex: number) {
     if (distance < 0) {
       this.timerStrings[taskGroupIndex] = "RESET!";
-      // Also show the reset text in the arcane river weeklies
-      if(taskGroupIndex == 1) {
+      // Also show the reset text in the thursday reset weeklies
+      if(taskGroupIndex == 0) {
         this.timerStrings[2] = "RESET!";
       }
       return;
@@ -154,16 +154,16 @@ export class MaplestoryTrackerWeeklyComponent implements OnInit, OnDestroy {
     var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
     this.timerStrings[taskGroupIndex] = days + "d " + hours + "h " + minutes + "m " + ("00" + seconds).slice(-2) + "s ";
-    // Duplicate the weekly task timer into the arcane river weeklies
-    if(taskGroupIndex == 1) {
+    // Duplicate the weekly task timer into the thursday weeklies
+    if(taskGroupIndex == 0) {
       this.timerStrings[2] = this.timerStrings[taskGroupIndex];
     }
   }
 
   liveReset(taskGroupIndex: number) {
     this.taskService.resetWeeklyCompletionIndex(this.generalData, taskGroupIndex);
-    //makes sure that arcane weekly live reset works (as there is no separate time for this)
-    if (taskGroupIndex == 1) {
+    //makes sure that thursday weekly live reset works (as there is no separate time for this)
+    if (taskGroupIndex == 0) {
       this.taskService.resetWeeklyCompletionIndex(this.generalData, 2);
     }
     this.startTimer(taskGroupIndex);
