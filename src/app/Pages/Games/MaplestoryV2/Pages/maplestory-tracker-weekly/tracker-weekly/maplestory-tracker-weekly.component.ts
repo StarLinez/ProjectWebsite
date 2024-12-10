@@ -44,7 +44,6 @@ export class MaplestoryTrackerWeeklyComponent implements OnInit, OnDestroy {
   initialise() {
     if (localStorage.getItem("generalData")) {
       this.generalData = JSON.parse(localStorage.getItem("generalData"));
-      console.log(this.generalData);
       this.taskService.weeklyUpdateChecker(this.generalData);
       this.weeklyResetChecker();
 
@@ -65,13 +64,9 @@ export class MaplestoryTrackerWeeklyComponent implements OnInit, OnDestroy {
     // fetch the selected user index with an if so errors can be caught, if it doesn't exist create it for that character and maybe show a pop up?
     if(localStorage.getItem(this.generalData.characters[this.generalData.selectedCharacterIndex].characterStorageReference)) {
       this.selectedCharacter = JSON.parse(localStorage.getItem(this.generalData.characters[this.generalData.selectedCharacterIndex].characterStorageReference));
-      console.log(this.selectedCharacter);
-      console.log("present");
     } else {
       // TODO: potentially add a warning message bottom right pop up to tell users there was something wrong
       this.selectedCharacter = this.generalDataService.addCharacterWithExistingReference(this.generalData.characters[this.generalData.selectedCharacterIndex].characterStorageReference);
-      console.log(this.selectedCharacter);
-      console.log("missing");
     }
   }
 

@@ -45,7 +45,6 @@ export class YuGardenTimerComponent implements OnInit, OnDestroy{
     if (date.getUTCHours() < endTime) {
       // count down to yu garden end which is the same day at 2AM
       this.yuGardenTimerPrefix = "Merchant leaves in ";
-      console.log(Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate(), endTime, 0, 0, 0));
       return Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate(), endTime, 0, 0, 0);
     }
 

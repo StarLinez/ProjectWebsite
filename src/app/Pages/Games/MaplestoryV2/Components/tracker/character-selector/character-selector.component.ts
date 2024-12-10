@@ -46,7 +46,6 @@ export class CharacterSelectorComponent implements OnInit {
     this.initiateVariables();
     this.editMode[index] = true;
 
-    console.log("editChar" + index);
     window.setTimeout(function () { 
       document.getElementById("editChar" + index)?.focus();
       }, 0); 

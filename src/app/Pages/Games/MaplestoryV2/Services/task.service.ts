@@ -32,13 +32,11 @@ export class TaskService {
             var characterData: CharacterData = JSON.parse(localStorage.getItem(generalData.characters[i].characterStorageReference));
             // make a copy as this has data being removed from it so it needs refreshing
             var newTaskGroups: TaskGroup [] = DailiesJson.taskGroups;
-            console.log("fine here");
             // TODO: in future if a new taskgroup is added make sure this is done
             // check if there are more task groups in the new data (aka if a new group is added). As the for loop bases it self on the new taskgroup length it will error out if it does not exist in the old data.
 
             for (let j = 0; j < characterData.dailyTaskGroups.length; j++) {
                 characterData.dailyTaskGroups[j] = this.updateTaskGroup(characterData.dailyTaskGroups[j], JSON.parse(JSON.stringify(newTaskGroups[j])));
-                console.log(characterData.dailyTaskGroups[j]);
             }
             
 
