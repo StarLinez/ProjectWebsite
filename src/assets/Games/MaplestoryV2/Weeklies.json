@@ -40,7 +40,7 @@
                 },
                 {
                     "name": "Princess No",
-                    "image": "PrincessNo.png",
+                    "image": "PNO.png",
                     "done": false,
                     "enabled": true,
                     "type": "default",
@@ -80,7 +80,7 @@
                 },
                 {
                     "name": "Akechi Mitsuhide",
-                    "image": "AkechiMitsuhide.png",
+                    "image": "Akechi.png",
                     "done": false,
                     "enabled": true,
                     "type": "default",
@@ -120,7 +120,7 @@
                 },
                 {
                     "name": "Guardian Angel Slime",
-                    "image": "GuardianAngelSlime.png",
+                    "image": "GuardianSlime.png",
                     "done": false,
                     "enabled": true,
                     "type": "default",
@@ -223,7 +223,7 @@
                 },
                 {
                     "name": "Mu Lung Dojo",
-                    "image": "MuLungDojo.png",
+                    "image": "Dojo.png",
                     "done": false,
                     "enabled": true,
                     "type": "default",
@@ -255,7 +255,7 @@
                 },
                 {
                     "name": "Sharenian Culvert",
-                    "image": "SharenianCulvert.png",
+                    "image": "Culvert.png",
                     "done": false,
                     "enabled": true,
                     "type": "default",
