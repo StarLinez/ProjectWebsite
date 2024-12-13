@@ -108,6 +108,7 @@ export class TaskGroupComponent implements OnInit {
       });
     }
     this.selectAll = !this.selectAll;
+    this.changeHandler();
   }
 
   checkSelectAll() {
