@@ -74,6 +74,53 @@
     border-radius: 3px;
 }
 
+.selectAll {
+    width: 385px;
+    height: 47px;
+    background-color: #BABABA;
+    margin: 0 auto 10px auto;
+    color: #393939;
+    display: flex;
+    align-items: center;    
+}
+
+.selectAllName {
+    font-family: "Lemon Milk", sans-serif;
+    font-weight: 500;
+    font-size: 20px;
+}
+
+
+.checkbox {
+    width: 20px;
+    height: 20px;
+    margin: 25px 18px 25px 20px;
+    border-radius: 5px;
+    color: #A6E197;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    text-align: center;
+    display:table;
+}
+
+.checkbox span {
+    display:table-cell;
+    vertical-align:middle;
+}
+
+.cbUnchecked {
+    border: 3px solid #393939;
+}
+
+.cbChecked {
+    background-color: #393939;
+}
+
+.tChecked {
+    background-color: #A6E197;
+}
+
 .allDisabledMessage {
     width: 385px;
     height: 70px;

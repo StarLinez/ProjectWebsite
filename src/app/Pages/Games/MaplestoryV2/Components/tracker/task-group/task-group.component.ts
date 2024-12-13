@@ -24,6 +24,8 @@ export class TaskGroupComponent implements OnInit {
 
   totalEnabledTasks: number = 0;
   totalCompleted: number = 0;
+  //TODO: check this when calculating completion (if 100 mark this as true)
+  selectAll: boolean = false;
 
   ngOnInit() {
     this.checkIfGroupIsFullyDisabled();
@@ -91,6 +93,29 @@ export class TaskGroupComponent implements OnInit {
         }
       }
     });
+
+    this.checkSelectAll();
+  }
+
+  toggleSelectAll() {
+    if(!this.selectAll) {
+      this.taskGroup.tasks.forEach(task => {
+        task.done = true;
+      });
+    } else {
+      this.taskGroup.tasks.forEach(task => {
+        task.done = false;
+      });
+    }
+    this.selectAll = !this.selectAll;
+  }
+
+  checkSelectAll() {
+    if(this.totalEnabledTasks / this.totalCompleted == 1) {
+      this.selectAll = true;
+    } else {
+      this.selectAll = false;
+    }
   }
 
   customTaskStartAdding() {
