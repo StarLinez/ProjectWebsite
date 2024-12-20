@@ -1,0 +1,59 @@
+.overlay {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(54, 54, 54, 0.75);
+    z-index: 100;
+}
+
+.info {
+    position: relative;
+    top: 110px;
+    left: 50%; 
+    transform: translateX(-50%);
+
+    width: 600px;
+
+    background-color: #D9D9D9;
+    border-radius: 6px;
+
+    display: flex;
+    flex-direction: column;
+
+    
+    font-weight: 500;
+    font-family: "Lemon Milk", sans-serif;
+    color: #393939;
+}
+
+.infoTitle {
+    margin: 0 auto;
+    padding-top: 25px;
+    color: #393939;
+
+    font-size: 20px;
+}
+
+.infoText {
+    margin: 0 auto;
+    padding-top: 25px;
+
+    width: calc(100% - 100px);
+    font-size: 15px;
+    text-align: center;
+
+    white-space: pre-wrap;
+}
+
+.resetButton {
+    height: 50px;
+    width: 224px;
+    border-radius: 100px;
+    border: none;
+    font-weight: 500;
+    font-size: 20px;
+    color: white;
+    font-family: "Lemon Milk", sans-serif;
+    margin: 25px auto 25px auto;
+    background-color: #B45757;
+}

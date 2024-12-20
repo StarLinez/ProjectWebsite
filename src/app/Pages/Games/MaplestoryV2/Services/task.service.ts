@@ -15,6 +15,12 @@ export class TaskService {
         if (DailiesJson.version !== generalData.trackerInfo.dailyVersion) {
             this.updateDailyTaskStructure(generalData);
             generalData.trackerInfo.dailyVersion = DailiesJson.version;
+            
+            //uncomment if necessary
+            generalData.trackerInfo.dailyInfoVisible = true;
+            generalData.trackerInfo.dailyInfoTitle = "The daily tracker has been updated!";
+            generalData.trackerInfo.dailyInfoText = "Welcome to the new version of the dailies tracker.\n A lot of effort was spent on it so I hope you enjoy it!\n\nIf you run into any issues feel free to contact me on discord username: starlines";
+
             localStorage.setItem("generalData", JSON.stringify(generalData));
         }
     }
@@ -23,6 +29,12 @@ export class TaskService {
         if (WeekliesJson.version !== generalData.trackerInfo.weeklyVersion) {
             this.updateWeeklyTaskStructure(generalData);
             generalData.trackerInfo.weeklyVersion = WeekliesJson.version;
+
+            //uncomment if necessary
+            generalData.trackerInfo.weeklyInfoVisible = true;
+            generalData.trackerInfo.weeklyInfoTitle = "The weekly tracker has been updated!";
+            generalData.trackerInfo.weeklyInfoText = "Welcome to the new version of the weeklies tracker.\n A lot of effort was spent on it so I hope you enjoy it!\n\nIf you run into any issues feel free to contact me on discord username: starlines";
+
             localStorage.setItem("generalData", JSON.stringify(generalData));
         }
     }

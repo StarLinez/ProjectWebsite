@@ -4,7 +4,11 @@ export interface TrackerInfo {
     lastDailyTrackerVisit: string;
     lastWeeklyTrackerVisit: string;
     dailyInfoVisible: boolean;
+    dailyInfoTitle: string;
+    dailyInfoText: string;
     weeklyInfoVisible: boolean;
+    weeklyInfoTitle: string;
+    weeklyInfoText: string;
     dailyImagePrefix: string;
     weeklyImagePrefix: string;
 }

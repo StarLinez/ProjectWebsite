@@ -14,6 +14,8 @@ import { TaskService } from '../../../Services/task.service';
   styleUrls: ['./maplestory-tracker-daily.component.css']
 })
 export class MaplestoryTrackerDailyComponent implements OnInit, OnDestroy {
+  initialisationComplete: boolean = false;
+
   generalData: GeneralData;
   selectedCharacter: CharacterData;
  
@@ -56,6 +58,8 @@ export class MaplestoryTrackerDailyComponent implements OnInit, OnDestroy {
     }
 
     this.startTimer();
+
+    this.initialisationComplete = true;
   }
 
   fetchSelectedUserData(){
@@ -159,6 +163,11 @@ export class MaplestoryTrackerDailyComponent implements OnInit, OnDestroy {
     localStorage.setItem("generalData", JSON.stringify(this.generalData));
     //TODO: review this later on (might not be necessary, forgot why I added this todo lol)
     //this.checkIfAllGroupsAreDisabled();
+  }
+
+  infoChangeHandler() {
+    this.generalData.trackerInfo.dailyInfoVisible = false;
+    this.generalDataChangeHandler();
   }
 
   regionChangeHandler() {

@@ -22,8 +22,12 @@ export class GeneralDataService {
                 weeklyVersion: WeekliesJson.version, 
                 lastDailyTrackerVisit: Date.now().toString(),
                 lastWeeklyTrackerVisit: Date.now().toString(),
-                dailyInfoVisible: false,
-                weeklyInfoVisible: false,
+                dailyInfoVisible: true,
+                dailyInfoTitle: "The daily tracker has been updated!",
+                dailyInfoText: "Welcome to the new version of the dailies tracker.\n A lot of effort was spent on it so I hope you enjoy it!\n\nIf you run into any issues feel free to contact me on discord username: starlines",
+                weeklyInfoVisible: true,
+                weeklyInfoTitle: "The weekly tracker has been updated!",
+                weeklyInfoText: "Welcome to the new version of the weeklies tracker.\n A lot of effort was spent on it so I hope you enjoy it!\n\nIf you run into any issues feel free to contact me on discord username: starlines",
                 dailyImagePrefix: DailiesJson.imagePrefix,
                 weeklyImagePrefix: WeekliesJson.imagePrefix
             }

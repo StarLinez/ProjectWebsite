@@ -1,3 +1,5 @@
+<app-error-box *ngIf="!initialisationComplete"></app-error-box>
+<app-info-box *ngIf="generalData.trackerInfo.dailyInfoVisible" [title]="generalData.trackerInfo.dailyInfoTitle" [text]="generalData.trackerInfo.dailyInfoText" (dismissEvent)="infoChangeHandler()"></app-info-box>
 <app-maplestory-navigation></app-maplestory-navigation>
 <div class="background"></div>
 <app-task-titlebar [generalData]="generalData" [editMode]="editMode" (editModeChangeEvent)="editModeChange($event)" (addCharacterEvent)="addCharacter($event)" (switchCharacterEvent)="switchCharacter($event)" (regionChangeEvent)="regionChangeHandler()"></app-task-titlebar>

@@ -14,6 +14,8 @@ import { TaskService } from '../../../Services/task.service';
   styleUrls: ['./maplestory-tracker-weekly.component.css']
 })
 export class MaplestoryTrackerWeeklyComponent implements OnInit, OnDestroy {
+  initialisationComplete: boolean = false;
+
   generalData: GeneralData;
   selectedCharacter: CharacterData;
  
@@ -58,6 +60,8 @@ export class MaplestoryTrackerWeeklyComponent implements OnInit, OnDestroy {
     // 0 starts weekly boss timer, 1 starts weekly task timer
     this.startTimer(0);
     this.startTimer(1);
+    
+    this.initialisationComplete = true;
   }
 
   fetchSelectedUserData(){
@@ -190,6 +194,11 @@ export class MaplestoryTrackerWeeklyComponent implements OnInit, OnDestroy {
     localStorage.setItem("generalData", JSON.stringify(this.generalData));
     //TODO: review this later on (might not be necessary, forgot why I added this todo lol)
     //this.checkIfAllGroupsAreDisabled();
+  }
+
+  infoChangeHandler() {
+    this.generalData.trackerInfo.weeklyInfoVisible = false;
+    this.generalDataChangeHandler();
   }
 
   regionChangeHandler() {
