@@ -13,6 +13,6 @@
 
 <div class="taskWrapper">
     <ng-container *ngFor="let item of selectedCharacter.dailyTaskGroups; let i = index">
-        <app-task-group [editMode]="editMode" [taskGroup]="item" [imagePrefix]="generalData.trackerInfo.dailyImagePrefix" [resetUtcOffset]="generalData.mapleRegion.resetUtcOffset" (changeEvent)="changeHandler()"></app-task-group>
+        <app-task-group class="taskGroupWrapper" [editMode]="editMode" [taskGroup]="item" [imagePrefix]="generalData.trackerInfo.dailyImagePrefix" [resetUtcOffset]="generalData.mapleRegion.resetUtcOffset" (changeEvent)="changeHandler()"></app-task-group>
     </ng-container>
 </div>

@@ -51,10 +51,48 @@
     display: -webkit-flex;
     display: flex;
     -webkit-flex-flow: row wrap;
+    flex-direction: column;
     -ms-flex-flow: row wrap;
     flex-flow: row wrap;
     -webkit-flex-pack: justify;
     -ms-flex-pack: justify;
     -webkit-justify-content: space-between;
     justify-content: space-between;
+}
+
+@media only screen and (max-width: 1400px) {
+    .timerWrapper {
+        width: 900px;
+        margin: 0 auto 20px auto;
+    }
+
+    .taskWrapper {
+        width: 950px;
+        display: block;
+        margin: 0 auto;
+    }
+
+    .taskGroupWrapper {
+        display: block;
+        float: left;
+        margin: 0px 25px 0px 25px;
+    }
+
+}
+
+@media only screen and (max-width: 953px) {
+    .timerWrapper {
+        width: 425px;
+        margin: 0 auto 20px auto;
+    }
+
+    .taskWrapper {
+        width: 425px;
+    }
+
+    .taskGroupWrapper {
+        display: block;
+        float: none;
+        margin: 0 auto;
+    }
 }

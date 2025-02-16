@@ -8,10 +8,10 @@
 <app-tracker-navigation></app-tracker-navigation>
 
 <div class="taskWrapper">
-    <div *ngFor="let item of selectedCharacter.weeklyTaskGroups; let i = index" class="groupWrapper">
+    <div class="taskGroupWrapper" *ngFor="let item of selectedCharacter.weeklyTaskGroups; let i = index">
         <div *ngIf="item.title === 'Weekly Bosses'" class="timer"><span>{{ "Weekly Bosses Reset in " + timerStrings[0] }}</span></div>
         <div *ngIf="item.title === 'Monday Reset'" class="timer"><span>{{ "Monday Tasks Reset in " + timerStrings[1] }}</span></div>
         <div *ngIf="item.title === 'Thursday Reset'" class="timer"><span>{{ "Thursday Tasks Reset in " + timerStrings[2] }}</span></div>
-        <app-task-group [editMode]="editMode" [taskGroup]="item" [imagePrefix]="generalData.trackerInfo.weeklyImagePrefix" [resetUtcOffset]="generalData.mapleRegion.resetUtcOffset" (changeEvent)="changeHandler()"></app-task-group>
+        <app-task-group class="taskGroupTest" [editMode]="editMode" [taskGroup]="item" [imagePrefix]="generalData.trackerInfo.weeklyImagePrefix" [resetUtcOffset]="generalData.mapleRegion.resetUtcOffset" (changeEvent)="changeHandler()"></app-task-group>
     </div>
 </div>
