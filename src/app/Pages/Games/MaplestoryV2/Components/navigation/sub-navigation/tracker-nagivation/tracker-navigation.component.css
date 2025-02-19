@@ -25,3 +25,18 @@
 .inactiveLink {
     background-color: #926000;
 }
+
+@media only screen and (max-width: 500px) {
+    .trackerSwitcher {
+        flex-wrap: wrap;
+        height: auto;
+    }
+
+    .trackerSwitcher button {
+        margin-top: 10px;
+    }
+
+    .trackerSwitcher a:last-child {
+        margin-bottom: 10px;
+    }
+}

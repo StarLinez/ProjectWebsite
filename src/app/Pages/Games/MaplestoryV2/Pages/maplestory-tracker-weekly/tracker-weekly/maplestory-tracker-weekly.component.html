@@ -1,5 +1,5 @@
 <app-error-box *ngIf="!initialisationComplete"></app-error-box>
-<app-info-box *ngIf="generalData.trackerInfo.weeklyInfoVisible" [title]="generalData.trackerInfo.weeklyInfoTitle" [text]="generalData.trackerInfo.weeklyInfoText" (dismissEvent)="infoChangeHandler()" ></app-info-box>
+<app-info-box *ngIf="generalData.trackerInfo.weeklyInfoVisible && initialisationComplete" [title]="generalData.trackerInfo.weeklyInfoTitle" [text]="generalData.trackerInfo.weeklyInfoText" (dismissEvent)="infoChangeHandler()" ></app-info-box>
 <app-maplestory-navigation></app-maplestory-navigation>
 <div class="background"></div>
 <app-task-titlebar [generalData]="generalData" [editMode]="editMode" (editModeChangeEvent)="editModeChange($event)" (addCharacterEvent)="addCharacter($event)" (switchCharacterEvent)="switchCharacter($event)" (regionChangeEvent)="regionChangeHandler()"></app-task-titlebar>
@@ -15,3 +15,5 @@
         <app-task-group class="taskGroupTest" [editMode]="editMode" [taskGroup]="item" [imagePrefix]="generalData.trackerInfo.weeklyImagePrefix" [resetUtcOffset]="generalData.mapleRegion.resetUtcOffset" (changeEvent)="changeHandler()"></app-task-group>
     </div>
 </div>
+
+<app-footer></app-footer>

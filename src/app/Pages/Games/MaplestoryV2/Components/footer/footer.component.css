@@ -1,0 +1,14 @@
+.footer {
+    width: 100%;
+    margin-bottom: 24px;
+    text-align: center;
+    font-family: "Lemon Milk", sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.footer a {
+    text-decoration: underline;
+    color: white;
+    white-space: nowrap;
+}

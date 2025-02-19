@@ -16,10 +16,9 @@ export class TaskService {
             this.updateDailyTaskStructure(generalData);
             generalData.trackerInfo.dailyVersion = DailiesJson.version;
             
-            //uncomment if necessary
-            generalData.trackerInfo.dailyInfoVisible = true;
-            generalData.trackerInfo.dailyInfoTitle = "The daily tracker has been updated!";
-            generalData.trackerInfo.dailyInfoText = "Welcome to the new version of the dailies tracker.\n A lot of effort was spent on it so I hope you enjoy it!\n\nIf you run into any issues feel free to contact me on discord username: starlines";
+            generalData.trackerInfo.dailyInfoVisible = DailiesJson.infoVisible;
+            generalData.trackerInfo.dailyInfoTitle = DailiesJson.infoTitle;
+            generalData.trackerInfo.dailyInfoText = DailiesJson.infoText;
 
             localStorage.setItem("generalData", JSON.stringify(generalData));
         }
@@ -30,10 +29,9 @@ export class TaskService {
             this.updateWeeklyTaskStructure(generalData);
             generalData.trackerInfo.weeklyVersion = WeekliesJson.version;
 
-            //uncomment if necessary
-            generalData.trackerInfo.weeklyInfoVisible = true;
-            generalData.trackerInfo.weeklyInfoTitle = "The weekly tracker has been updated!";
-            generalData.trackerInfo.weeklyInfoText = "Welcome to the new version of the weeklies tracker.\n A lot of effort was spent on it so I hope you enjoy it!\n\nIf you run into any issues feel free to contact me on discord username: starlines";
+            generalData.trackerInfo.weeklyInfoVisible = WeekliesJson.infoVisible;
+            generalData.trackerInfo.weeklyInfoTitle = WeekliesJson.infoTitle;
+            generalData.trackerInfo.weeklyInfoText = WeekliesJson.infoText;
 
             localStorage.setItem("generalData", JSON.stringify(generalData));
         }

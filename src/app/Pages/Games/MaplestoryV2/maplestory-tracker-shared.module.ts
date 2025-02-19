@@ -15,10 +15,11 @@ import { YuGardenTimerComponent } from "./Components/tracker/task/task-timers/yu
 import { TrackerNavigationComponent } from "./Components/navigation/sub-navigation/tracker-nagivation/tracker-navigation.component";
 import { InfoBoxComponent } from "./Components/info-box/info-box.component";
 import { ErrorBoxComponent } from "./Components/error-box/error-box.component";
+import { FooterComponent } from "./Components/footer/footer.component";
 
 @NgModule({
     imports: [CommonModule, SharedModule],
-    declarations: [TaskComponent, TaskGroupComponent, TaskTitlebarComponent, CharacterSelectorComponent, UrsusTimerComponent, YuGardenTimerComponent, TrackerNavigationComponent, InfoBoxComponent, ErrorBoxComponent],
-    exports: [TaskComponent, TaskGroupComponent, TaskTitlebarComponent, CharacterSelectorComponent, UrsusTimerComponent, YuGardenTimerComponent, TrackerNavigationComponent, InfoBoxComponent, ErrorBoxComponent]
+    declarations: [TaskComponent, TaskGroupComponent, TaskTitlebarComponent, CharacterSelectorComponent, UrsusTimerComponent, YuGardenTimerComponent, TrackerNavigationComponent, InfoBoxComponent, ErrorBoxComponent, FooterComponent],
+    exports: [TaskComponent, TaskGroupComponent, TaskTitlebarComponent, CharacterSelectorComponent, UrsusTimerComponent, YuGardenTimerComponent, TrackerNavigationComponent, InfoBoxComponent, ErrorBoxComponent, FooterComponent]
 })
 export class MaplestoryTrackerSharedModule { }

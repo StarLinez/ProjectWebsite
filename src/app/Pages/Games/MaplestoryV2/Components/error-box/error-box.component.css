@@ -57,3 +57,14 @@
     margin: 25px auto 25px auto;
     background-color: #B45757;
 }
+
+
+@media only screen and (max-width: 630px) {
+    .info {
+        width: calc(100% - 32px);
+    }
+
+    .infoTitle {
+        text-align: center;
+    }
+}

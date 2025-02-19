@@ -119,3 +119,13 @@
     margin: 10px auto 10px auto;
     border-top: 1px #F3F3F3 solid;
 }
+
+@media only screen and (max-width: 680px) {
+    .characterSelectorMenu {
+        left: 0;
+    }
+
+    .characterSelectorButton {
+        margin: 0px 7px 10px 7px;
+    }
+}

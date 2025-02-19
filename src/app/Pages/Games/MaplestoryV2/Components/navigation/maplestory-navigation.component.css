@@ -6,9 +6,10 @@
     align-items: center;
 }
 
-.topbar .title{
+.title{
     height: 25px;
     padding-left: 32px;
+    width: 297px;
 
     font-family: "Gothic A1", sans-serif;
     font-weight: 300;
@@ -16,7 +17,7 @@
     line-height: 25px;
 }
 
-.topbar .links {
+.links {
     margin-left: auto;
     margin-right: 32px;
 
@@ -26,8 +27,8 @@
     line-height: 30px;
 }
 
-.topbar .links a {
-    width: 64px;
+.links a {
+    min-width: 64px;
     height: 30px;
     text-decoration: none;
     color: #FFFFFF;
@@ -36,4 +37,34 @@
 
 .activelink {
     font-weight: 900;
+}
+
+
+@media only screen and (max-width: 900px) {
+    .topbar {
+        align-content: flex-start;
+        flex-wrap: wrap;
+        height: auto;
+    }
+
+    .title {
+        width: 100%;
+        text-align: center;
+        padding-left: 0px;
+        padding-top: 12px;
+    }
+
+    .links {
+        margin: 0 auto;
+        padding-top: 8px;
+        text-align: center;
+        
+    }
+
+    .links a {
+        display: inline-block;
+        white-space: nowrap;
+        margin-right: 12px;
+        margin-left: 12px;
+    }
 }
