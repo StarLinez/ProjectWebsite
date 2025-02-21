@@ -9,9 +9,10 @@
 .title{
     height: 25px;
     padding-left: 32px;
-    width: 297px;
+    width: 210px;
 
     font-family: "Gothic A1", sans-serif;
+    color: white;
     font-weight: 300;
     font-size: 24px;
     line-height: 25px;
@@ -40,7 +41,18 @@
 }
 
 
-@media only screen and (max-width: 900px) {
+@media only screen and (max-width: 880px) {
+    .title {
+        padding-left: 20px;
+    }
+
+    .links {
+        margin-right: 0px;
+    }
+}
+
+
+@media only screen and (max-width: 800px) {
     .topbar {
         align-content: flex-start;
         flex-wrap: wrap;

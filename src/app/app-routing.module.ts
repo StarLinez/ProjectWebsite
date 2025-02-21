@@ -45,14 +45,6 @@ const routes: Routes = [
         loadChildren: () => import('./Pages/Games/Maplestory/Pages/maplestory-settings/maplestory-settings.module').then(m => m.MaplestorySettingsModule)
     },
     {
-        path: 'games/maplestory/dailies', 
-        loadChildren: () => import('./Pages/Games/Maplestory/Pages/maplestory-dailies-v3/maplestory-dailies-v3.module').then(m => m.MaplestoryDailiesV3Module)
-    },
-    {
-        path: 'games/maplestory/weeklies', 
-        loadChildren: () => import('./Pages/Games/Maplestory/Pages/maplestory-weeklies-v3/maplestory-weeklies-v3.module').then(m => m.MaplestoryWeekliesV3Module)
-    },
-    {
         path: 'games/maplestory/tracker/daily', 
         loadChildren: () => import('./Pages/Games/MaplestoryV2/Pages/maplestory-tracker-daily/maplestory-tracker-daily.module').then(m => m.MaplestoryTrackerDailyModule)
     },
@@ -60,15 +52,21 @@ const routes: Routes = [
         path: 'games/maplestory/tracker/weekly', 
         loadChildren: () => import('./Pages/Games/MaplestoryV2/Pages/maplestory-tracker-weekly/maplestory-tracker-weekly.module').then(m => m.MaplestoryTrackerWeeklyModule)
     },
-
     {
-        path: 'games/maplestory/tracker', 
+        path: 'games/maplestory/dailies', 
         redirectTo: 'games/maplestory/tracker/daily'
+    },
+    {
+        path: 'games/maplestory/weeklies', 
+        redirectTo: 'games/maplestory/tracker/weekly'
+    },
+    {
+        path: 'games/maplestory/oldweeklies', 
+        loadChildren: () => import('./Pages/Games/Maplestory/Pages/maplestory-weeklies-v3/maplestory-weeklies-v3.module').then(m => m.MaplestoryWeekliesV3Module)
     },
 
 
-
-
+    
     {
         path: 'games/overwatch/home', 
         loadChildren: () => import('./Pages/Games/Overwatch/Pages/overwatch-home/overwatch-home.module').then(m => m.OverwatchHomeModule)

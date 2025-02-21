@@ -1,6 +1,7 @@
 export interface Settings {
-    dailiesDataV3: string;
-    weekliesDataV3: string;
+    generalData: string;
+    characterStorageReference: string[];
+    characterData: string[];
     arcaneSymbolSaveDataV2: string;
     sacredSymbolSaveDataV3: string;
     flameData: string;

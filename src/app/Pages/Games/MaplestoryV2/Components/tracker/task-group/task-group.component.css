@@ -36,6 +36,7 @@
     background-color: rgba(10, 10, 10, 0.5);
     text-align: right;
     font-family: "Lemon Milk", sans-serif;
+    color: white;
     font-size: 20px;
     font-weight: 500;
     line-height: 54px;
@@ -62,6 +63,7 @@
     position: absolute;
     text-align: center;
     font-family: "Lemon Milk", sans-serif;
+    color: white;
     top: 5px;
     left: 0;
     right: 0;

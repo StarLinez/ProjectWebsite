@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 import { Settings } from '../../../Models/settings';
+import { GeneralData } from '../../../../MaplestoryV2/Models/generalData';
 
 @Component({
   selector: 'app-maplestory-settings',
@@ -11,13 +12,15 @@ export class MaplestorySettingsComponent implements OnInit {
   //file: any;
   // settingsToExport: string[] = ['dailiesDataV3', 'weekliesDataV3', 'arcaneSymbolSaveData', 'flameData', 'weaponFlameData'];
   settingsData: Settings = {
-    dailiesDataV3: "",
-    weekliesDataV3: "",
+    generalData: "",
+    characterStorageReference: [],
+    characterData: [],
     arcaneSymbolSaveDataV2: "",
     sacredSymbolSaveDataV3: "",
     flameData: "",
     weaponFlameData: ""
   }
+  generalData: GeneralData;
 
   constructor(private titleService: Title, private metaService: Meta) { }
 
@@ -32,12 +35,16 @@ export class MaplestorySettingsComponent implements OnInit {
   }
 
   exportSettings() {
-    if (localStorage.getItem("dailiesDataV3")) {
-      this.settingsData.dailiesDataV3 = localStorage.getItem("dailiesDataV3")
-    }
+    if (localStorage.getItem("generalData")) {
+      this.settingsData.generalData = localStorage.getItem("generalData")
 
-    if (localStorage.getItem("weekliesDataV3")) {
-      this.settingsData.weekliesDataV3 = localStorage.getItem("weekliesDataV3")
+      this.generalData = JSON.parse(localStorage.getItem("generalData"));
+      this.generalData.characters.forEach(x => {
+        if (localStorage.getItem(x.characterStorageReference)) {
+          this.settingsData.characterStorageReference.push(x.characterStorageReference);
+          this.settingsData.characterData.push(localStorage.getItem(x.characterStorageReference))
+        }
+      });
     }
 
     if (localStorage.getItem("arcaneSymbolSaveDataV2")) {
@@ -71,12 +78,14 @@ export class MaplestorySettingsComponent implements OnInit {
     fileReader.onload = (e) => {
       try {
         this.settingsData = JSON.parse(fileReader.result.toString());
-        if (this.settingsData.dailiesDataV3) {
-          localStorage.setItem("dailiesDataV3", this.settingsData.dailiesDataV3)
-        }
-
-        if (this.settingsData.weekliesDataV3) {
-          localStorage.setItem("weekliesDataV3", this.settingsData.weekliesDataV3)
+        if (this.settingsData.generalData) {
+          localStorage.setItem("generalData", this.settingsData.generalData)
+          
+          if(this.settingsData.characterStorageReference) {
+            for (let i = 0; i < this.settingsData.characterStorageReference.length; i++) {
+              localStorage.setItem(this.settingsData.characterStorageReference[i], this.settingsData.characterData[i])
+            }
+          }
         }
 
         if (this.settingsData.arcaneSymbolSaveDataV2) {
@@ -113,8 +122,9 @@ export class MaplestorySettingsComponent implements OnInit {
 
   clearSettingsData() {
     this.settingsData = {
-      dailiesDataV3: "",
-      weekliesDataV3: "",
+      generalData: "",
+      characterStorageReference: [],
+      characterData: [],
       arcaneSymbolSaveDataV2: "",
       sacredSymbolSaveDataV3: "",
       flameData: "",
