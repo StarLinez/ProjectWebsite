@@ -167,7 +167,10 @@ export class MaplestoryTrackerWeeklyComponent implements OnInit, OnDestroy {
     }
     this.startTimer(taskGroupIndex);
     this.generalData.trackerInfo.lastWeeklyTrackerVisit = (parseInt(Date.now().toString()) + 5000).toString();
-    this.changeHandler();
+    this.generalDataChangeHandler();
+
+    //as the resetcompletion does not return anything the updated data needs to be fetched from local storage
+    this.fetchSelectedUserData();
   }
 
 

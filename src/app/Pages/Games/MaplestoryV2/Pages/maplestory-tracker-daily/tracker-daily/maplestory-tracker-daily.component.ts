@@ -137,6 +137,9 @@ export class MaplestoryTrackerDailyComponent implements OnInit, OnDestroy {
     this.startTimer();
     this.generalData.trackerInfo.lastDailyTrackerVisit = (parseInt(Date.now().toString()) + 5000).toString();
     this.generalDataChangeHandler();
+
+    //as the resetcompletion does not return anything the updated data needs to be fetched from local storage
+    this.fetchSelectedUserData();
   }
 
 
