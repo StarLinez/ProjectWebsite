@@ -19,6 +19,9 @@
         <a (click)="changeActiveSymbolIndex(5)" [ngClass]="(activeSymbolIndex == 5)?'selected':'notSelected'">
             <div class="imgWrapper"><img src="assets/Games/Maplestory/SymbolImages/Carcion.png" alt="carcion"></div>
         </a>
+        <a (click)="changeActiveSymbolIndex(6)" [ngClass]="(activeSymbolIndex == 6)?'selected':'notSelected'">
+            <div class="imgWrapper"><img src="assets/Games/Maplestory/SymbolImages/Tallahart.png" alt="tallahart"></div>
+        </a>
     </div>
     <p class="symbolTitle">{{ sacredSymbolNames[activeSymbolIndex] }}</p>
     <form (ngSubmit)="submit()">
@@ -41,6 +44,7 @@
         <app-shangri-la *ngIf="activeSymbolIndex==3" (valueChange)="submit()" (clearOutput)="clearOutputVariables()"></app-shangri-la>
         <app-arteria *ngIf="activeSymbolIndex==4" (valueChange)="submit()" (clearOutput)="clearOutputVariables()"></app-arteria>
         <app-carcion *ngIf="activeSymbolIndex==5" (valueChange)="submit()" (clearOutput)="clearOutputVariables()"></app-carcion>
+        <app-tallahart *ngIf="activeSymbolIndex==6" (valueChange)="submit()" (clearOutput)="clearOutputVariables()"></app-tallahart>
     </form>
     <div class="outputWrapper">
         <div class="symbolInput">

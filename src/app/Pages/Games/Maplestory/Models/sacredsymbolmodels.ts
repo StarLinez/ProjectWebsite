@@ -31,4 +31,8 @@ export interface SacredSymbolSaveData {
     carcionLevel: number;
     carcionExp: number;
     carcionDailyQuest: boolean;
+        
+    tallahartLevel: number;
+    tallahartExp: number;
+    tallahartDailyQuest: boolean;
 }

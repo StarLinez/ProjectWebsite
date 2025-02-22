@@ -9,6 +9,7 @@ import { Meta, Title } from '@angular/platform-browser';
 import { ShangriLaComponent } from './Areas/shangri-la/shangri-la.component';
 import { ArteriaComponent } from './Areas/arteria/arteria.component';
 import { CarcionComponent } from './Areas/carcion/carcion.component';
+import { TallahartComponent } from './Areas/tallahart/tallahart.component';
 
 
 @Component({
@@ -23,11 +24,12 @@ export class MaplestorySacredSymbolsComponent implements OnInit {
   @ViewChild(ShangriLaComponent) shangriLaChild: ShangriLaComponent;
   @ViewChild(ArteriaComponent) arteriaChild: ArteriaComponent;
   @ViewChild(CarcionComponent) carcionChild: CarcionComponent;
+  @ViewChild(TallahartComponent) tallahartChild: TallahartComponent;
 
   sacredSymbolSaveData: SacredSymbolSaveData;
   sacredSymbolStats: SacredSymbol[] = SacredSymbolStatsJson.SacredSymbolsStats;
   sacredSymbolCost: number[] = SacredSymbolCostJson.Cernium;
-  sacredSymbolNames: string[] = ['Cernium', 'Arcus', 'Odium', 'Shangri-La', 'Arteria', 'Carcion'];
+  sacredSymbolNames: string[] = ['Cernium', 'Arcus', 'Odium', 'Shangri-La', 'Arteria', 'Carcion', 'Tallahart'];
   currentLevel: number = 1;
   currentXp: number = 1;
   activeSymbolIndex: number = 0;
@@ -55,8 +57,8 @@ export class MaplestorySacredSymbolsComponent implements OnInit {
   }
 
   initialise() {
-    if (localStorage.getItem("sacredSymbolSaveDataV3")) {
-      this.sacredSymbolSaveData = JSON.parse(localStorage.getItem("sacredSymbolSaveDataV3"));
+    if (localStorage.getItem("sacredSymbolSaveDataV4")) {
+      this.sacredSymbolSaveData = JSON.parse(localStorage.getItem("sacredSymbolSaveDataV4"));
     } else {
       // initiate a dataset
       this.initiateData();
@@ -84,10 +86,13 @@ export class MaplestorySacredSymbolsComponent implements OnInit {
       arteriaDailyQuest: true,
       carcionLevel: 1,
       carcionExp: 1,
-      carcionDailyQuest: true
+      carcionDailyQuest: true,
+      tallahartLevel: 1,
+      tallahartExp: 1,
+      tallahartDailyQuest: true
     };
     this.sacredSymbolSaveData = newSacredSymbolSaveData;
-    localStorage.setItem("sacredSymbolSaveDataV3", JSON.stringify(this.sacredSymbolSaveData));
+    localStorage.setItem("sacredSymbolSaveDataV4", JSON.stringify(this.sacredSymbolSaveData));
   }
 
   changeActiveSymbolIndex(value: number) {
@@ -130,6 +135,12 @@ export class MaplestorySacredSymbolsComponent implements OnInit {
           this.currentXp = this.sacredSymbolSaveData.carcionExp;
           this.carcionChild.dailyQuest = this.sacredSymbolSaveData.carcionDailyQuest;
           break;
+      case 6:
+          this.sacredSymbolCost = SacredSymbolCostJson.Tallahart;
+          this.currentLevel = this.sacredSymbolSaveData.tallahartLevel;
+          this.currentXp = this.sacredSymbolSaveData.tallahartExp;
+          this.tallahartChild.dailyQuest = this.sacredSymbolSaveData.tallahartDailyQuest;
+          break;
       default: {
         break;
       }
@@ -157,6 +168,9 @@ export class MaplestorySacredSymbolsComponent implements OnInit {
         break;
       case 5:
         this.calculateSymbolStats(this.carcionChild.calculateDailySymbols());
+        break;
+      case 6:
+        this.calculateSymbolStats(this.tallahartChild.calculateDailySymbols());
         break;
       default: {
         break;
@@ -303,11 +317,16 @@ export class MaplestorySacredSymbolsComponent implements OnInit {
         this.sacredSymbolSaveData.carcionExp = this.currentXp;
         this.sacredSymbolSaveData.carcionDailyQuest = this.carcionChild.dailyQuest;
         break;
+      case 6:
+        this.sacredSymbolSaveData.tallahartLevel = this.currentLevel;
+        this.sacredSymbolSaveData.tallahartExp = this.currentXp;
+        this.sacredSymbolSaveData.tallahartDailyQuest = this.tallahartChild.dailyQuest;
+        break;
       default: {
         break;
       }
     }
-    localStorage.setItem("sacredSymbolSaveDataV3", JSON.stringify(this.sacredSymbolSaveData));
+    localStorage.setItem("sacredSymbolSaveDataV4", JSON.stringify(this.sacredSymbolSaveData));
   }
 
   calculateSymbolStats(symbolsPerDay: number) {

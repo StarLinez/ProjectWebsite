@@ -9,6 +9,7 @@ import { OdiumComponent } from './sacred-symbols/Areas/odium/odium.component';
 import { ShangriLaComponent } from './sacred-symbols/Areas/shangri-la/shangri-la.component';
 import { ArteriaComponent } from './sacred-symbols/Areas/arteria/arteria.component';
 import { CarcionComponent } from './sacred-symbols/Areas/carcion/carcion.component';
+import { TallahartComponent } from './sacred-symbols/Areas/tallahart/tallahart.component';
 
 @NgModule({
     declarations: [
@@ -18,7 +19,8 @@ import { CarcionComponent } from './sacred-symbols/Areas/carcion/carcion.compone
         OdiumComponent,
         ShangriLaComponent,
         ArteriaComponent,
-        CarcionComponent
+        CarcionComponent,
+        TallahartComponent
     ],
     imports: [
         CommonModule, 
