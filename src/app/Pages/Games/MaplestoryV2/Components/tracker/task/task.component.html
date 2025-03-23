@@ -11,10 +11,10 @@
     </div>
     <div class="taskName">{{ task.name }}</div>
     <img [src]="task.type != 'custom' ? 'assets/Games/MaplestoryV2/' + imagePrefix + task.image + '.png' : task.image" onerror="this.onerror=null; this.src='assets/TrackerImages/error.png'" alt="{{task.name}}">
-    <div *ngIf="editMode" class="toggle" [ngClass]="(!task.enabled)?'emEnabled':'emDisabled'">
+    <div *ngIf="editMode" class="toggle" [ngClass]="(!task.enabled && task.type != 'custom')?'emEnabled':'emDisabled'">
         <span *ngIf="!task.enabled && task.type != 'custom'" class="fa fa-plus"></span>
         <span *ngIf="task.enabled && task.type != 'custom'" class="fa fa-minus"></span>
-        <span *ngIf="task.type == 'custom'" class="fa fa-trash"></span>
+        <span *ngIf="task.type == 'custom'" class="fa fa-trash" (click)="removeCustomTask()"></span>
     </div>
     <app-ursus-timer *ngIf="task.name === 'Ursus' && resetUtcOffset == 0"></app-ursus-timer>
     <app-yu-garden-timer *ngIf="task.name === 'Yu Garden' && resetUtcOffset == 0"></app-yu-garden-timer>

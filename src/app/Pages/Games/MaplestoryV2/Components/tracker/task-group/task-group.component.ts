@@ -55,14 +55,14 @@ export class TaskGroupComponent implements OnInit {
   }
 
   disableTask(index: any) {
-    if (this.taskGroup.tasks[index].type == "custom" || this.taskGroup.tasks[index].image == "Custom.png") {
-      this.taskGroup.tasks.splice(index, 1);
-    } else {
-      this.taskGroup.tasks[index].enabled = !this.taskGroup.tasks[index].enabled;
-    }
+    this.taskGroup.tasks[index].enabled = !this.taskGroup.tasks[index].enabled;
 
     this.checkIfGroupIsFullyDisabled();
     this.calculateProgress();
+  }
+
+  removeCustomTask(index: any) {
+    this.taskGroup.tasks.splice(index, 1);
   }
 
   checkIfGroupIsFullyDisabled() {
@@ -73,7 +73,7 @@ export class TaskGroupComponent implements OnInit {
     for (let i = 0; i < this.taskGroup.tasks.length; i++) {
       if(this.taskGroup.tasks[i].enabled && eval(this.taskGroup.tasks[i].dispCon)) {
         this.taskGroup.allDisabled = false;
-        break;   
+        break;
       }
     }
 
@@ -145,7 +145,7 @@ export class TaskGroupComponent implements OnInit {
       this.addingCustomTask = false;
       this.customTaskName = "";
       this.customTaskImageUrl = "";
-    
+
       // this also kicks off changehandler
       this.checkIfGroupIsFullyDisabled();
       this.calculateProgress();

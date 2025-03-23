@@ -15,6 +15,7 @@ export class TaskComponent {
   @Input() resetUtcOffset: boolean;
 
   @Output() disableEvent = new EventEmitter<any>();
+  @Output() removeCustomTaskEvent = new EventEmitter<any>();
   @Output() moveEvent = new EventEmitter<any>();
   @Output() toggleEvent = new EventEmitter<any>();
 
@@ -26,6 +27,10 @@ export class TaskComponent {
     } else {
       this.disableEvent.emit(this.index);
     }
+  }
+
+  removeCustomTask() {
+    this.removeCustomTaskEvent.emit(this.index);
   }
 
   moveTask(direction: string) {
