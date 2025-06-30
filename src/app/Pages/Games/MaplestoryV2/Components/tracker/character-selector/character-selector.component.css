@@ -65,6 +65,16 @@
     margin-right: 10px;
 }
 
+.characterItem .fa-caret-up {
+    margin-right: 0px;
+    padding: 0px 3px 0px 5px;
+}
+
+.characterItem .fa-caret-down {
+    margin-right: 5px;
+    padding: 0px 5px 0px 3px;
+}
+
 .characterItem .fa {
     transform: translateY(5px);
 }
@@ -118,6 +128,11 @@
     width: 280px;
     margin: 10px auto 10px auto;
     border-top: 1px #F3F3F3 solid;
+}
+
+.test {
+    margin-right: 0px;
+    width: 20px;
 }
 
 @media only screen and (max-width: 680px) {

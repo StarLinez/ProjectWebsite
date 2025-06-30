@@ -9,6 +9,7 @@ import { GeneralData } from '../../../Models/generalData';
 })
 export class CharacterSelectorComponent implements OnInit {
   @Input() generalData: GeneralData;
+  @Input() trackerEditMode: boolean
 
   @Output() switchCharacterEvent = new EventEmitter<any>();
   @Output() addCharacterEvent = new EventEmitter<any>();
@@ -99,6 +100,46 @@ export class CharacterSelectorComponent implements OnInit {
       this.addCharacterEvent.emit(this.newName);
     }
     this.initiateVariables();
+  }
+
+  moveUser(direction: string, index: number) {
+    if (direction == "up") {
+      if (index == 0) {
+        return;
+      }
+      var temp = this.generalData.characters[index - 1];
+      this.generalData.characters[index - 1] = this.generalData.characters[index];
+      this.generalData.characters[index] = temp;
+
+      // prevent current selected character from changing to a different character
+      if (this.generalData.selectedCharacterIndex == index) {
+        this.switchCharacter(index - 1);
+      } else if (this.generalData.selectedCharacterIndex == index - 1) {
+        this.switchCharacter(index);
+      } else {
+        // kick off a change event to save general data adjustment as no switchCharacter was called which saves on it's own
+        this.ChangeHandler();
+      }
+    }
+
+    if (direction == "down") {
+      if (index + 1 == this.generalData.characters.length) {
+        return;
+      }
+      var temp = this.generalData.characters[index + 1];
+      this.generalData.characters[index + 1] = this.generalData.characters[index];
+      this.generalData.characters[index] = temp;
+
+      // prevent current selected character from changing to a different character
+      if (this.generalData.selectedCharacterIndex == index) {
+        this.switchCharacter(index + 1);
+      } else if (this.generalData.selectedCharacterIndex == index + 1) {
+        this.switchCharacter(index);
+      } else {
+        // kick off a change event to save general data adjustment as no switchCharacter was called which saves on it's own
+        this.ChangeHandler();
+      }
+    }
   }
 
   ChangeHandler() {
