@@ -19,8 +19,8 @@ export class MaplestoryTrackerWeeklyComponent implements OnInit, OnDestroy {
   generalData: GeneralData;
   selectedCharacter: CharacterData;
  
-  timers: any[] = [];
-  timerStrings: string[] = ["", "", ""];
+  timer: any;
+  timerString: string;
 
   editMode: boolean = false;
 
@@ -46,6 +46,7 @@ export class MaplestoryTrackerWeeklyComponent implements OnInit, OnDestroy {
   initialise() {
     if (localStorage.getItem("generalData")) {
       this.generalData = JSON.parse(localStorage.getItem("generalData"));
+      
       this.taskService.weeklyUpdateChecker(this.generalData);
       this.weeklyResetChecker();
 
@@ -57,9 +58,7 @@ export class MaplestoryTrackerWeeklyComponent implements OnInit, OnDestroy {
       this.fetchSelectedUserData();
     }
 
-    // 0 starts weekly boss timer, 1 starts weekly task timer
-    this.startTimer(0);
-    this.startTimer(1);
+    this.startTimer();
     
     this.initialisationComplete = true;
   }
@@ -75,18 +74,12 @@ export class MaplestoryTrackerWeeklyComponent implements OnInit, OnDestroy {
   }
 
   weeklyResetChecker() {
-    var lastThursday = this.calculateResetDayTime(4) - (7 * 24 * 60 * 60 * 1000);
-    var lastMonday = this.calculateResetDayTime(1) - (7 * 24 * 60 * 60 * 1000);
+    var lastReset = this.calculateResetTime() - (7 * 24 * 60 * 60 * 1000);
 
     var lastVisit = parseInt(this.generalData.trackerInfo.lastWeeklyTrackerVisit);
 
-    if (lastVisit < lastThursday) {
-      this.taskService.resetWeeklyCompletionIndex(this.generalData, 0);
-      this.taskService.resetWeeklyCompletionIndex(this.generalData, 2);
-    }
-
-    if (lastVisit < lastMonday) {
-      this.taskService.resetWeeklyCompletionIndex(this.generalData, 1);
+    if (lastVisit < lastReset) {
+      this.taskService.resetWeeklyCompletion(this.generalData);
     }
 
     // set last visit to the current time
@@ -94,36 +87,37 @@ export class MaplestoryTrackerWeeklyComponent implements OnInit, OnDestroy {
     this.generalDataChangeHandler();
   }
 
-  startTimer(taskGroupIndex: number) {
-    clearInterval(this.timers[taskGroupIndex]);
+  startTimer() {
+    clearInterval(this.timer);
 
-    var endTime;
+    var endTime = this.calculateResetTime();
+    // var endTime;
 
     // if the index is 1 the reset is for Monday Reset on Sunday (1) else it is 4 which is the reset for weeklytasks on Thursday
-    if (taskGroupIndex == 1) {
-      endTime = this.calculateResetDayTime(1);
-    } else {
-      endTime = this.calculateResetDayTime(4);
-    }
+    // if (taskGroupIndex == 1) {
+    //   endTime = this.calculateResetDayTime(1);
+    // } else {
+    //   endTime = this.calculateResetDayTime(4);
+    // }
 
-    this.calculateAndOutPutTimes(endTime - new Date().getTime(), taskGroupIndex);
+    this.calculateAndOutPutTime(endTime - new Date().getTime());
 
-    this.timers[taskGroupIndex] = setInterval(() => {
+    this.timer = setInterval(() => {
       var distance = endTime - new Date().getTime();
-      this.calculateAndOutPutTimes(distance, taskGroupIndex);
+      this.calculateAndOutPutTime(distance);
 
       if (distance < 0) {
-        clearInterval(this.timers[taskGroupIndex]);
-        this.liveReset(taskGroupIndex);
+        clearInterval(this.timer);
+        this.liveReset();
       }
     }, 1000);
   }
 
-  calculateResetDayTime(dayOfWeek) {
+  calculateResetTime() {
     var currentDay = new Date();
     var resultDate = new Date(Date.UTC(currentDay.getUTCFullYear(), currentDay.getUTCMonth(), currentDay.getUTCDate(), 0, 0, 0, 0));
 
-    resultDate.setTime(resultDate.getTime() + (((7 + dayOfWeek - resultDate.getUTCDay() - 1) % 7 + 1) * 24 * 60 * 60 * 1000));
+    resultDate.setTime(resultDate.getTime() + (((7 + 4 - resultDate.getUTCDay() - 1) % 7 + 1) * 24 * 60 * 60 * 1000));
 
     // calculate the offset from UTC if the time to countdown is in the past it means that a week needs to be added
     // WARNING: countdowns to timezones behind utc might not work properly (Have fun future me if this needs to be added :) )
@@ -137,13 +131,9 @@ export class MaplestoryTrackerWeeklyComponent implements OnInit, OnDestroy {
     return resultDateEpoch;
   }
 
-  calculateAndOutPutTimes(distance: number, taskGroupIndex: number) {
+  calculateAndOutPutTime(distance: number) {
     if (distance < 0) {
-      this.timerStrings[taskGroupIndex] = "RESET!";
-      // Also show the reset text in the thursday reset weeklies
-      if(taskGroupIndex == 0) {
-        this.timerStrings[2] = "RESET!";
-      }
+      this.timerString = "RESET!";
       return;
     }
 
@@ -152,20 +142,12 @@ export class MaplestoryTrackerWeeklyComponent implements OnInit, OnDestroy {
     var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
     var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-    this.timerStrings[taskGroupIndex] = days + "d " + hours + "h " + minutes + "m " + ("00" + seconds).slice(-2) + "s ";
-    // Duplicate the weekly task timer into the thursday weeklies
-    if(taskGroupIndex == 0) {
-      this.timerStrings[2] = this.timerStrings[taskGroupIndex];
-    }
+    this.timerString = "Weekly reset in " + days + "d " + hours + "h " + minutes + "m " + ("00" + seconds).slice(-2) + "s ";
   }
 
-  liveReset(taskGroupIndex: number) {
-    this.taskService.resetWeeklyCompletionIndex(this.generalData, taskGroupIndex);
-    //makes sure that thursday weekly live reset works (as there is no separate time for this)
-    if (taskGroupIndex == 0) {
-      this.taskService.resetWeeklyCompletionIndex(this.generalData, 2);
-    }
-    this.startTimer(taskGroupIndex);
+  liveReset() {
+    this.taskService.resetWeeklyCompletion(this.generalData);
+    this.startTimer();
     this.generalData.trackerInfo.lastWeeklyTrackerVisit = (parseInt(Date.now().toString()) + 5000).toString();
     this.generalDataChangeHandler();
 
@@ -206,8 +188,7 @@ export class MaplestoryTrackerWeeklyComponent implements OnInit, OnDestroy {
 
   regionChangeHandler() {
     this.weeklyResetChecker();
-    this.startTimer(0);
-    this.startTimer(1);
+    this.startTimer();
     this.generalDataChangeHandler();
   }
 }

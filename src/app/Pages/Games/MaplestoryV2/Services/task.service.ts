@@ -129,11 +129,13 @@ export class TaskService {
         });
     }
 
-    resetWeeklyCompletionIndex(data: GeneralData, index: number) {
+    resetWeeklyCompletion(data: GeneralData) {
         data.characters.forEach(character => {
             var characterData = JSON.parse(localStorage.getItem(character.characterStorageReference)) as CharacterData;
-            characterData.weeklyTaskGroups[index].tasks.forEach(task => {
-                task.done = false;
+            characterData.weeklyTaskGroups.forEach(taskgroup => {
+                taskgroup.tasks.forEach(task => {
+                    task.done = false;
+                });
             });
             localStorage.setItem(character.characterStorageReference, JSON.stringify(characterData));
         });
